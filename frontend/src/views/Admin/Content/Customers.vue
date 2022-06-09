@@ -3,8 +3,8 @@
 <SidebarComponent />
 <main class="mt-5 pt-3">
     <!--Message for delete products-->
-    <div v-if="Deleteproduct.success" class="alert alert-danger text-center">{{Deleteproduct.success}}</div>
-    <div v-if="Deleteproduct.error" class="alert alert-warning text-center">{{Deleteproduct.error}}</div>
+    <div v-if="Deletecustomer.success" class="alert alert-danger text-center">{{Deletecustomer.success}}</div>
+    <div v-if="Deletecustomer.error" class="alert alert-warning text-center">{{Deletecustomer.error}}</div>
 
     <div class="col-md-12 fs-5 mt-3 mb-2" style="padding:0px 50px;">
         Name of Customer
@@ -85,7 +85,7 @@ export default {
             customers: [],
             searchQuery:'',
             customer: {
-                id:''
+                id_pers:''
             },
             Deletecustomer: {
                 success: '',
@@ -116,15 +116,15 @@ export default {
             let res = await axios("http://stop-and-shop.com/User");
             this.customers = res.data
         },
-    },
-    //passing id for model
+        //passing id for model
         passingDataDelete(p) {
             this.customer.id_pers = p.id_pers;
+            console.log(this.customer.id_pers)
         },
         //delete customer
         async DeleteCustomer() {
-            let res = await axios.post("http://stop-and-shop.com/Product/DeleteCustomer/" + this.product.id_produit);
-            if (res.data.message == 'Product Deleted Successfully') {
+            let res = await axios.post("http://stop-and-shop.com/User/DeleteCustomer/" + this.customer.id_pers);
+            if (res.data.message == 'Customer Deleted Successfully') {
                 this.fetchCustomers()
                 this.Deleteproduct.success = "Customer Deleted Successfully";
             } else {
@@ -132,6 +132,9 @@ export default {
                 this.Deleteproduct.error = "Error on updating customer";
             }
         },
+    },
+    
+        
 }
 </script>
 
