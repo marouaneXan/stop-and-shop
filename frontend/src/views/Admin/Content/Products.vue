@@ -90,7 +90,7 @@
             </div>
         </div>
     </div>
-    <div v-if="products.length" class="row d-flex justify-content-center align-items-center mt-3">
+    <div  class="row d-flex justify-content-center align-items-center mt-3">
         <div class="col-md-6" id="card">
             <div class="card text-dark bg-light mb-3">
                 <div class="card-header fw-bold">List of Products</div>
