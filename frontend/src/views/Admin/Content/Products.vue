@@ -13,6 +13,11 @@
     <!--Message for update products-->
     <div v-if="Updateproduct.success" class="alert alert-success text-center">{{Updateproduct.success}} <i class="fa-solid fa-circle-check"></i></div>
     <div v-if="Updateproduct.error" class="alert alert-warning text-center">{{Updateproduct.error}}</div>
+    
+    <!--Message for add category-->
+    <div v-if="Addcategory.success" class="alert alert-success text-center">{{Addcategory.success}} <i class="fa-solid fa-circle-check"></i></div>
+    <div v-if="Addcategory.error" class="alert alert-warning text-center">{{Addcategory.error}}</div>
+
     <div class="col-md-12 fs-5 mt-3 mb-2" style="margin-left:55px">
         Search for products
     </div>
@@ -73,19 +78,19 @@
                         <form @click.prevent>
                             <div class="mb-1">
                                 <label for="name" class="form-label">Name of Category</label>
-                                <input type="text" class="form-control" id="name" required>
+                                <input v-model="category.nom_cat" type="text" class="form-control" id="name" required>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Add</button>
+                        <button @click="addCategory()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Add</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row d-flex justify-content-center align-items-center mt-3">
+    <div v-if="resources.length" class="row d-flex justify-content-center align-items-center mt-3">
         <div class="col-md-6" id="card">
             <div class="card text-dark bg-light mb-3">
                 <div class="card-header fw-bold">List of Products</div>
@@ -338,6 +343,26 @@ export default {
                 this.Updateproduct.error = "Error on Updating new Product";
             }
         },
+        //Add category
+        async addCategory(){
+            let form=new FormData()
+            form.append('nom_cat',this.category.nom_cat)
+            let res = await axios({
+                method:'POST',
+                url:'http://stop-and-shop.com/Category/create',
+                data:form,
+                headers:{
+                    "Content-Type": "multipart/form-data"
+                }
+            }) 
+            if (res.data.message == "Category added successfully") {
+                this.fetchCategories()
+                this.Addcategory.success = res.data.message;
+            } else {
+                this.fetchCategories()
+                this.Addcategory.error = "Error on adding new category";
+            }
+        }
     },
 }
 </script>
