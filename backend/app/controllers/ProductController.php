@@ -55,7 +55,7 @@ class ProductController
     }
   }
 
-  //get single product
+  //delete product
   public function DeleteProduct($id)
   {
     $Delete = new Product();

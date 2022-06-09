@@ -61,7 +61,7 @@ class User extends DB
 
 
   //delete client
-  public function DeleteUser($id)
+  public function DeleteCustomer($id)
   {
     $sql = "DELETE FROM personne WHERE id_pers=? and role like 0";
     $sql = $this->connect()->prepare($sql);
