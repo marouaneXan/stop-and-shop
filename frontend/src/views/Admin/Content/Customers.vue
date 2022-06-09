@@ -39,7 +39,7 @@
                                     <td>#</td>
                                     <td>{{p.nom}}</td>
                                     <td>{{p.prenom}}</td>
-                                    <td>{{p.date_naissance}}$</td>
+                                    <td>{{p.date_naissance}}</td>
                                     <td>{{p.ville}}</td>
                                     <td>{{p.email}}</td>
                                     <td class="action_btn">
@@ -123,13 +123,13 @@ export default {
         },
         //delete customer
         async DeleteCustomer() {
-            let res = await axios.post("http://stop-and-shop.com/User/DeleteCustomer/" + this.customer.id_pers);
+            let res = await axios.post("http://stop-and-shop.com/User/DeleteCustomers/" + this.customer.id_pers);
             if (res.data.message == 'Customer Deleted Successfully') {
                 this.fetchCustomers()
-                this.Deleteproduct.success = "Customer Deleted Successfully";
+                this.Deletecustomer.success = "Customer Deleted Successfully";
             } else {
                 this.fetchCustomers()
-                this.Deleteproduct.error = "Error on updating customer";
+                this.Deletecustomer.error = "Error on updating customer";
             }
         },
     },
