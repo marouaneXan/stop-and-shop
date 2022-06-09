@@ -5,7 +5,7 @@
     <!--Message for delete products-->
     <div v-if="Deleteproduct.success" class="alert alert-danger text-center">{{Deleteproduct.success}}</div>
     <div v-if="Deleteproduct.error" class="alert alert-warning text-center">{{Deleteproduct.error}}</div>
-    
+
     <div class="col-md-12 fs-5 mt-3 mb-2" style="padding:0px 50px;">
         Name of Customer
     </div>
@@ -16,7 +16,7 @@
     </div>
     <div class="col mt-5" style="padding:0px 50px;">
     </div>
-    <div  class="row d-flex justify-content-center align-items-center mt-3">
+    <div class="row d-flex justify-content-center align-items-center mt-3">
         <div class="col-md-6" id="card">
             <div class="card text-dark bg-light mb-3">
                 <div class="card-header fw-bold">List of Customers</div>
@@ -36,7 +36,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="p in resultQuery" :key="p.id_produit">
+                                <tr v-for="p in resultQuery" :key="p.id_customer">
                                     <td>#</td>
                                     <td>{{p.nom}}</td>
                                     <td>{{p.description}}</td>
@@ -64,44 +64,6 @@
                                             </div>
                                         </div>
 
-                                        <button @click="passingDataUpdate(p)" class="btn" data-bs-toggle="modal" data-bs-target="#updateProduct"><i class="fa-solid fa-pen-to-square"></i></button>
-                                        <!-- Model To update new product -->
-                                        <div class="modal fade" id="updateProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Update Product</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form @click.prevent>
-                                                            <div class="mb-1">
-                                                                <label for="name" class="form-label">Name</label>
-                                                                <input type="text" v-model="product.nom" class="form-control" id="name">
-                                                                <label for="Description" class="form-label">Description</label>
-                                                                <input type="text" v-model="product.description" class="form-control" id="Description">
-                                                                <label for="Price" class="form-label">Price</label>
-                                                                <input type="text" v-model="product.prix" class="form-control" id="Price">
-                                                                <!-- <label for="formFile" class="form-label">Image</label> -->
-                                                                <!-- <input type="file" ref="ProductImage" multiple class="form-control" @change="previewFiles" id="formFile" enctype='multipart/form-data'> -->
-                                                                <!-- <label class="form-label">Select Category</label> -->
-                                                                <select class="form-select" v-model="product.id_category" aria-label="Default select example">
-                                                                    <option disabled selected>Select Category</option>
-                                                                    <option v-for="c in categories" :key="c.id_cat" :value="c.id_cat">{{c.nom_cat}}</option>
-                                                                </select>
-                                                                <label for="Quantity" class="form-label">Quantity</label>
-                                                                <input type="number" v-model="product.quantite" class="form-control" id="Quantity">
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" @click="UpdateProduct()" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                     </td>
                                 </tr>
                             </tbody>
@@ -115,8 +77,64 @@
 </template>
 
 <script>
+import axios from 'axios'
+import NavbarComponent from '@/components/Admin/Layouts/Navbar.vue'
+import SidebarComponent from '@/components/Admin/Layouts/Sidebar.vue'
 export default {
-name:"CustomersView"
+    name: "CustomersView",
+    data() {
+        return {
+            customers: [],
+            searchQuery:'',
+            product: {
+                
+            },
+            Deletecustomer: {
+                success: '',
+                error: ''
+            },
+        }
+    },
+    components: {
+        NavbarComponent,
+        SidebarComponent
+    },
+    mounted() {
+        this.fetchCustomers()
+    },
+    computed: {
+        resultQuery() {
+            if (this.searchQuery) {
+                return this.customers.filter((customer) => {
+                    return this.searchQuery.toLowerCase().split(' ').every(v => customer.nom.toLowerCase().includes(v))
+                })
+            } else {
+                return this.customers;
+            }
+        }
+    },
+    methods:{
+      async fetchCustomers() {
+            let res = await axios("http://stop-and-shop.com/Product");
+            this.customers = res.data
+        },
+    },
+    //passing id for model
+        passingDataDelete(p) {
+            this.product.id_produit = p.id_produit;
+            console.log(this.product.id_produit)
+        },
+        //delete customer
+        async DeleteProduct() {
+            let res = await axios.post("http://stop-and-shop.com/Product/DeleteProduct/" + this.product.id_produit);
+            if (res.data.message == 'Product Deleted Successfully') {
+                this.fetchProducts()
+                this.Deleteproduct.success = "Product Deleted Successfully";
+            } else {
+                this.fetchProducts()
+                this.Deleteproduct.error = "Error on updating Product";
+            }
+        },
 }
 </script>
 
