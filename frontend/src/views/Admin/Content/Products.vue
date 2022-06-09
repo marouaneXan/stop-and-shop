@@ -90,7 +90,7 @@
             </div>
         </div>
     </div>
-    <div v-if="resources.length" class="row d-flex justify-content-center align-items-center mt-3">
+    <div v-if="products.length" class="row d-flex justify-content-center align-items-center mt-3">
         <div class="col-md-6" id="card">
             <div class="card text-dark bg-light mb-3">
                 <div class="card-header fw-bold">List of Products</div>
@@ -103,7 +103,7 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Description</th>
                                     <th scope="col">Price</th>
-                                    <!-- <th scope="col">image</th> -->
+                                    <th scope="col">image</th>
                                     <th scope="col">Category</th>
                                     <th scope="col">Quantity</th>
                                     <th scope="col" class="text-center">Action</th>
@@ -115,7 +115,7 @@
                                     <td>{{p.nom}}</td>
                                     <td>{{p.description}}</td>
                                     <td>{{p.prix}}$</td>
-                                    <!-- <td><img id="image_produit" :src="getImgUrl(p.image)" alt="..."></td> -->
+                                    <td><img id="image_produit" :src="getImgUrl(p.image)" alt="..."></td>
                                     <td>{{p.nom_cat}}</td>
                                     <td>{{p.quantite}}</td>
                                     <td class="action_btn">
@@ -255,10 +255,10 @@ export default {
     },
     methods: {
         // ...mapActions(['fetchProducts', 'fetchCategories']),
-        // getImgUrl(pet) {
-        //     var images = require.context('../../../assets/uploads/', false)
-        //     return images('./' + pet)
-        // },
+        getImgUrl(pet) {
+            var images = require.context('../../../assets/uploads/', false)
+            return images('./' + pet)
+        },
         async fetchProducts() {
             let res = await axios("http://stop-and-shop.com/Product");
             this.products = res.data

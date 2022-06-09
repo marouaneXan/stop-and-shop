@@ -60,9 +60,9 @@ class Product extends DB
     // Function to add new Product
     public function addProduct($data)
     {
-        $sql = "INSERT INTO produit (`nom`,`description`,`prix`,`image`,`id_category`,`quantite`) VALUES (?,?,?,0,?,?)";
+        $sql = "INSERT INTO produit (`nom`,`description`,`prix`,`image`,`id_category`,`quantite`) VALUES (?,?,?,?,?,?)";
         $sql = $this->connect()->prepare($sql);
-        if ($sql->execute([$data['nom'], $data['description'], $data['prix'], $data['id_category'], $data['quantite']]))
+        if ($sql->execute([$data['nom'], $data['description'], $data['prix'],$data['image'], $data['id_category'], $data['quantite']]))
             return 1;
         return 0;
     }
