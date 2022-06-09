@@ -2,24 +2,12 @@
 <NavbarComponent />
 <SidebarComponent />
 <main class="mt-5 pt-3">
-    <!--Message for add products-->
-    <div v-if="Addproduct.success" class="alert alert-success text-center">{{Addproduct.success}} <i class="fa-solid fa-circle-check"></i></div>
-    <div v-if="Addproduct.error" class="alert alert-warning text-center">{{Addproduct.error}}</div>
-
     <!--Message for delete products-->
     <div v-if="Deleteproduct.success" class="alert alert-danger text-center">{{Deleteproduct.success}}</div>
     <div v-if="Deleteproduct.error" class="alert alert-warning text-center">{{Deleteproduct.error}}</div>
-
-    <!--Message for update products-->
-    <div v-if="Updateproduct.success" class="alert alert-success text-center">{{Updateproduct.success}} <i class="fa-solid fa-circle-check"></i></div>
-    <div v-if="Updateproduct.error" class="alert alert-warning text-center">{{Updateproduct.error}}</div>
     
-    <!--Message for add category-->
-    <div v-if="Addcategory.success" class="alert alert-success text-center">{{Addcategory.success}} <i class="fa-solid fa-circle-check"></i></div>
-    <div v-if="Addcategory.error" class="alert alert-warning text-center">{{Addcategory.error}}</div>
-
     <div class="col-md-12 fs-5 mt-3 mb-2" style="padding:0px 50px;">
-        Name of Product
+        Name of Customer
     </div>
     <div class="d-flex" id="form" style="">
         <div class="mb-3" style="padding:0px 50px;">
