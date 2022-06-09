@@ -46,4 +46,14 @@ class User extends DB
       return $sql->rowCount();
     return 0;
   }
+
+  //delete client
+  public function DeleteUser($id)
+    {
+        $sql = "DELETE FROM personne WHERE id_pers=? and role like 0";
+        $sql = $this->connect()->prepare($sql);
+        if ($sql->execute(array($id)))
+            return 1;
+        return 0;
+    }
 }
