@@ -7,7 +7,7 @@ class User extends DB
   {
     $sql = "INSERT INTO personne(`nom`, `prenom`, `date_naissance`, `ville`, `email`, `password`, `role`) VALUES (?,?,?,?,?,?,?)";
     $sql = $this->connect()->prepare($sql);
-    if ($sql->execute(array($data['nom'], $data['prenom'], $data['date_naissance'], $data['ville'], $data['email'], $data['password'],0)))
+    if ($sql->execute(array($data['nom'], $data['prenom'], $data['date_naissance'], $data['ville'], $data['email'], $data['password'], 0)))
       return 1;
     return 0;
   }
@@ -18,11 +18,12 @@ class User extends DB
     $sql = "SELECT * FROM personne";
     $sql = $this->connect()->prepare($sql);
     $sql->execute();
-    $result=$sql->fetchAll(PDO::FETCH_ASSOC);
+    $result = $sql->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $row) {
-      if (password_verify($data['password'], $row['password']) && $data['email']===$row['email'])
+      if (password_verify($data['password'], $row['password']) && $data['email'] === $row['email'])
         return $row;
-    }return 0;
+    }
+    return 0;
   }
 
   // check if the adress email already exist
@@ -32,7 +33,7 @@ class User extends DB
     $sql = "SELECT * FROM personne where email like ?";
     $sql = $this->connect()->prepare($sql);
     if ($sql->execute(array($email)))
-      if ($sql->rowCount()>0)
+      if ($sql->rowCount() > 0)
         return 1;
     return 0;
   }
@@ -47,13 +48,25 @@ class User extends DB
     return 0;
   }
 
+
+  //Function to display all product
+  public function get_all_customers()
+  {
+    $sql = "SELECT * from personne where role like 0";
+    $sql = $this->connect()->prepare($sql);
+    if ($sql->execute())
+      return $sql->fetchAll(PDO::FETCH_ASSOC);
+    return 0;
+  }
+
+
   //delete client
   public function DeleteUser($id)
-    {
-        $sql = "DELETE FROM personne WHERE id_pers=? and role like 0";
-        $sql = $this->connect()->prepare($sql);
-        if ($sql->execute(array($id)))
-            return 1;
-        return 0;
-    }
+  {
+    $sql = "DELETE FROM personne WHERE id_pers=? and role like 0";
+    $sql = $this->connect()->prepare($sql);
+    if ($sql->execute(array($id)))
+      return 1;
+    return 0;
+  }
 }
