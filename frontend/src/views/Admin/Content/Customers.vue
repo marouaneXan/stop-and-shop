@@ -86,8 +86,8 @@ export default {
         return {
             customers: [],
             searchQuery:'',
-            product: {
-                
+            customer: {
+                id:''
             },
             Deletecustomer: {
                 success: '',
@@ -121,12 +121,11 @@ export default {
     },
     //passing id for model
         passingDataDelete(p) {
-            this.product.id_produit = p.id_produit;
-            console.log(this.product.id_produit)
+            this.customer.id_pers = p.id_produit;
         },
         //delete customer
-        async DeleteProduct() {
-            let res = await axios.post("http://stop-and-shop.com/Product/DeleteProduct/" + this.product.id_produit);
+        async DeleteCustomer() {
+            let res = await axios.post("http://stop-and-shop.com/Product/DeleteCustomer/" + this.product.id_produit);
             if (res.data.message == 'Product Deleted Successfully') {
                 this.fetchProducts()
                 this.Deleteproduct.success = "Product Deleted Successfully";
