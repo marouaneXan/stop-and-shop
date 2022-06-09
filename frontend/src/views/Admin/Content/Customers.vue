@@ -26,24 +26,22 @@
                             <thead>
                                 <tr>
                                     <th scope="col">N°</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">image</th>
-                                    <th scope="col">Category</th>
-                                    <th scope="col">Quantity</th>
+                                    <th scope="col">First name</th>
+                                    <th scope="col">Last name</th>
+                                    <th scope="col">Birthday</th>
+                                    <th scope="col">Country</th>
+                                    <th scope="col">Email</th>
                                     <th scope="col" class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="p in resultQuery" :key="p.id_customer">
+                                <tr v-for="p in resultQuery" :key="p.id_pers">
                                     <td>#</td>
                                     <td>{{p.nom}}</td>
-                                    <td>{{p.description}}</td>
-                                    <td>{{p.prix}}$</td>
-                                    <td><img id="image_produit" :src="getImgUrl(p.image)" alt="..."></td>
-                                    <td>{{p.nom_cat}}</td>
-                                    <td>{{p.quantite}}</td>
+                                    <td>{{p.prenom}}</td>
+                                    <td>{{p.date_naissance}}$</td>
+                                    <td>{{p.ville}}</td>
+                                    <td>{{p.email}}</td>
                                     <td class="action_btn">
                                         <button class="btn" @click="passingDataDelete(p)" data-bs-toggle="modal" data-bs-target="#delete"><i class="fa-solid fa-trash-can" style="color:red;"></i></button>
                                         <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -54,11 +52,11 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        Are You Sure You want To Delete This Product
+                                                        Are You Sure You want To Delete This Customer
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                        <button type="button" @click="DeleteProduct()" class="btn btn-danger" data-bs-dismiss="modal">Yes</button>
+                                                        <button type="button" @click="DeleteCustomer()" class="btn btn-danger" data-bs-dismiss="modal">Yes</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -115,23 +113,23 @@ export default {
     },
     methods:{
       async fetchCustomers() {
-            let res = await axios("http://stop-and-shop.com/Product");
+            let res = await axios("http://stop-and-shop.com/User");
             this.customers = res.data
         },
     },
     //passing id for model
         passingDataDelete(p) {
-            this.customer.id_pers = p.id_produit;
+            this.customer.id_pers = p.id_pers;
         },
         //delete customer
         async DeleteCustomer() {
             let res = await axios.post("http://stop-and-shop.com/Product/DeleteCustomer/" + this.product.id_produit);
             if (res.data.message == 'Product Deleted Successfully') {
-                this.fetchProducts()
-                this.Deleteproduct.success = "Product Deleted Successfully";
+                this.fetchCustomers()
+                this.Deleteproduct.success = "Customer Deleted Successfully";
             } else {
-                this.fetchProducts()
-                this.Deleteproduct.error = "Error on updating Product";
+                this.fetchCustomers()
+                this.Deleteproduct.error = "Error on updating customer";
             }
         },
 }
