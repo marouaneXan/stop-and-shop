@@ -16,17 +16,11 @@
     <div class="col-md-12 fs-5 mt-3 mb-2" style="margin-left:55px">
         Search for products
     </div>
-    <form @click.prevent class="d-flex" id="form" style="margin-left:56px">
-        <div class="mb-3">
-            <input  type="text" v-model="filter.nom_cat" class="form-control" placeholder="Name of product">
-        </div>
+    <div class="d-flex" id="form" style="margin-left:56px">
         <div class="mb-3" style="margin-left:8px;">
-            <input v-model="filter.nom_pro" type="text" class="form-control" placeholder="Name of category">
+            <input v-model="searchQuery" type="text" class="form-control" placeholder="Name of product">
         </div>
-        <div class="mb-3" style="margin-left:6px;">
-            <button @click="searchProduct()" type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </form>
+    </div>
     <div class="col mt-5" style="margin-left:56px">
 
         <!-- Model To add new product -->
@@ -111,7 +105,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="p in products" :key="p.id_produit">
+                                <tr v-for="p in resultQuery" :key="p.id_produit">
                                     <td>#</td>
                                     <td>{{p.nom}}</td>
                                     <td>{{p.description}}</td>
@@ -159,6 +153,7 @@
                                                                 <input type="text" v-model="product.prix" class="form-control" id="Price">
                                                                 <!-- <label for="formFile" class="form-label">Image</label> -->
                                                                 <!-- <input type="file" ref="ProductImage" multiple class="form-control" @change="previewFiles" id="formFile" enctype='multipart/form-data'> -->
+                                                                <!-- <label class="form-label">Select Category</label> -->
                                                                 <select class="form-select" v-model="product.id_category" aria-label="Default select example">
                                                                     <option disabled selected>Select Category</option>
                                                                     <option v-for="c in categories" :key="c.id_cat" :value="c.id_cat">{{c.nom_cat}}</option>
@@ -192,14 +187,17 @@
 import axios from 'axios'
 import NavbarComponent from '@/components/Admin/Layouts/Navbar.vue'
 import SidebarComponent from '@/components/Admin/Layouts/Sidebar.vue'
-import {
-    mapGetters,
-    mapActions
-} from 'vuex'
+// import {
+//     mapGetters,
+//     mapActions
+// } from 'vuex'
 export default {
     name: 'ProductView',
     data() {
         return {
+            products: [],
+            categories: [],
+            searchQuery:'',
             product: {
                 id_produit: '',
                 nom: '',
@@ -209,11 +207,14 @@ export default {
                 id_category: '',
                 quantite: ''
             },
-            filter:{
-                nom_cat:"",
-                nom_pro:"",
+            category:{
+                nom_cat:''
             },
             Addproduct: {
+                success: '',
+                error: ''
+            },
+            Addcategory: {
                 success: '',
                 error: ''
             },
@@ -236,14 +237,31 @@ export default {
         this.fetchCategories()
     },
     computed: {
-        ...mapGetters(['products', 'categories'])
+        // ...mapGetters(['products', 'categories'])
+        resultQuery() {
+            if (this.searchQuery) {
+                return this.products.filter((item) => {
+                    return this.searchQuery.toLowerCase().split(' ').every(v => item.nom.toLowerCase().includes(v))
+                })
+            } else {
+                return this.products;
+            }
+        }
     },
     methods: {
-        ...mapActions(['fetchProducts', 'fetchCategories']),
+        // ...mapActions(['fetchProducts', 'fetchCategories']),
         // getImgUrl(pet) {
         //     var images = require.context('../../../assets/uploads/', false)
         //     return images('./' + pet)
         // },
+        async fetchProducts() {
+            let res = await axios("http://stop-and-shop.com/Product");
+            this.products = res.data
+        },
+        async fetchCategories() {
+            let res = await axios("http://stop-and-shop.com/Category");
+            this.categories = res.data
+        },
         async addProduct() {
             var form = new FormData();
             form.append('nom', this.product.nom);
@@ -274,16 +292,16 @@ export default {
             console.log(this.product.id_produit)
         },
         //delete product
-        // async DeleteProduct() {
-        //     let res = await axios.post("http://stop-and-shop.com/Product/DeleteProduct/" + this.product.id_produit);
-        //     if (res.data.message == 'Product Deleted Successfully') {
-        //         this.fetchProducts()
-        //         this.Deleteproduct.success = "Product Deleted Successfully";
-        //     } else {
-        //         this.fetchProducts()
-        //         this.Deleteproduct.error = "Error on updating Product";
-        //     }
-        // },
+        async DeleteProduct() {
+            let res = await axios.post("http://stop-and-shop.com/Product/DeleteProduct/" + this.product.id_produit);
+            if (res.data.message == 'Product Deleted Successfully') {
+                this.fetchProducts()
+                this.Deleteproduct.success = "Product Deleted Successfully";
+            } else {
+                this.fetchProducts()
+                this.Deleteproduct.error = "Error on updating Product";
+            }
+        },
 
         //passing data for model
         passingDataUpdate(p) {
@@ -320,21 +338,6 @@ export default {
                 this.Updateproduct.error = "Error on Updating new Product";
             }
         },
-        async searchProduct(){
-        let fomdata = new FormData()
-        fomdata.append('nom_cat' , this.filter.nom_cat)
-        fomdata.append('nom_pro' , this.filter.nom_pro)
-        let res= await axios({
-            method:'POST',
-            url:'http://stop-and-shop.com/Product/Search',
-            data:fomdata,
-            headers:{
-                "Content-Type": "multipart/form-data"
-            }
-        });
-        // products=res.data;
-        console.log(res.data)
-    }
     },
 }
 </script>

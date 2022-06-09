@@ -26,7 +26,7 @@ class Category extends DB
    // Function to add new category
    public function addCategory($nom_cat)
    {
-      $sql = "INSERT INTO categories (`nom_cat`)";
+      $sql = "INSERT INTO categories (`nom_cat`) values(?)";
       $sql = $this->connect()->prepare($sql);
       if ($sql->execute([$nom_cat]))
          return 1;

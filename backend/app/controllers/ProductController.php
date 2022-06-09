@@ -9,10 +9,6 @@ class ProductController
   public function index()
   {
     $all_products = new Product();
-    $search_product = new Product();
-    // $data=[
-    //   'number_of_products'=>all_products->Number_of_products()
-    // ];
     if ($all_products->get_all_products()) {
       echo json_encode($all_products->get_all_products());
     } else {
@@ -20,37 +16,6 @@ class ProductController
         'message' => 'There is no Products available for this moment'
       ));
     }
-
-    if($_SERVER['REQUEST_METHOD']=='POST'){
-      $data=[
-        'nom'=>$_POST['nom'],
-        'nom_cat'=>$_POST['nom_cat']
-      ];
-      if ($search_product->search_product($data['nom_cat'],$data['nom'])) {
-        echo json_encode($search_product->search_product($data['nom_cat'],$data['nom']));
-      } else {
-        echo json_encode(array(
-          'error' => 'Not Found'
-        ));
-      }
-    }
-  }
-  public function Search()
-  {
-    $search_product = new Product();
-      $data=[
-        'nom'=>$_POST['nom_pro'],
-        'nom_cat'=>$_POST['nom_cat']
-      ];
-        if($search_product->search_product($data['nom_cat'],$data['nom'])){
-          echo json_encode($search_product->search_product($data['nom_cat'],$data['nom']));
-        }else{
-          echo json_encode(array(
-            'error' => 'Product not Found'
-          ));
-        }
-        
-        
   }
   //get single product
   public function read_single_product($id)

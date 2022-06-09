@@ -17,4 +17,18 @@ class CategoryController
       ));
     }
   }
+  public function create()
+  {
+    $insert = new Category();
+    $nom_cat=$_POST['nom_cat'];
+    if($insert->addCategory($nom_cat)){
+      echo json_encode(array(
+        'message'=>'Category added successfully'
+      ));
+    }else{
+    echo json_encode(array(
+      'error'=>'Error on adding new category'
+    ));
+  }
+  }
 }
