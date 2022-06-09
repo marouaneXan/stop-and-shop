@@ -274,16 +274,16 @@ export default {
             console.log(this.product.id_produit)
         },
         //delete product
-        async DeleteProduct() {
-            let res = await axios.post("http://stop-and-shop.com/Product/DeleteProduct/" + this.product.id_produit);
-            if (res.data.message == 'Product Deleted Successfully') {
-                this.fetchProducts()
-                this.Deleteproduct.success = "Product Deleted Successfully";
-            } else {
-                this.fetchProducts()
-                this.Deleteproduct.error = "Error on updating Product";
-            }
-        },
+        // async DeleteProduct() {
+        //     let res = await axios.post("http://stop-and-shop.com/Product/DeleteProduct/" + this.product.id_produit);
+        //     if (res.data.message == 'Product Deleted Successfully') {
+        //         this.fetchProducts()
+        //         this.Deleteproduct.success = "Product Deleted Successfully";
+        //     } else {
+        //         this.fetchProducts()
+        //         this.Deleteproduct.error = "Error on updating Product";
+        //     }
+        // },
 
         //passing data for model
         passingDataUpdate(p) {
