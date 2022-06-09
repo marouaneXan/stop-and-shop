@@ -18,15 +18,15 @@
     <div v-if="Addcategory.success" class="alert alert-success text-center">{{Addcategory.success}} <i class="fa-solid fa-circle-check"></i></div>
     <div v-if="Addcategory.error" class="alert alert-warning text-center">{{Addcategory.error}}</div>
 
-    <div class="col-md-12 fs-5 mt-3 mb-2" style="margin-left:55px">
-        Search for products
+    <div class="col-md-12 fs-5 mt-3 mb-2" style="padding:0px 50px;">
+        Name of Product
     </div>
-    <div class="d-flex" id="form" style="margin-left:56px">
-        <div class="mb-3" style="margin-left:8px;">
-            <input v-model="searchQuery" type="text" class="form-control" placeholder="Name of product">
+    <div class="d-flex" id="form" style="">
+        <div class="mb-3" style="padding:0px 50px;">
+            <input v-model="searchQuery" type="text" class="form-control" placeholder="Search" style="width:300px;">
         </div>
     </div>
-    <div class="col mt-5" style="margin-left:56px">
+    <div class="col mt-5" style="padding:0px 50px;">
 
         <!-- Model To add new product -->
         <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#addProduct">Add Product</button>
