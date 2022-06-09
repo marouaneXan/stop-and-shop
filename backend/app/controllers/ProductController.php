@@ -21,21 +21,37 @@ class ProductController
       ));
     }
 
-    // if($_SERVER['REQUEST_METHOD']=='POST'){
-    //   $data=[
-    //     'nom_produit'=>$_POST['nom_produit'],
-    //     'nom_cat'=>$_POST['nom_cat']
-    //   ];
-    //   if ($search_product->search_product($nom,$cat)) {
-    //     echo json_encode($search_product->search_product($nom,$cat));
-    //   } else {
-    //     echo json_encode(array(
-    //       'message' => 'There is no Products available'
-    //     ));
-    //   }
-    // }
+    if($_SERVER['REQUEST_METHOD']=='POST'){
+      $data=[
+        'nom'=>$_POST['nom'],
+        'nom_cat'=>$_POST['nom_cat']
+      ];
+      if ($search_product->search_product($data['nom_cat'],$data['nom'])) {
+        echo json_encode($search_product->search_product($data['nom_cat'],$data['nom']));
+      } else {
+        echo json_encode(array(
+          'error' => 'Not Found'
+        ));
+      }
+    }
   }
-
+  public function Search()
+  {
+    $search_product = new Product();
+      $data=[
+        'nom'=>$_POST['nom_pro'],
+        'nom_cat'=>$_POST['nom_cat']
+      ];
+        if($search_product->search_product($data['nom_cat'],$data['nom'])){
+          echo json_encode($search_product->search_product($data['nom_cat'],$data['nom']));
+        }else{
+          echo json_encode(array(
+            'error' => 'Product not Found'
+          ));
+        }
+        
+        
+  }
   //get single product
   public function read_single_product($id)
   {

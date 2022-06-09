@@ -35,28 +35,23 @@ class Product extends DB
     // Function to search for product
     public function search_product($nom_cat,$nom_produit)
     {
-        // $sql = "SELECT p.id_produit,p.nom,p.description,p.prix,p.image,c.nom_cat,p.quantite FROM produit p,categories c where p.id_category=c.id_cat and p.id_category=?";
-        // $sql = $this->connect()->prepare($sql);
-        // if ($sql->execute([$id_cat]))
-        //     return $sql->fetchAll(PDO::FETCH_ASSOC);
-        // return 0;
         if(!empty($nom_cat) && empty($nom_produit)){
-            $sql="SELECT p.id_produit,p.nom,p.description,p.prix,p.image,c.nom_cat,p.quantite FROM produit p,categories c where p.id_category=c.id_cat and c.nom_cat='$nom_cat%'";
+            $sql="SELECT p.id_produit,p.nom,p.description,p.prix,p.image,c.nom_cat,p.quantite FROM produit p,categories c where p.id_category=c.id_cat and c.nom_cat like '$nom_cat'";
             $sql=$this->connect()->prepare($sql);
             if($sql->execute())
-            return $sql->fetchAll();
+            return $sql->fetchAll(PDO::FETCH_ASSOC);
                 return 0;
-        }elseif(!empty($nom_cat) && empty($nom_produit)){
-            $sql="SELECT p.id_produit,p.nom,p.description,p.prix,p.image,c.nom_cat,p.quantite FROM produit p,categories c where p.id_category=c.id_cat and p.nom='$nom_produit%'";
+        }elseif(empty($nom_cat) && !empty($nom_produit)){
+            $sql="SELECT p.id_produit,p.nom,p.description,p.prix,p.image,c.nom_cat,p.quantite FROM produit p,categories c where p.id_category=c.id_cat and p.nom like'$nom_produit'";
             $sql=$this->connect()->prepare($sql);
             if($sql->execute())
-            return $sql->fetchAll();
+            return $sql->fetchAll(PDO::FETCH_ASSOC);
                 return 0;
-        }elseif(!empty($nom_cat) && !empty($nom_cat)){
-            $sql="SELECT p.id_produit,p.nom,p.description,p.prix,p.image,c.nom_cat,p.quantite FROM produit p,categories c where p.id_category=c.id_cat and (p.nom='$nom_produit%' or c.nom_cat='$nom_cat%' )";
+        }elseif(!empty($nom_produit) && !empty($nom_cat)){
+            $sql="SELECT p.id_produit,p.nom,p.description,p.prix,p.image,c.nom_cat,p.quantite FROM produit p,categories c where p.id_category=c.id_cat and (p.nom like '$nom_produit' and c.nom_cat like'$nom_cat' )";
             $sql=$this->connect()->prepare($sql);
             if($sql->execute())
-                return $sql->fetchAll();
+                return $sql->fetchAll(PDO::FETCH_ASSOC);
             return 0;
         }
     }

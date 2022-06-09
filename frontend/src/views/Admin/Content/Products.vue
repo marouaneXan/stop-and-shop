@@ -3,7 +3,7 @@
 <SidebarComponent />
 <main class="mt-5 pt-3">
     <!--Message for add products-->
-    <div v-if="Addproduct.success" class="alert alert-success text-center">{{Addproduct.success}}</div>
+    <div v-if="Addproduct.success" class="alert alert-success text-center">{{Addproduct.success}} <i class="fa-solid fa-circle-check"></i></div>
     <div v-if="Addproduct.error" class="alert alert-warning text-center">{{Addproduct.error}}</div>
 
     <!--Message for delete products-->
@@ -11,20 +11,20 @@
     <div v-if="Deleteproduct.error" class="alert alert-warning text-center">{{Deleteproduct.error}}</div>
 
     <!--Message for update products-->
-    <div v-if="Updateproduct.success" class="alert alert-success text-center">{{Updateproduct.success}}</div>
+    <div v-if="Updateproduct.success" class="alert alert-success text-center">{{Updateproduct.success}} <i class="fa-solid fa-circle-check"></i></div>
     <div v-if="Updateproduct.error" class="alert alert-warning text-center">{{Updateproduct.error}}</div>
     <div class="col-md-12 fs-5 mt-3 mb-2" style="margin-left:55px">
         Search for products
     </div>
     <form @click.prevent class="d-flex" id="form" style="margin-left:56px">
         <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Name of product">
+            <input  type="text" v-model="filter.nom_cat" class="form-control" placeholder="Name of product">
         </div>
         <div class="mb-3" style="margin-left:8px;">
-            <input type="text" class="form-control" placeholder="Name of category">
+            <input v-model="filter.nom_pro" type="text" class="form-control" placeholder="Name of category">
         </div>
         <div class="mb-3" style="margin-left:6px;">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button @click="searchProduct()" type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
     <div class="col mt-5" style="margin-left:56px">
@@ -209,6 +209,10 @@ export default {
                 id_category: '',
                 quantite: ''
             },
+            filter:{
+                nom_cat:"",
+                nom_pro:"",
+            },
             Addproduct: {
                 success: '',
                 error: ''
@@ -315,7 +319,22 @@ export default {
                 this.fetchProducts()
                 this.Updateproduct.error = "Error on Updating new Product";
             }
-        }
+        },
+        async searchProduct(){
+        let fomdata = new FormData()
+        fomdata.append('nom_cat' , this.filter.nom_cat)
+        fomdata.append('nom_pro' , this.filter.nom_pro)
+        let res= await axios({
+            method:'POST',
+            url:'http://stop-and-shop.com/Product/Search',
+            data:fomdata,
+            headers:{
+                "Content-Type": "multipart/form-data"
+            }
+        });
+        // products=res.data;
+        console.log(res.data)
+    }
     },
 }
 </script>
