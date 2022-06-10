@@ -3,7 +3,7 @@
 <SidebarComponent />
 <main class="mt-5 pt-3">
     <!--Message for delete products-->
-    <div v-if="Deletecustomer.success" class="alert alert-danger text-center">{{Deletecustomer.success}}</div>
+    <div v-if="Deletecustomer.success" class="alert alert-success text-center">{{Deletecustomer.success}}</div>
     <div v-if="Deletecustomer.error" class="alert alert-warning text-center">{{Deletecustomer.error}}</div>
 
     <div class="col-md-12 fs-5 mt-3 mb-2" style="padding:0px 50px;">
@@ -35,15 +35,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="p in resultQuery" :key="p.id_pers">
+                                <tr v-for="c in resultQuery" :key="c.id_pers">
                                     <td>#</td>
-                                    <td>{{p.nom}}</td>
-                                    <td>{{p.prenom}}</td>
-                                    <td>{{p.date_naissance}}</td>
-                                    <td>{{p.ville}}</td>
-                                    <td>{{p.email}}</td>
+                                    <td>{{c.nom}}</td>
+                                    <td>{{c.prenom}}</td>
+                                    <td>{{c.date_naissance}}</td>
+                                    <td>{{c.ville}}</td>
+                                    <td>{{c.email}}</td>
                                     <td class="action_btn">
-                                        <button class="btn" @click="passingDataDelete(p)" data-bs-toggle="modal" data-bs-target="#delete"><i class="fa-solid fa-trash-can" style="color:red;"></i></button>
+                                        <button class="btn" @click="passingDataDelete(c)" data-bs-toggle="modal" data-bs-target="#delete"><i class="fa-solid fa-trash-can" style="color:red;"></i></button>
                                         <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
@@ -117,8 +117,8 @@ export default {
             this.customers = res.data
         },
         //passing id for model
-        passingDataDelete(p) {
-            this.customer.id_pers = p.id_pers;
+        passingDataDelete(c) {
+            this.customer.id_pers = c.id_pers;
             console.log(this.customer.id_pers)
         },
         //delete customer
@@ -128,8 +128,7 @@ export default {
                 this.fetchCustomers()
                 this.Deletecustomer.success = "Customer Deleted Successfully";
             } else {
-                this.fetchCustomers()
-                this.Deletecustomer.error = "Error on updating customer";
+                this.Deletecustomer.error = "Error on deleting customer";
             }
         },
     },

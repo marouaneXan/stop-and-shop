@@ -18,7 +18,7 @@ class UserController
         }
     }
 
-  //delete product
+  //delete customer
   public function DeleteCustomers($id)
   {
     $Delete = new User();
@@ -28,7 +28,7 @@ class UserController
       ));
     } else {
       echo json_encode(array(
-        'message' => 'Error on Deleting Customer'
+        'error' => 'Error on Deleting Customer'
       ));
     }
   }

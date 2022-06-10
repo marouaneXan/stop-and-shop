@@ -2,8 +2,8 @@
 <NavbarComponent />
 <SidebarComponent />
 <main class="mt-5 pt-3">
-    <!--Message for delete products-->
-    <div v-if="Deletecontact.success" class="alert alert-danger text-center">{{Deletecontact.success}}</div>
+    <!--Message for delete contact-->
+    <div v-if="Deletecontact.success" class="alert alert-success text-center">{{Deletecontact.success}}</div>
     <div v-if="Deletecontact.error" class="alert alert-warning text-center">{{Deletecontact.error}}</div>
 
     <div class="col-md-12 fs-5 mt-3 mb-2" style="padding:0px 50px;">
@@ -19,7 +19,7 @@
     <div class="row d-flex justify-content-center align-items-center mt-3">
         <div class="col-md-6" id="card">
             <div class="card text-dark bg-light mb-3">
-                <div class="card-header fw-bold">List of Customers</div>
+                <div class="card-header fw-bold">List of Contact</div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -35,16 +35,16 @@
                             <tbody>
                                 <tr v-for="c in resultQuery" :key="c.id">
                                     <td>#</td>
-                                    <td>{{p.email}}</td>
-                                    <td>{{p.subject}}</td>
-                                    <td>{{p.email}}</td>
+                                    <td>{{c.email}}</td>
+                                    <td>{{c.subject}}</td>
+                                    <td>{{c.message}}</td>
                                     <td class="action_btn">
-                                        <button class="btn" @click="passingDataDelete(p)" data-bs-toggle="modal" data-bs-target="#delete"><i class="fa-solid fa-trash-can" style="color:red;"></i></button>
+                                        <button class="btn" @click="passingDataDelete(c)" data-bs-toggle="modal" data-bs-target="#delete"><i class="fa-solid fa-trash-can" style="color:red;"></i></button>
                                         <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Delete Contact</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
@@ -52,7 +52,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                        <button type="button" @click="DeleteCustomer()" class="btn btn-danger" data-bs-dismiss="modal">Yes</button>
+                                                        <button type="button" @click="DeleteContact()" class="btn btn-danger" data-bs-dismiss="modal">Yes</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -94,16 +94,16 @@ export default {
         SidebarComponent
     },
     mounted() {
-        this.fetchContacts()
+        this.fetchContact()
     },
     computed: {
         resultQuery() {
             if (this.searchQuery) {
-                return this.contact.filter((contact) => {
+                return this.contacts.filter((contact) => {
                     return this.searchQuery.toLowerCase().split(' ').every(v => contact.email.toLowerCase().includes(v))
                 })
             } else {
-                return this.contact;
+                return this.contacts;
             }
         }
     },
@@ -113,18 +113,18 @@ export default {
             this.contacts = res.data
         },
         //passing id for model
-        passingDataDelete(p) {
-            this.contact.id = p.id;
+        passingDataDelete(c) {
+            this.contact.id = c.id;
         },
         //delete customer
         async DeleteContact() {
             let res = await axios.post("http://stop-and-shop.com/Contact/DeleteContact/" + this.contact.id);
-            if (res.data.message == 'Customer Deleted Successfully') {
+            if (res.data.message == 'Contact Deleted Successfully') {
                 this.fetchContact()
                 this.Deletecontact.success = "Contact Deleted Successfully";
             } else {
                 this.fetchContact()
-                this.Deletecontact.error = "Error on updating contact";
+                this.Deletecontact.error = "Error on deleting contact";
             }
         },
     },
