@@ -14,7 +14,7 @@ import products from '../views/Admin/Content/Products.vue'
 import customers from '../views/Admin/Content/Customers.vue'
 import orders from '../views/Admin/Content/Orders.vue'
 import contact from '../views/Admin/Content/Contact.vue'
-import statistic from '../views/Admin/Content/Statistic.vue'
+import statistic from '../components/Admin/Content/Statistic.vue'
 import profile from '../views/Admin/Content/Profile.vue'
 
 const routes=[

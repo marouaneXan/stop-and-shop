@@ -10,4 +10,14 @@ class Contact extends DB
             return $sql->rowCount();
         return 0;
     }
+
+    // Function to get all gategories
+   public function get_all_contacts()
+   {
+      $sql = "SELECT * FROM contact";
+      $sql = $this->connect()->prepare($sql);
+      if ($sql->execute())
+         return $sql->fetchAll(PDO::FETCH_ASSOC);
+      return 0;
+   }
 }
