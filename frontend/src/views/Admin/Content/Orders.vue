@@ -1,7 +1,7 @@
 <template>
 <NavbarComponent />
 <SidebarComponent />
-<main class="mt-5 pt-3">
+<main v-if="orders.length" class="mt-5 pt-3">
     <!--Message for delete products-->
     <div v-if="Updateorder.success" class="alert alert-success text-center">{{Updateorder.success}}</div>
     <div v-if="Updateorder.error" class="alert alert-warning text-center">{{Updateorder.error}}</div>
@@ -100,6 +100,11 @@
         </div>
     </div>
 </main>
+<main v-else class="mt-5 d-flex justify-content-center align-content-center">
+    <lord-icon  src="https://cdn.lordicon.com/slkvcfos.json" trigger="loop" style="width:250px;height:250px">
+    </lord-icon>
+</main>
+<!-- {{orders}} -->
 </template>
 
 <script>
@@ -114,7 +119,8 @@ export default {
             searchQuery: '',
             order: {
                 id_pers: '',
-                status: ''
+                status: '',
+                nom_pers: ''
             },
             Updateorder: {
                 success: '',
@@ -133,7 +139,7 @@ export default {
         resultQuery() {
             if (this.searchQuery) {
                 return this.orders.filter((order) => {
-                    return this.searchQuery.toLowerCase().split(' ').every(v => order.status.toLowerCase().includes(v))
+                    return this.searchQuery.toLowerCase().split(' ').every(v => order.nom_pers.toLowerCase().includes(v))
                 })
             } else {
                 return this.orders;
@@ -152,6 +158,7 @@ export default {
         //passing data for model
         passingDataUpdate(o) {
             this.order.id_order = o.id_order;
+            // this.order.nom_pers = o.nom_pers;
             this.order.status = o.status;
         },
         //delete product
