@@ -1,11 +1,12 @@
 <template>
 <NavbarComponent />
 <SidebarComponent />
-<section style="background-color: #f4f5f7;">
-    <div class="container py-5">
-        <div class="row d-flex justify-content-center align-items-center">
-            <div class="col col-lg-6 mb-4 mb-lg-0">
-                <div class="card mb-3" style="border-radius: .5rem;">
+<section class=" mt-2 pt-3">
+  <div class="container py-5">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col col-lg-6 mb-4 mb-lg-0">
+              <h1>Profile Admin</h1>
+                <div class="card mb-3" style="border-radius: .5rem;width: 600px;">
                     <div class="row g-0">
                         <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar" class="img-fluid my-5" style="width:90px;height:90px;" />
@@ -67,4 +68,7 @@ export default {
 </script>
 
 <style>
+.gradient-custom {
+background-color: rgb(10, 10, 10);
+}
 </style>
