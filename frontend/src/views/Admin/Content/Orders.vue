@@ -46,12 +46,18 @@
                                     <td>{{o.nom_pers}}</td>
                                     <td>{{o.ville}}</td>
                                     <td>{{o.email}}</td>
+                                    <td>{{o.nom}}</td>
                                     <td>{{o.prix}}</td>
                                     <td>{{o.image}}</td>
                                     <td>{{o.nom_cat}}</td>
                                     <td>{{o.price_total}}</td>
                                     <td>{{o.qtte}}</td>
-                                    <td>{{o.qtte}}</td>
+                                    <td>{{o.done_at}}</td>
+                                    <td>
+                                      <span v-if="o.status=='In progress...'" class="badge rounded-pill bg-warning">In progress...</span>
+                                      <span v-if="o.status=='Delivery'" class="badge rounded-pill bg-info">Delivery</span>
+                                      <span v-if="o.status=='Confirmed'" class="badge rounded-pill bg-success">Confirmed</span>
+                                    </td>
                                     <td class="action_btn">
                                         <button class="btn" @click="passingDataDelete(p)" data-bs-toggle="modal" data-bs-target="#delete"><i class="fa-solid fa-trash-can" style="color:red;"></i></button>
                                         <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -124,8 +130,7 @@ export default {
     methods:{
       async fetchOrders() {
             let res = await axios("http://stop-and-shop.com/Order");
-            // this.orders = res.data
-            console.log(res.data)
+            this.orders = res.data
         },
         //passing id for model
         // passingDataDelete(p) {
