@@ -17,4 +17,20 @@ class OrderController
       ));
     }
   }
+
+  // Update status order
+  public function updateStatusOrder($id)
+  {
+    $update = new Order();
+    $status = trim($_POST['status']);
+    if ($update->updateStatus($status, $id)) {
+      echo json_encode(array(
+        'message' => 'Status Updated successfully'
+      ));
+    } else {
+      echo json_encode(array(
+        'error' => 'Error on updating Status'
+      ));
+    }
+  }
 }

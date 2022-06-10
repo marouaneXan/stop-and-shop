@@ -3,7 +3,7 @@
 <SidebarComponent />
 <main class="mt-5 pt-3">
     <!--Message for delete products-->
-    <div v-if="Updateorder.success" class="alert alert-danger text-center">{{Updateorder.success}}</div>
+    <div v-if="Updateorder.success" class="alert alert-success text-center">{{Updateorder.success}}</div>
     <div v-if="Updateorder.error" class="alert alert-warning text-center">{{Updateorder.error}}</div>
 
     <div class="col-md-12 fs-5 mt-3 mb-2" style="padding:0px 50px;">
@@ -54,9 +54,9 @@
                                     <td>{{o.qtte}}</td>
                                     <td>{{o.done_at}}</td>
                                     <td>
-                                        <span v-if="o.status=='In progress...'" class="badge rounded-pill bg-warning">In progress...</span>
-                                        <span v-if="o.status=='Delivery'" class="badge rounded-pill bg-info">Delivery</span>
-                                        <span v-if="o.status=='Confirmed'" class="badge rounded-pill bg-success">Confirmed</span>
+                                        <span v-if="o.status=='In progress...'" class="badge bg-warning">In progress...</span>
+                                        <span v-if="o.status=='Delivery'" class="badge bg-info">Delivery</span>
+                                        <span v-if="o.status=='Confirmed'" class="badge bg-success">Confirmed</span>
                                     </td>
                                     <td class="action_btn">
                                         <button @click="passingDataUpdate(o)" class="btn" data-bs-toggle="modal" data-bs-target="#updateProduct"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -73,7 +73,7 @@
                                                             <div class="mb-1">
                                                                 <!-- <label for="name" class="form-label">Status</label>
                                                                 <input type="text" v-model="order.status" class="form-control" id="name"> -->
-                                                                <select class="form-select" aria-label="Default select example">
+                                                                <select v-model="order.status" class="form-select" aria-label="Default select example">
                                                                     <option disabled selected>Select Status</option>
                                                                     <option value="In progress...">In progress...</option>
                                                                     <option value="Delivery">Delivery</option>
@@ -151,12 +151,12 @@ export default {
             this.order.status = o.status;
         },
         //delete product
-        async UpdateProduct() {
+        async UpdateOrder() {
             var form = new FormData();
-            form.append('nom', this.order.status);
+            form.append('status', this.order.status);
             let res = await axios({
                 method: "POST",
-                url: 'http://stop-and-shop.com/Order/updateOrder/' + this.order.id_order,
+                url: 'http://stop-and-shop.com/Order/updateStatusOrder/' + this.order.id_order,
                 data: form,
                 headers: {
                     "Content-Type": "multipart/form-data"
