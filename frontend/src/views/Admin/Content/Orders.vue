@@ -16,10 +16,10 @@
     </div>
     <div class="col mt-5" style="padding:0px 50px;">
     </div>
-    <div class="row d-flex justify-content-center align-items-center mt-3">
+    <div class="row d-flex justify-content-center align-items-center">
         <div class="col-md-6" id="card">
             <div class="card text-dark bg-light mb-3">
-                <div class="card-header fw-bold">List of Customers</div>
+                <div class="card-header fw-bold">List of Orders</div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -48,7 +48,7 @@
                                     <td>{{o.email}}</td>
                                     <td>{{o.nom}}</td>
                                     <td>{{o.prix}}</td>
-                                    <td>{{o.image}}</td>
+                                    <td><img id="image_produit" :src="getImgUrl(o.image)" alt="..."></td>
                                     <td>{{o.nom_cat}}</td>
                                     <td>{{o.price_total}}</td>
                                     <td>{{o.qtte}}</td>
@@ -132,8 +132,8 @@ export default {
     computed: {
         resultQuery() {
             if (this.searchQuery) {
-                return this.customers.filter((order) => {
-                    return this.searchQuery.toLowerCase().split(' ').every(v => order.nom.toLowerCase().includes(v))
+                return this.orders.filter((order) => {
+                    return this.searchQuery.toLowerCase().split(' ').every(v => order.status.toLowerCase().includes(v))
                 })
             } else {
                 return this.orders;
@@ -141,6 +141,10 @@ export default {
         }
     },
     methods: {
+        getImgUrl(pet) {
+            var images = require.context('../../../assets/uploads/', false)
+            return images('./' + pet)
+        },
         async fetchOrders() {
             let res = await axios("http://stop-and-shop.com/Order");
             this.orders = res.data
@@ -176,5 +180,8 @@ export default {
 </script>
 
 <style>
-
+#image_produit {
+    width: 60px;
+    /* height: 36px; */
+}
 </style>
