@@ -25,4 +25,27 @@ class AdminController{
         $admin = new Admin();
         echo json_encode($admin->get_data_admin());
     }
+    
+
+    // Update informations admin
+  public function updateAdminProfile()
+  {
+    $update = new Admin();
+    $data = [
+      'nom' => trim($_POST['nom']),
+      'prenom' => trim($_POST['prenom']),
+      'date_naissance' => trim($_POST['date_naissance']),
+      'ville' => trim($_POST['ville']),
+      'email' => trim($_POST['email'])
+    ];
+    if ($update->updateDataAdmin($data)) {
+      echo json_encode(array(
+        'message' => 'Your informations Updated successfully'
+      ));
+    } else {
+      echo json_encode(array(
+        'error' => 'Error on updating information'
+      ));
+    }
+  }
 }
