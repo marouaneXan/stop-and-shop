@@ -101,7 +101,7 @@
     </div>
 </main>
 <!-- shop empty page -->
-<div v-else class="py-6 py-lg-12" id="main">
+<!-- <div v-else class="py-6 py-lg-12">
     <div class="container">
         <div class="row">
             <div class="offset-lg-3 col-lg-6 col-md-12 col-12 text-center">
@@ -115,7 +115,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- {{orders}} -->
 </template>
 
@@ -202,8 +202,5 @@ export default {
 #image_produit {
     width: 60px;
     /* height: 36px; */
-}
-#main{
-    margin-top: 100px;
 }
 </style>
