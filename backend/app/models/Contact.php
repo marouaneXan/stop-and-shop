@@ -20,4 +20,14 @@ class Contact extends DB
          return $sql->fetchAll(PDO::FETCH_ASSOC);
       return 0;
    }
+
+   //delete contact
+  public function DeleteContact($id)
+  {
+    $sql = "DELETE FROM contact WHERE id=?";
+    $sql = $this->connect()->prepare($sql);
+    if ($sql->execute(array($id)))
+      return 1;
+    return 0;
+  }
 }

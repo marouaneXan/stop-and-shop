@@ -17,4 +17,20 @@ class ContactController
       ));
     }
   }
+
+
+  //delete contact
+  public function DeleteContact($id)
+  {
+    $Delete = new Contact();
+    if ($Delete->DeleteContact($id)) {
+      echo json_encode(array(
+        'message' => 'Contact Deleted Successfully'
+      ));
+    } else {
+      echo json_encode(array(
+        'message' => 'Error on Deleting Contact'
+      ));
+    }
+  }
 }

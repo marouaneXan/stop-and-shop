@@ -36,8 +36,8 @@
                                 <tr v-for="c in resultQuery" :key="c.id">
                                     <td>#</td>
                                     <td>{{p.email}}</td>
-                                    <td>{{p.prenom}}</td>
-                                    <td>{{p.date_naissance}}</td>
+                                    <td>{{p.subject}}</td>
+                                    <td>{{p.email}}</td>
                                     <td class="action_btn">
                                         <button class="btn" @click="passingDataDelete(p)" data-bs-toggle="modal" data-bs-target="#delete"><i class="fa-solid fa-trash-can" style="color:red;"></i></button>
                                         <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -48,7 +48,7 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        Are You Sure You want To Delete This Customer
+                                                        Are You Sure You want To Delete This Contact
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -78,12 +78,12 @@ export default {
     name: "CustomersView",
     data() {
         return {
-            customers: [],
+            contacts: [],
             searchQuery:'',
-            customer: {
-                id_pers:''
+            contact: {
+                id:''
             },
-            Deletecustomer: {
+            Deletecontact: {
                 success: '',
                 error: ''
             },
@@ -94,38 +94,37 @@ export default {
         SidebarComponent
     },
     mounted() {
-        this.fetchCustomers()
+        this.fetchContacts()
     },
     computed: {
         resultQuery() {
             if (this.searchQuery) {
-                return this.customers.filter((customer) => {
-                    return this.searchQuery.toLowerCase().split(' ').every(v => customer.nom.toLowerCase().includes(v))
+                return this.contact.filter((contact) => {
+                    return this.searchQuery.toLowerCase().split(' ').every(v => contact.email.toLowerCase().includes(v))
                 })
             } else {
-                return this.customers;
+                return this.contact;
             }
         }
     },
     methods:{
-      async fetchCustomers() {
-            let res = await axios("http://stop-and-shop.com/User");
-            this.customers = res.data
+      async fetchContact() {
+            let res = await axios("http://stop-and-shop.com/Contact");
+            this.contacts = res.data
         },
         //passing id for model
         passingDataDelete(p) {
-            this.customer.id_pers = p.id_pers;
-            console.log(this.customer.id_pers)
+            this.contact.id = p.id;
         },
         //delete customer
-        async DeleteCustomer() {
-            let res = await axios.post("http://stop-and-shop.com/User/DeleteCustomers/" + this.customer.id_pers);
+        async DeleteContact() {
+            let res = await axios.post("http://stop-and-shop.com/Contact/DeleteContact/" + this.contact.id);
             if (res.data.message == 'Customer Deleted Successfully') {
-                this.fetchCustomers()
-                this.Deletecustomer.success = "Customer Deleted Successfully";
+                this.fetchContact()
+                this.Deletecontact.success = "Contact Deleted Successfully";
             } else {
-                this.fetchCustomers()
-                this.Deletecustomer.error = "Error on updating customer";
+                this.fetchContact()
+                this.Deletecontact.error = "Error on updating contact";
             }
         },
     },
