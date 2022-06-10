@@ -20,8 +20,8 @@ class Admin extends DB
           prenom=?,
           date_naissance=?,
           ville=?,
-          email=?,
-          where role=1
+          email=?
+          where role = 1
           ";
           $sql = $this->connect()->prepare($sql);
           if ($sql->execute([$data['nom'], $data['prenom'], $data['date_naissance'], $data['ville'], $data['email']]))
