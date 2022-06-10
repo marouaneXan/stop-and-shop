@@ -1,7 +1,7 @@
 <template>
 <NavbarComponent />
 <SidebarComponent />
-<main v-if="orders.length" class="mt-5 pt-3">
+<main  class="mt-5 pt-3">
     <!--Message for delete products-->
     <div v-if="Updateorder.success" class="alert alert-success text-center">{{Updateorder.success}}</div>
     <div v-if="Updateorder.error" class="alert alert-warning text-center">{{Updateorder.error}}</div>
@@ -22,7 +22,7 @@
                 <div class="card-header fw-bold">List of Orders</div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table v-if="orders.length" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">N°</th>
@@ -94,6 +94,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <h1 v-else class="text-center">This is no oredrs yet</h1>
                     </div>
                 </div>
             </div>

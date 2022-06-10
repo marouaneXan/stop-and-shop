@@ -22,7 +22,7 @@
                 <div class="card-header fw-bold">List of Contact</div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table v-if="contacts.length" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">N°</th>
@@ -62,6 +62,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <h1 v-else class="text-center">This is no contacts yet</h1>
                     </div>
                 </div>
             </div>
