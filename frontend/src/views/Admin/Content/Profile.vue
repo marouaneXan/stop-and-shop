@@ -3,8 +3,8 @@
 <SidebarComponent />
 <section class=" mt-2 pt-3">
     <!--Message for delete products-->
-    <div v-if="UpdatedataAdmin.success" class="alert alert-success text-center">{{UpdatedataAdmin.success}}</div>
-    <div v-if="UpdatedataAdmin.error" class="alert alert-warning text-center">{{UpdatedataAdmin.error}}</div>
+    <!-- <div v-if="UpdatedataAdmin.success" class="alert alert-success text-center">{{UpdatedataAdmin.success}}</div>
+    <div v-if="UpdatedataAdmin.error" class="alert alert-warning text-center">{{UpdatedataAdmin.error}}</div> -->
     <div class="container py-5">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col col-lg-6 mb-4 mb-lg-0">
@@ -68,10 +68,10 @@ export default {
     ata() {
         return {
             AdminInfos: [],
-            order: {
-                id_pers: '',
-                nom_pers: ''
-            },
+            // order: {
+            //     id_pers: '',
+            //     nom_pers: ''
+            // },
             UpdatedataAdmin: {
                 success: '',
                 error: ''
@@ -91,36 +91,39 @@ export default {
             this.AdminInfos = res.data
         },
         //passing data for model
-        passingDataUpdate(a) {
-            this.order.id_order = a.id_order;
-            this.order.nom_pers = a.nom_pers;
-            this.order.status = a.status;
-        },
+        // passingDataUpdate(a) {
+        //     this.order.id_pers = a.id_pers;
+        //     this.order.nom = a.nom;
+        //     this.order.prenom = a.prenom;
+        //     this.order.date_naissance = a.date_naissance;
+        //     this.order.ville = a.ville;
+        //     this.order.email = a.email;
+        // },
         //delete product
-        async UpdateOrder() {
-            var form = new FormData();
-            form.append('status', this.order.status);
-            form.append('status', this.order.status);
-            form.append('status', this.order.status);
-            form.append('status', this.order.status);
-            form.append('status', this.order.status);
-            form.append('status', this.order.status);
-            let res = await axios({
-                method: "POST",
-                url: 'http://stop-and-shop.com/Order/updateStatusOrder/' + this.order.id_order,
-                data: form,
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                },
-            })
-            if (res.data.message == "Status Updated successfully") {
-                this.fetchDataAdmin()
-                this.Updateorder.success = res.data.message;
-            } else {
-                this.fetchDataAdmin()
-                this.Updateorder.error = "Error on Updating Status";
-            }
-        },
+        // async UpdateOrder() {
+        //     var form = new FormData();
+        //     form.append('status', this.order.status);
+        //     form.append('status', this.order.status);
+        //     form.append('status', this.order.status);
+        //     form.append('status', this.order.status);
+        //     form.append('status', this.order.status);
+        //     form.append('status', this.order.status);
+        //     let res = await axios({
+        //         method: "POST",
+        //         url: 'http://stop-and-shop.com/Order/updateStatusOrder/' + this.order.id_order,
+        //         data: form,
+        //         headers: {
+        //             "Content-Type": "multipart/form-data"
+        //         },
+        //     })
+        //     if (res.data.message == "Status Updated successfully") {
+        //         this.fetchDataAdmin()
+        //         this.Updateorder.success = res.data.message;
+        //     } else {
+        //         this.fetchDataAdmin()
+        //         this.Updateorder.error = "Error on Updating Status";
+        //     }
+        // },
     },
 }
 </script>
