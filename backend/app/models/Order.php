@@ -22,4 +22,24 @@ class Order extends DB
             return $sql->fetchAll(PDO::FETCH_ASSOC);
         return 0;
     }
+
+    // Function to update Product
+    public function updateProduct($data, $id)
+    {
+        if ($this->getProductById($id)) {
+            $sql = "UPDATE produit SET 
+            nom=?,
+            description=?,
+            prix=?,
+            image=0,
+            id_category=?,
+            quantite=?
+            where id_produit = ?
+            ";
+            $sql = $this->connect()->prepare($sql);
+            if ($sql->execute([$data['nom'], $data['description'], $data['prix'], $data['id_category'], $data['quantite'], $id]))
+                return 1;
+            return 0;
+        }
+    }
 }
