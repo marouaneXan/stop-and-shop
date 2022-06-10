@@ -11,4 +11,22 @@ class Admin extends DB
       return $sql->fetchAll(PDO::FETCH_ASSOC);
     return 0;
   }
+
+  // Function to update Product
+  public function updateProduct($data)
+  {
+          $sql = "UPDATE personne SET 
+          nom=?,
+          prenom=?,
+          date_naissance=?,
+          ville=?,
+          email=?,
+          password=?
+          where role=1
+          ";
+          $sql = $this->connect()->prepare($sql);
+          if ($sql->execute([$data['nom'], $data['prenom'], $data['date_naissance'], $data['ville'], $data['quantite']]))
+              return 1;
+          return 0;
+  }
 }

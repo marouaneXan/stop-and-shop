@@ -87,8 +87,8 @@ export default {
     },
     methods: {
         async fetchDataAdmin() {
-            let res = await axios("http://stop-and-shop.com/Order");
-            this.orders = res.data
+            let res = await axios("http://stop-and-shop.com/Admin/DataAdmin");
+            this.AdminInfos = res.data
         },
         //passing data for model
         passingDataUpdate(a) {
