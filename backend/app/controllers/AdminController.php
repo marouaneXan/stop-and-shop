@@ -19,4 +19,10 @@ class AdminController{
 
         echo json_encode($data);
     }
+    // Display information admin
+    public function DataAdmin()
+    {
+        $admin = new Admin();
+        echo json_encode($admin->get_data_admin());
+    }
 }

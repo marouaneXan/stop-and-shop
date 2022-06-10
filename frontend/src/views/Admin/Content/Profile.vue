@@ -3,8 +3,8 @@
 <SidebarComponent />
 <section class=" mt-2 pt-3">
     <!--Message for delete products-->
-    <div v-if="Updateorder.success" class="alert alert-success text-center">{{Updateorder.success}}</div>
-    <div v-if="Updateorder.error" class="alert alert-warning text-center">{{Updateorder.error}}</div>
+    <div v-if="UpdatedataAdmin.success" class="alert alert-success text-center">{{UpdatedataAdmin.success}}</div>
+    <div v-if="UpdatedataAdmin.error" class="alert alert-warning text-center">{{UpdatedataAdmin.error}}</div>
     <div class="container py-5">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col col-lg-6 mb-4 mb-lg-0">
@@ -56,6 +56,7 @@
         </div>
     </div>
 </section>
+{{AdminInfos}}
 </template>
 
 <script>
