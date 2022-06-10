@@ -2,10 +2,13 @@
 <NavbarComponent />
 <SidebarComponent />
 <section class=" mt-2 pt-3">
-  <div class="container py-5">
-    <div class="row d-flex justify-content-center align-items-center">
-      <div class="col col-lg-6 mb-4 mb-lg-0">
-              <h1>Profile Admin</h1>
+    <!--Message for delete products-->
+    <div v-if="Updateorder.success" class="alert alert-success text-center">{{Updateorder.success}}</div>
+    <div v-if="Updateorder.error" class="alert alert-warning text-center">{{Updateorder.error}}</div>
+    <div class="container py-5">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col col-lg-6 mb-4 mb-lg-0">
+                <h1>Profile Admin</h1>
                 <div class="card mb-3" style="border-radius: .5rem;width: 600px;">
                     <div class="row g-0">
                         <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
@@ -56,19 +59,73 @@
 </template>
 
 <script>
+import axios from 'axios'
 import NavbarComponent from '@/components/Admin/Layouts/Navbar.vue'
 import SidebarComponent from '@/components/Admin/Layouts/Sidebar.vue'
 export default {
     name: "ProfileView",
+    ata() {
+        return {
+            AdminInfos: [],
+            order: {
+                id_pers: '',
+                nom_pers: ''
+            },
+            UpdatedataAdmin: {
+                success: '',
+                error: ''
+            }
+        }
+    },
     components: {
         NavbarComponent,
         SidebarComponent
+    },
+    mounted() {
+        this.fetchDataAdmin()
+    },
+    methods: {
+        async fetchDataAdmin() {
+            let res = await axios("http://stop-and-shop.com/Order");
+            this.orders = res.data
+        },
+        //passing data for model
+        passingDataUpdate(a) {
+            this.order.id_order = a.id_order;
+            this.order.nom_pers = a.nom_pers;
+            this.order.status = a.status;
+        },
+        //delete product
+        async UpdateOrder() {
+            var form = new FormData();
+            form.append('status', this.order.status);
+            form.append('status', this.order.status);
+            form.append('status', this.order.status);
+            form.append('status', this.order.status);
+            form.append('status', this.order.status);
+            form.append('status', this.order.status);
+            let res = await axios({
+                method: "POST",
+                url: 'http://stop-and-shop.com/Order/updateStatusOrder/' + this.order.id_order,
+                data: form,
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+            })
+            if (res.data.message == "Status Updated successfully") {
+                this.fetchDataAdmin()
+                this.Updateorder.success = res.data.message;
+            } else {
+                this.fetchDataAdmin()
+                this.Updateorder.error = "Error on Updating Status";
+            }
+        },
     },
 }
 </script>
 
 <style>
 .gradient-custom {
-background-color: rgb(10, 10, 10);
+    background-color: rgb(4, 3, 16);
 }
 </style>
