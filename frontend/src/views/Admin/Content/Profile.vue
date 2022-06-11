@@ -15,7 +15,7 @@
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar" class="img-fluid my-5" style="width:90px;height:90px;" />
                             <h5>{{AdminInfos.nom}} {{AdminInfos.prenom}}</h5>
                             <p>Web Designer</p>
-                            <i class="far fa-edit mb-5"></i>
+                            <i @click="passingDataUpdate(AdminInfos)" class="far fa-edit mb-5" data-bs-toggle="modal" data-bs-target="#updateProduct" style="cursor:pointer"></i>
                         </div>
                         <div class="col-md-8">
                             <div class="card-body p-4">
@@ -27,8 +27,8 @@
                                         <p class="text-muted">{{AdminInfos.email}}</p>
                                     </div>
                                     <div class="col-6 mb-3">
-                                        <h6>{{AdminInfos.date_naissance}}</h6>
-                                        <p class="text-muted">123 456 789</p>
+                                        <h6>Birthday</h6>
+                                        <p class="text-muted">{{AdminInfos.date_naissance}}</p>
                                     </div>
                                 </div>
                                 <div class="row pt-1">
@@ -53,6 +53,40 @@
             </div>
         </div>
     </div>
+
+    <!-- Model To update informations of admin -->
+    <div class="modal fade" id="updateProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Your personnel informations</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form @click.prevent>
+                        <div class="mb-1">
+                            <label for="name" class="form-label">First name</label>
+                            <input type="text" v-model="info.nom" class="form-control" id="name">
+                            <label for="name" class="form-label">Last name</label>
+                            <input type="text" v-model="info.prenom" class="form-control" id="name">
+                            <label for="name" class="form-label">Birthday</label>
+                            <input type="text" v-model="info.date_naissance" class="form-control" id="name">
+                            <label for="name" class="form-label">Country</label>
+                            <input type="text" v-model="info.ville" class="form-control" id="name">
+                            <label for="name" class="form-label">Email</label>
+                            <input type="text" v-model="info.email" class="form-control" id="name">
+                            <label for="name" class="form-label">Password</label>
+                            <input type="text" v-model="info.password" class="form-control" id="name">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" @click="UpdateDataAdmin()" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 {{AdminInfos}}
 </template>
@@ -66,10 +100,14 @@ export default {
     data() {
         return {
             AdminInfos: [],
-            // order: {
-            //     id_pers: '',
-            //     nom_pers: ''
-            // },
+            info: {
+                nom: '',
+                prenom: '',
+                date_naissance: '',
+                ville: '',
+                email: '',
+                password: '',
+            },
             UpdatedataAdmin: {
                 success: '',
                 error: ''
@@ -89,39 +127,39 @@ export default {
             this.AdminInfos = res.data
         },
         //passing data for model
-        // passingDataUpdate(a) {
-        //     this.order.id_pers = a.id_pers;
-        //     this.order.nom = a.nom;
-        //     this.order.prenom = a.prenom;
-        //     this.order.date_naissance = a.date_naissance;
-        //     this.order.ville = a.ville;
-        //     this.order.email = a.email;
-        // },
+        passingDataUpdate(a) {
+            this.info.nom = a.nom;
+            this.info.prenom = a.prenom;
+            this.info.date_naissance = a.date_naissance;
+            this.info.ville = a.ville;
+            this.info.email = a.email;
+            this.info.password = a.password;
+        },
         //delete product
-        // async UpdateOrder() {
-        //     var form = new FormData();
-        //     form.append('status', this.order.status);
-        //     form.append('status', this.order.status);
-        //     form.append('status', this.order.status);
-        //     form.append('status', this.order.status);
-        //     form.append('status', this.order.status);
-        //     form.append('status', this.order.status);
-        //     let res = await axios({
-        //         method: "POST",
-        //         url: 'http://stop-and-shop.com/Order/updateStatusOrder/' + this.order.id_order,
-        //         data: form,
-        //         headers: {
-        //             "Content-Type": "multipart/form-data"
-        //         },
-        //     })
-        //     if (res.data.message == "Status Updated successfully") {
-        //         this.fetchDataAdmin()
-        //         this.Updateorder.success = res.data.message;
-        //     } else {
-        //         this.fetchDataAdmin()
-        //         this.Updateorder.error = "Error on Updating Status";
-        //     }
-        // },
+        async UpdateDataAdmin() {
+            var form = new FormData();
+            form.append('nom', this.order.nom);
+            form.append('prenom', this.order.prenom);
+            form.append('date_naissance', this.order.date_naissance);
+            form.append('ville', this.order.ville);
+            form.append('email', this.order.email);
+            form.append('password', this.order.password);
+            let res = await axios({
+                method: "POST",
+                url: 'http://stop-and-shop.com/Admin/updateAdminProfile',
+                data: form,
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+            })
+            if (res.data.message == "Your informations Updated successfully") {
+                this.fetchDataAdmin()
+                this.UpdatedataAdmin.success = res.data.message;
+            } else {
+                this.fetchDataAdmin()
+                this.UpdatedataAdmin.error = "Error on Updating Status";
+            }
+        },
     },
 }
 </script>
