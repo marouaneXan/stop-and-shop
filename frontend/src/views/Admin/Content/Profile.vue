@@ -12,11 +12,13 @@
                 <div class="card mb-3" style="border-radius: .5rem;width: 600px;">
                     <div class="row g-0">
                         <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar" class="img-fluid my-5" style="width:90px;height:90px;" />
+                            <img src="@/assets/images/imgMe.jpeg" id="pic" alt="Avatar" class="img-fluid my-5" style="width:90px;height:90px;" />
                             <h5>{{AdminInfos.nom}} {{AdminInfos.prenom}}</h5>
                             <p>Web Designer</p>
                             <i @click="passingDataUpdate(AdminInfos)" class="far fa-edit mb-5" data-bs-toggle="modal" data-bs-target="#updateProduct" style="cursor:pointer"></i>
+
                         </div>
+
                         <div class="col-md-8">
                             <div class="card-body p-4">
                                 <h6>Information</h6>
@@ -66,17 +68,17 @@
                     <form @click.prevent>
                         <div class="mb-1">
                             <label for="name" class="form-label">First name</label>
-                            <input type="text" v-model="info.nom" class="form-control" id="name">
+                            <input type="text" v-model="info.nom" class="form-control" required>
                             <label for="name" class="form-label">Last name</label>
-                            <input type="text" v-model="info.prenom" class="form-control" id="name">
+                            <input type="text" v-model="info.prenom" class="form-control" required>
                             <label for="name" class="form-label">Birthday</label>
-                            <input type="text" v-model="info.date_naissance" class="form-control" id="name">
+                            <input type="date" v-model="info.date_naissance" class="form-control" required>
                             <label for="name" class="form-label">Country</label>
-                            <input type="text" v-model="info.ville" class="form-control" id="name">
+                            <input type="text" v-model="info.ville" class="form-control" required>
                             <label for="name" class="form-label">Email</label>
-                            <input type="text" v-model="info.email" class="form-control" id="name">
+                            <input type="text" v-model="info.email" class="form-control" required>
                             <label for="name" class="form-label">Password</label>
-                            <input type="text" v-model="info.password" class="form-control" id="name">
+                            <input type="text" v-model="info.password" class="form-control" required>
                         </div>
                     </form>
                 </div>
@@ -101,6 +103,7 @@ export default {
         return {
             AdminInfos: [],
             info: {
+                id_pers: '',
                 nom: '',
                 prenom: '',
                 date_naissance: '',
@@ -128,7 +131,9 @@ export default {
         },
         //passing data for model
         passingDataUpdate(a) {
+            this.info.id_pers = a.id_pers;
             this.info.nom = a.nom;
+            console.log(this.info.nom)
             this.info.prenom = a.prenom;
             this.info.date_naissance = a.date_naissance;
             this.info.ville = a.ville;
@@ -138,12 +143,12 @@ export default {
         //delete product
         async UpdateDataAdmin() {
             var form = new FormData();
-            form.append('nom', this.order.nom);
-            form.append('prenom', this.order.prenom);
-            form.append('date_naissance', this.order.date_naissance);
-            form.append('ville', this.order.ville);
-            form.append('email', this.order.email);
-            form.append('password', this.order.password);
+            form.append('nom', this.info.nom);
+            form.append('prenom', this.info.prenom);
+            form.append('date_naissance', this.info.date_naissance);
+            form.append('ville', this.info.ville);
+            form.append('email', this.info.email);
+            form.append('password', this.info.password);
             let res = await axios({
                 method: "POST",
                 url: 'http://stop-and-shop.com/Admin/updateAdminProfile',
@@ -167,5 +172,8 @@ export default {
 <style>
 .gradient-custom {
     background-color: rgb(4, 3, 16);
+}
+#pic{
+    border-radius: 50%;
 }
 </style>
