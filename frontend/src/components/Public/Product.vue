@@ -17,22 +17,22 @@
 
                             <h6>Description:</h6>
                             <p>{{product.description}}</p>
-                            <!-- <ul class="list-inline">
+                            <ul class="list-inline">
                                 <li class="list-inline-item">
-                                    <h6>Avaliable Color :</h6>
+                                    <h6>Product Category :</h6>
                                 </li>
                                 <li class="list-inline-item">
-                                    <p class="text-muted"><strong>White / Black</strong></p>
+                                    <p class="text-muted"><strong>{{product.nom_cat}}</strong></p>
                                 </li>
-                            </ul> -->
+                            </ul>
 
-                            <form action="" method="GET">
+                            <form>
                                 <input type="hidden" name="product-title" value="Activewear">
                                 <div class="row">
                                     <div class="col-auto">
                                         <ul class="list-inline pb-3">
                                             <li class="list-inline-item text-right">
-                                                <p class="text-muted"><strong>Quantite</strong></p>
+                                                Quantity
                                                 <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control form-control-sm" />
                                             </li>
                                         </ul>
@@ -55,7 +55,7 @@
         </div>
     </section>
     <!-- Close Content -->
-    <!-- {{product}} -->
+    {{product}}
 </template>
 
 <script>
