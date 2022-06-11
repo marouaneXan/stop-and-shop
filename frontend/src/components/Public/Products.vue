@@ -37,7 +37,7 @@
                             <ul>
                                 <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
                                 <!-- <li><a href="#"><i class="fas fa-heart"></i></a></li> -->
-                                <li><a href="#"><i class="fas fa-expand"></i></a></li>
+                                <li><a :to="{ name: 'Product',params:{id_produit:p.id_produit}}" href="#"><i class="fas fa-expand"></i></a></li>
                             </ul>
                         </div>
                         <div class="part-2">
