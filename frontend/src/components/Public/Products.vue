@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="d-flex justify-content-center mb-5 pb-5" @click.prevent>
-            <button class="btn btn-outline-dark me-2">iniernoe</button>
+            <button v-for="c in categories" :key="c.id_cat" class="btn btn-outline-dark me-2">{{c.nom_cat}}</button>
         </div>
     </div>
 
@@ -27,21 +27,22 @@
     <!-- </div>
         </div>
     </div> -->
-    <section class="section-products">
+    <section  class="section-products">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-lg-4 col-xl-3">
+                <div v-for="p in products" :key="p.id_produit" class="col-md-6 col-lg-4 col-xl-3">
                     <div id="product-1" class="single-product">
                         <div class="part-1">
+                            <img :src="getImgUrl(p.image)" alt="">
                             <ul>
                                 <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-heart"></i></a></li>
+                                <!-- <li><a href="#"><i class="fas fa-heart"></i></a></li> -->
                                 <li><a href="#"><i class="fas fa-expand"></i></a></li>
                             </ul>
                         </div>
                         <div class="part-2">
-                            <h3 class="product-title">Here Product Title</h3>
-                            <h4 class="product-price">$49.99</h4>
+                            <h3 class="product-title">{{p.nom}}</h3>
+                            <h4 class="product-price">{{p.prix}}</h4>
                         </div>
                     </div>
                 </div>
@@ -64,9 +65,10 @@ export default {
     },
     mounted(){
         this.fetchProducts()
+        this.fetchCategories()
     },
     methods:{
-        ...mapActions(['fetchProducts']),
+        ...mapActions(['fetchProducts','fetchCategories']),
         getImgUrl(pet) {
             var images = require.context('../../assets/uploads/', false)
             return images('./' + pet)
@@ -140,11 +142,11 @@ a:hover {
 		transform: scale(1.2,1.2) rotate(5deg);
 }
 
-.section-products #product-1 .part-1::before {
+/* .section-products #product-1 .part-1::before {
     background: url("https://i.ibb.co/L8Nrb7p/1.jpg") no-repeat center;
     background-size: cover;
 		transition: all 0.3s;
-}
+} */
 
 
 

@@ -27,10 +27,12 @@ const actions={
         commit("setProducts", res.data);
         
     },
+    //get all categories of products
     async fetchCategories({ commit }) {
         let res = await axios("http://stop-and-shop.com/Category");
         commit("setCategories", res.data);
     },
+    //get product by id
     
 
 };
