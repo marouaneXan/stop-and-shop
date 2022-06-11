@@ -56,8 +56,8 @@ const routes=[
         component: Cart
     },
     {
-        path: '/product/{id}',
-        name: 'PrductDetails',
+        path: '/product/:id_produit',
+        name: 'ProductDetails',
         component: ProductDetails
     },
 
