@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import NavbarComponent from '@/components/Pages/layouts/Navbar.vue'
-import ProductComponent from '@/components/Pages/Product.vue'
+import NavbarComponent from '../../components/Public/Layouts/Navbar.vue'
+import ProductComponent from '../../components/Public/Product.vue'
 import FooterView from '@/components/Public/Layouts/Footer.vue'
 export default {
-    name:'PrductDetail',
+    name:'ProductDetails',
     components:{
         NavbarComponent,
         ProductComponent,

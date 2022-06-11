@@ -5,6 +5,7 @@ import Login from '../views/Pages/Login.vue'
 import Register from '../views/Pages/Register.vue'
 import Contact from '../views/Pages/Contact.vue'
 import About from '../views/Pages/About.vue'
+import ProductDetails from '../views/Pages/ProductDetails.vue'
 import ErrorPage from '../views/Pages/ErrorPage.vue'
 import Cart from '../views/Pages/Cart.vue'
 
@@ -53,6 +54,11 @@ const routes=[
         path: '/cart',
         name: 'cart',
         component: Cart
+    },
+    {
+        path: '/product/{id}',
+        name: 'PrductDetails',
+        component: ProductDetails
     },
 
 
