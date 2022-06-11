@@ -8,7 +8,7 @@ class Admin extends DB
     $sql = "SELECT * from personne where role like 1";
     $sql = $this->connect()->prepare($sql);
     if ($sql->execute())
-      return $sql->fetchAll(PDO::FETCH_ASSOC);
+      return $sql->fetch(PDO::FETCH_ASSOC);
     return 0;
   }
 
@@ -20,11 +20,12 @@ class Admin extends DB
           prenom=?,
           date_naissance=?,
           ville=?,
-          email=?
+          email=?,
+          password=?
           where role = 1
           ";
           $sql = $this->connect()->prepare($sql);
-          if ($sql->execute([$data['nom'], $data['prenom'], $data['date_naissance'], $data['ville'], $data['email']]))
+          if ($sql->execute([$data['nom'], $data['prenom'], $data['date_naissance'], $data['ville'], $data['email'],$data['password']]))
               return 1;
           return 0;
   }

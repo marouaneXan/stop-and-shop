@@ -36,7 +36,8 @@ class AdminController{
       'prenom' => trim($_POST['prenom']),
       'date_naissance' => trim($_POST['date_naissance']),
       'ville' => trim($_POST['ville']),
-      'email' => trim($_POST['email'])
+      'email' => trim($_POST['email']),
+      'password' => trim($_POST['password']),
     ];
     if ($update->updateDataAdmin($data)) {
       echo json_encode(array(

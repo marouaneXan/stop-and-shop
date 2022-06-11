@@ -13,7 +13,7 @@
                     <div class="row g-0">
                         <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar" class="img-fluid my-5" style="width:90px;height:90px;" />
-                            <h5>Marie Horwitz</h5>
+                            <h5>{{AdminInfos.nom}} {{AdminInfos.prenom}}</h5>
                             <p>Web Designer</p>
                             <i class="far fa-edit mb-5"></i>
                         </div>
@@ -24,23 +24,21 @@
                                 <div class="row pt-1">
                                     <div class="col-6 mb-3">
                                         <h6>Email</h6>
-                                        <p class="text-muted">info@example.com</p>
+                                        <p class="text-muted">{{AdminInfos.email}}</p>
                                     </div>
                                     <div class="col-6 mb-3">
-                                        <h6>Phone</h6>
+                                        <h6>{{AdminInfos.date_naissance}}</h6>
                                         <p class="text-muted">123 456 789</p>
                                     </div>
                                 </div>
-                                <h6>Projects</h6>
-                                <hr class="mt-0 mb-4">
                                 <div class="row pt-1">
                                     <div class="col-6 mb-3">
-                                        <h6>Recent</h6>
-                                        <p class="text-muted">Lorem ipsum</p>
+                                        <h6>Country</h6>
+                                        <p class="text-muted">{{AdminInfos.ville}}</p>
                                     </div>
                                     <div class="col-6 mb-3">
-                                        <h6>Most Viewed</h6>
-                                        <p class="text-muted">Dolor sit amet</p>
+                                        <h6>Password</h6>
+                                        <p class="text-muted">{{AdminInfos.password}}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-start">
@@ -65,7 +63,7 @@ import NavbarComponent from '@/components/Admin/Layouts/Navbar.vue'
 import SidebarComponent from '@/components/Admin/Layouts/Sidebar.vue'
 export default {
     name: "ProfileView",
-    ata() {
+    data() {
         return {
             AdminInfos: [],
             // order: {
