@@ -13,18 +13,6 @@ class User extends DB
   }
 
   // login for client and admin
-  // public function login($data)
-  // {
-  //   $sql = "SELECT * FROM personne";
-  //   $sql = $this->connect()->prepare($sql);
-  //   $sql->execute();
-  //   $result = $sql->fetchAll(PDO::FETCH_ASSOC);
-  //   foreach ($result as $row) {
-  //     if (password_verify($data['password'], $row['password']) && $data['email'] === $row['email'])
-  //       return $row;
-  //   }
-  //   return 0;
-  // }
   public function login($data)
   {
     $sql = "SELECT * FROM personne";
@@ -32,11 +20,8 @@ class User extends DB
     $sql->execute();
     $result = $sql->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $row) {
-      if ($data['password']==$row['password'] && $data['email'] === $row['email'] && $result[0]['role'] != 0)
+      if (password_verify($data['password'], $row['password']) && $data['email'] === $row['email'])
         return $row;
-      elseif ( $data['password'] == $result['password'] && $data['email'] === $result['email'] && $result[0]['role'] == 1) {
-        return $row;
-      }
     }
     return 0;
   }

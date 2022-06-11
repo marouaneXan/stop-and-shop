@@ -49,11 +49,29 @@
         </div>
     </section>
 </div>
+
 </template>
 
 <script>
+import {
+    mapGetters,
+    mapActions
+} from 'vuex'
 export default {
     name: 'ProductsComponent',
+    computed:{
+        ...mapGetters(['products', 'categories'])
+    },
+    mounted(){
+        this.fetchProducts()
+    },
+    methods:{
+        ...mapActions(['fetchProducts']),
+        getImgUrl(pet) {
+            var images = require.context('../../assets/uploads/', false)
+            return images('./' + pet)
+        }
+    }
 }
 </script>
 
