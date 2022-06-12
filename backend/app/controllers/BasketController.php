@@ -25,27 +25,29 @@ class BasketController
         }
     }
 
-    // create new product
+    // create new product in basket
     public function create()
     {
         $add = new Basket();
         $data = [
-            'qtte' => $_POST['qtte'],
-            'id_pers' => $_POST['id_pers'],
-            'id_produit' => $_POST['id_produit'],
-            'price_total' => $_POST['price_total']
+            // 'qtte' => $_POST['qtte'],
+            // 'id_pers' => $_POST['id_pers'],
+            'id_produit' =>33,
+            // 'price_total' => $_POST['price_total']
         ];
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if ($add->addProductToBasket($data)) {
-                echo json_encode(array(
-                    'message' => 'Product Added successfully In Your Basket'
-                ));
-            } else {
-                echo json_encode(array(
-                    'error' => 'Error on Adding new Product To Basket'
-                ));
-            }
-        }
+        echo $add->ProductAlreadyExist($data['id_produit']);
+        // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        //     if ($add->ProductAlreadyExist($data['id_produit'])) {
+        //         $add->addProductToBasket($data);
+        //         echo json_encode(array(
+        //             'message' => 'Product Added successfully In Your Basket'
+        //         ));
+        //     } else {
+        //         echo json_encode(array(
+        //             'error' => 'Error on Adding new Product To Basket'
+        //         ));
+        //     }
+        // }
     }
 
     //delete product

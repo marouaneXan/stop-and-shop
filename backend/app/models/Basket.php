@@ -13,7 +13,16 @@ class Basket extends DB
         }
         return 'empty';
     }
-
+    //
+    public function ProductAlreadyExist($id_produit){
+        $sql="SELECT * from basket where id_produit=?";
+        $sql = $this->connect()->prepare($sql);
+        // if()
+        //     return 0;
+        // return 1;
+        return $sql->execute(array($id_produit));
+        return 0;
+    }
     // Function to add product to basket
     public function addProductToBasket($data)
     {
@@ -52,5 +61,12 @@ class Basket extends DB
         if ($sql->execute(array($id_pers)))
             return $sql->rowCount();
         return 0;
+    }
+    public function getAllProductInBasket(){
+        $sql="select * from basket";
+        $sql = $this->connect()->prepare($sql);
+        if($sql->execute()){
+            return $sql->fetchAll(PDO::FETCH_ASSOC);
+        }return 0;
     }
 }
