@@ -39,8 +39,18 @@ class Basket extends DB
     {
         $sql = "UPDATE basket SET qtte=?,price_total=? where id_basket = ?";
         $sql = $this->connect()->prepare($sql);
-        if ($sql->execute([$data['qtte'],$data['price_total'], $id]))
+        if ($sql->execute([$data['qtte'], $data['price_total'], $id]))
             return 1;
+        return 0;
+    }
+
+    //
+    public function getNumberOfProductInBasketById($id_pers)
+    {
+        $sql = "SELECT * FROM basket where id_pers = ?";
+        $sql = $this->connect()->prepare($sql);
+        if ($sql->execute(array($id_pers)))
+            return $sql->rowCount();
         return 0;
     }
 }

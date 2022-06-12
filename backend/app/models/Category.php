@@ -4,7 +4,7 @@ class Category extends DB
 {
 
    // get number of category
-   public function number_of_category($data)
+   public function number_of_category()
    {
       $sql = "SELECT * FROM categories";
       $sql = $this->connect()->prepare($sql);
