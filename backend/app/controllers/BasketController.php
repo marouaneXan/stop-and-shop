@@ -7,6 +7,9 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 class BasketController
 {
 
+    public function index(){
+        echo 'hello';
+    }
     //get single cart
     public function readBasketProductById($id)
     {
