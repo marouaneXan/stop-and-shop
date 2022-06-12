@@ -43,17 +43,34 @@ class BasketController
     }
 
     //delete product
-  public function DeleteProductFromBasket($id_basket)
-  {
-    $Delete = new Basket();
-    if ($Delete->DeleteProductFromBasket($id_basket)) {
-      echo json_encode(array(
-        'message' => 'Product Deleted Successfully'
-      ));
-    } else {
-      echo json_encode(array(
-        'message' => 'Error on Deleting this product'
-      ));
+    public function DeleteProductFromBasket($id_basket)
+    {
+        $Delete = new Basket();
+        if ($Delete->DeleteProductFromBasket($id_basket)) {
+            echo json_encode(array(
+                'message' => 'Product Deleted Successfully'
+            ));
+        } else {
+            echo json_encode(array(
+                'message' => 'Error on Deleting this product'
+            ));
+        }
     }
-  }
+
+
+    // Update quantite of product in basket
+    public function updateQteOfProduct($id)
+    {
+        $update = new Basket();
+        $qtte = trim($_POST['qtte']);
+        if ($update->updateQteOfProduct($qtte, $id)) {
+            echo json_encode(array(
+                'message' => 'Quantite Updated successfully'
+            ));
+        } else {
+            echo json_encode(array(
+                'error' => 'Error on updating quantite'
+            ));
+        }
+    }
 }
