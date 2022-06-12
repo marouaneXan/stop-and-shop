@@ -64,7 +64,7 @@ export default {
     name: "NavbarComponent",
     data(){
         return{
-            client:localStorage.getItem("client")
+            client_id:localStorage.getItem("client_id")
         }
     },
 }
