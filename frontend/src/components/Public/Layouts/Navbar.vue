@@ -34,21 +34,21 @@
                     </li>
                 </ul> 
                 <div class="btn">
-                    <router-link v-if="!client" :to="{ name: 'Login'}" style="text-decoration:none;">
+                    <router-link v-if="!client_id" :to="{ name: 'Login'}" style="text-decoration:none;">
                         <a class="btn btn-outline-dark ms-2">
                             <i class="fa fa-sign-in me-1" aria-hidden="true"></i>Login
                         </a>
                     </router-link>
-                    <router-link v-if="!client" :to="{ name: 'Register'}" style="text-decoration:none;">
+                    <router-link v-if="!client_id" :to="{ name: 'Register'}" style="text-decoration:none;">
                         <a class="btn btn-outline-dark ms-2">
                             <i class="fa fa-user-plus me-1"></i>Register
                         </a>
                     </router-link>
-                        <a v-if="client" class="btn btn-outline-dark ms-2" style="text-decoration:none;">
+                        <a v-if="client_id" class="btn btn-outline-dark ms-2" style="text-decoration:none;">
                             <i class="fa-solid fa-right-from-bracket"></i>Logout
                         </a>
                     <router-link :to="{ name: 'cart'}" style="text-decoration:none;">
-                        <a class="btn btn-outline-dark ms-2">
+                        <a v-if="client_id" class="btn btn-outline-dark ms-2">
                             <i class="fa-solid fa-cart-shopping"></i>Cart(130)
                         </a>
                     </router-link>
