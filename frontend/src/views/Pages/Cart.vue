@@ -52,8 +52,8 @@
         </div>
     </div>
 </section> -->
-<section class=" h-custom" style="background-color: #eee;">
-    <div class="container py-5 ">
+<section v-if="basketProducts.length" class=" h-custom" style="background-color: #eee;">
+    <div  class="container py-5 ">
         <div class="row d-flex justify-content-center align-items-center ">
             <div class="col">
                 <div class="card">
@@ -76,7 +76,7 @@
                                     <div class="card-body">
                                         <div class=" d-flex justify-content-between">
                                             <div class="d-flex flex-row align-items-center">
-                                                <div >
+                                                <div>
                                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp" class="img-fluid rounded-3" alt="Shopping item" id="image">
                                                 </div>
                                                 <div class="ms-3">
@@ -91,7 +91,24 @@
                                                 <div style="width: 80px;">
                                                     <h5 class="mb-0">${{b.prix*b.qtte}}</h5>
                                                 </div>
-                                                <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+                                                <a @click="passingDataDelete(b)" style="color: #cecece;cursor: pointer;" data-bs-toggle="modal" data-bs-target="#delete"><i class="fas fa-trash-alt"></i></a>
+                                                <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Are You Sure You want To Delete This Product From Basket
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                <button type="button" @click="DeleteProductFromBasket()" class="btn btn-danger" data-bs-dismiss="modal">Yes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -165,6 +182,21 @@
         </div>
     </div>
 </section>
+<div v-else class="py-6 py-lg-12" style="margin-top:120px;">
+    <div class="container">
+        <div class="row">
+            <div class="offset-lg-3 col-lg-6 col-md-12 col-12 text-center">
+                <lord-icon src="https://cdn.lordicon.com/slkvcfos.json" trigger="loop" style="width:250px;height:250px">
+                </lord-icon>
+                <h2>Your shopping cart is empty</h2>
+                <p class="mb-4">
+                    Return to the store to add items for your delivery slot. Before proceed to checkout you must add some products to your shopping cart. You will find a lot of interesting products on our shop page.
+                </p>
+                <a href="/products" class="btn btn-dark">Explore Products</a>
+            </div>
+        </div>
+    </div>
+</div>
 </template>
 
 <script>
@@ -176,10 +208,10 @@ export default {
             basketProducts: [],
             basketProduct: {
                 id_pers: localStorage.getItem('client_id'),
-                id_basket:''
+                id_basket: ''
             },
             numberProductInBasket: '',
-            totalPrice:''
+            totalPrice: ''
         }
     },
     computed: {},
@@ -195,11 +227,13 @@ export default {
             let res = await axios('http://stop-and-shop.com/Basket/readBasketProductById/' + this.basketProduct.id_pers)
             this.basketProducts = res.data
             // console.log(this.basketProducts)
-            let sum = 0
-            this.basketProducts.forEach(item => {
-                sum += (item.prix * item.qtte)
-            })
-            this.totalPrice=sum
+            if (this.basketProducts.length) {
+                let sum = 0
+                this.basketProducts.forEach(item => {
+                    sum += (item.prix * item.qtte)
+                })
+                this.totalPrice = sum
+            }
         },
 
         //passing id for model
