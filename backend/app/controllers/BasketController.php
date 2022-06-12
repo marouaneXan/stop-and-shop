@@ -24,13 +24,13 @@ class BasketController
     }
 
     // create new product
-    public function create($id_pers, $id_produit)
+    public function create()
     {
         $add = new Basket();
         $data = [
             'qte' => $_POST['qtte'],
-            'id_pers' => $id_pers,
-            'id_produit' => $id_produit
+            'id_pers' => $_POST['id_pers'],
+            'id_produit' => $_POST['id_produit']
         ];
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($add->addProductToBasket($data)) {
