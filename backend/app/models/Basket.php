@@ -4,9 +4,9 @@ class Basket extends DB
 {
 
     //
-    public function get_cart_by_id($id)
+    public function get_basket_by_id($id)
     {
-        $sql = "cart.id_cart,p.nom as nom_pers,p.ville,p.email,pro.nom,pro.prix,pro.image,c.nom_cat,cart.qtte,cart.price_total from personne p,produit pro,categories c,cart where p.id_pers=cart.id_pers and pro.id_produit=cart.id_cart and pro.id_category=c.id_cat and cart.id_cart=?";
+        $sql = "basket.id_basket,p.nom as nom_pers,p.ville,p.email,pro.nom,pro.prix,pro.image,c.nom_cat,basket.qtte,basket.price_total from personne p,produit pro,categories c,basket where p.id_pers=basket.id_pers and pro.id_produit=basket.id_basket and pro.id_category=c.id_cat and basket.id_basket=?";
         $sql = $this->connect()->prepare($sql);
         if ($sql->execute(array($id))) {
             return $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -32,5 +32,15 @@ class Basket extends DB
         if ($sql->execute(array($id)))
             return 1;
         return 0;
+    }
+
+    // Function to update status of order
+    public function updateQteOfProduct($qte, $id)
+    {
+            $sql = "UPDATE basket SET qtte=? where id_basket like ?";
+            $sql = $this->connect()->prepare($sql);
+            if ($sql->execute([$qte,$id]))
+                return 1;
+            return 0;
     }
 }
