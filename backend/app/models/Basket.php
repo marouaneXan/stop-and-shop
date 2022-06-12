@@ -27,7 +27,7 @@ class Basket extends DB
     //delete contact
     public function DeleteProductFromBasket($id)
     {
-        $sql = "DELETE FROM basket WHERE id=?";
+        $sql = "DELETE FROM basket WHERE id_basket=?";
         $sql = $this->connect()->prepare($sql);
         if ($sql->execute(array($id)))
             return 1;
