@@ -85,13 +85,13 @@ class Product extends DB
             nom=?,
             description=?,
             prix=?,
-            image=0,
+            image=?,
             id_category=?,
             quantite=?
             where id_produit = ?
             ";
             $sql = $this->connect()->prepare($sql);
-            if ($sql->execute([$data['nom'], $data['description'], $data['prix'], $data['id_category'], $data['quantite'], $id]))
+            if ($sql->execute([$data['nom'], $data['description'], $data['prix'], $data['id_category'],'image1.png', $data['quantite'], $id]))
                 return 1;
             return 0;
         }

@@ -30,7 +30,7 @@ class BasketController
     {
         $add = new Basket();
         $data = [
-            'qtte' => $_POST['qtte'],
+            'qtte' => 1,
             'id_pers' => $_POST['id_pers'],
             'id_produit' => $_POST['id_produit'],
             'price_total' => $_POST['price_total']

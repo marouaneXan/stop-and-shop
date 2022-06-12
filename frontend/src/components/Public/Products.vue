@@ -35,7 +35,7 @@
                         <div class="part-1">
                             <img :src="getImgUrl(p.image)" alt="">
                             <ul>
-                                <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                                <li><a @click="AddProductToBasket()"><i class="fas fa-shopping-cart"></i></a></li>
                                 <!-- <li><a href="#"><i class="fas fa-heart"></i></a></li> -->
                                 <li><router-link :to="{ name: 'ProductDetails',params:{id_produit:p.id_produit}}"><i class="fas fa-expand"></i></router-link></li>
                             </ul>
@@ -72,6 +72,9 @@ export default {
         getImgUrl(pet) {
             var images = require.context('../../assets/uploads/', false)
             return images('./' + pet)
+        },
+        async AddProductToBasket(){
+            
         }
     }
 }

@@ -38,7 +38,7 @@ class ProductController
       'nom' => trim($_POST['nom']),
       'description' => trim($_POST['description']),
       'prix' => trim($_POST['prix']),
-      'image' => trim($_POST['image']),
+      'image' => 'image1.png',
       'id_category' => trim($_POST['id_category']),
       'quantite' => trim($_POST['quantite'])
     ];
@@ -79,6 +79,7 @@ class ProductController
       'description' => trim($_POST['description']),
       'prix' => trim($_POST['prix']),
       // 'image' => uploadImage(),
+      'image' => trim($_POST['image']),
       'id_category' => trim($_POST['id_category']),
       'quantite' => trim($_POST['quantite'])
     ];
