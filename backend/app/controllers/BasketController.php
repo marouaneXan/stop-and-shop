@@ -7,8 +7,10 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 class BasketController
 {
 
-    public function index(){
-        echo 'hello';
+    public function index($id){
+        $count=new Basket();
+        $numberProductBasket=$count->getNumberOfProductInBasketById($id);
+        echo json_encode($numberProductBasket);
     }
     //get single cart
     public function readBasketProductById($id)

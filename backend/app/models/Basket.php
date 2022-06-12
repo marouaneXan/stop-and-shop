@@ -44,7 +44,7 @@ class Basket extends DB
         return 0;
     }
 
-    //
+    //get number of products in basket
     public function getNumberOfProductInBasketById($id_pers)
     {
         $sql = "SELECT * FROM basket where id_pers = ?";
