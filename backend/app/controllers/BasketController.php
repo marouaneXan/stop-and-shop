@@ -33,7 +33,6 @@ class BasketController
             'qtte' => 1,
             'id_pers' => $_POST['id_pers'],
             'id_produit' => $_POST['id_produit'],
-            'price_total' => $_POST['price_total']
         ];
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($add->ProductAlreadyExist($data['id_produit'])==0) {
@@ -71,7 +70,6 @@ class BasketController
         $update = new Basket();
         $data = [
             'qtte'=>trim($_POST['qtte']),
-            'price_total'=>trim($_POST['price_total'])
         ];
         if ($update->updateQteOfProduct($data, $id)) {
             echo json_encode(array(

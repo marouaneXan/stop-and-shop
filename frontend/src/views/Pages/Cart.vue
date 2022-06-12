@@ -97,7 +97,7 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Update quantite</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Update Quantite</h5>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
@@ -268,53 +268,38 @@ export default {
         //passing id for model
         passingDataDelete(p) {
             this.basketProduct.id_basket = p.id_basket;
-            console.log(this.basketProduct.id_basket)
         },
-        //delete product
+        //delete product from basket
         async DeleteProductFromBasket() {
             let res = await axios.post("http://stop-and-shop.com/Basket/DeleteProductFromBasket/" + this.basketProduct.id_basket);
             if (res.data.message == 'Product Deleted Successfully') {
                 this.DisplayAllProductsInBasket()
-                // this.Deleteproduct.success = "Product Deleted Successfully";
             } else {
                 this.DisplayAllProductsInBasket()
-                // this.Deleteproduct.error = "Error on updating Product";
             }
         },
 
         //passing data for model
-        passingDataUpdate(p) {
-            this.product.id_produit = p.id_produit;
-            this.product.nom = p.nom;
-            this.product.description = p.description;
-            this.product.prix = p.prix;
-            // this.product.image = p.image;
-            this.product.id_category = p.id_category;
-            this.product.quantite = p.quantite;
+        passingDataUpdate(b) {
+            this.basketProduct.id_basket = b.id_basket;
+            this.basketProduct.qtte = b.qtte;
         },
         //delete product
-        async UpdateProduct() {
+        async UpdateQuantite() {
             var form = new FormData();
-            form.append('nom', this.product.nom);
-            form.append('description', this.product.description);
-            form.append('prix', this.product.prix);
-            // form.append('image', this.product.image);
-            form.append('id_category', this.product.id_category);
-            form.append('quantite', this.product.quantite);
+            form.append('qtte', this.basketProduct.qtte);
             let res = await axios({
                 method: "POST",
-                url: 'http://stop-and-shop.com/Product/updateProduct/' + this.product.id_produit,
+                url: 'http://stop-and-shop.com/Basket/updateQteOfProduct/' + this.basketProduct.id_basket,
                 data: form,
                 headers: {
                     "Content-Type": "multipart/form-data"
                 },
             })
             if (res.data.message == "Product Updated successfully") {
-                this.fetchProducts()
-                this.Updateproduct.success = res.data.message;
+                this.DisplayAllProductsInBasket()
             } else {
-                this.fetchProducts()
-                this.Updateproduct.error = "Error on Updating new Product";
+                this.DisplayAllProductsInBasket()
             }
         },
     }
