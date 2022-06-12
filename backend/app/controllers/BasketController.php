@@ -28,9 +28,10 @@ class BasketController
     {
         $add = new Basket();
         $data = [
-            'qte' => $_POST['qtte'],
+            'qtte' => $_POST['qtte'],
             'id_pers' => $_POST['id_pers'],
-            'id_produit' => $_POST['id_produit']
+            'id_produit' => $_POST['id_produit'],
+            'price_total' => $_POST['price_total']
         ];
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($add->addProductToBasket($data)) {

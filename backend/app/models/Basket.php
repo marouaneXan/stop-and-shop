@@ -17,7 +17,7 @@ class Basket extends DB
     // Function to add product to basket
     public function addProductToBasket($data)
     {
-        $sql = "INSERT INTO `basket`(`id_pers`, `id_produit`, `qtte`, `price_total`) VALUES (?,?,?,?,?)";
+        $sql = "INSERT INTO `basket`(`id_pers`, `id_produit`, `qtte`, `price_total`) VALUES (?,?,?,?)";
         $sql = $this->connect()->prepare($sql);
         if ($sql->execute([$data['id_pers'], $data['id_produit'], $data['qtte'], $data['price_total']]))
             return 1;
