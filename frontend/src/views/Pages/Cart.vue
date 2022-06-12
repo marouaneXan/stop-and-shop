@@ -68,7 +68,7 @@
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <div>
                                         <p class="mb-1">Shopping cart</p>
-                                        <p class="mb-0">You have 4 items in your cart</p>
+                                        <p class="mb-0">You have {{numberProductInBasket}} items in your cart</p>
                                     </div>
                                     <div>
                                         <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!" class="text-body">price <i class="fas fa-angle-down mt-1"></i></a></p>
@@ -79,12 +79,12 @@
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex flex-row align-items-center">
-                                                <div>
+                                                <div class="col-md-2 col-lg-2 col-xl-2">
                                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp" class="img-fluid rounded-3" alt="Shopping item" id="image">
                                                 </div>
                                                 <div class="ms-3">
                                                     <h5>{{b.nom}}</h5>
-                                                   <p>Category: <span class="small mb-0">{{b.nom_cat}}</span></p>
+                                                    <p>Category: <span class="small mb-0">{{b.nom_cat}}</span></p>
                                                 </div>
                                             </div>
                                             <div class="d-flex flex-row align-items-center">
@@ -92,7 +92,7 @@
                                                     <h5 class="fw-normal mb-0">{{b.qtte}}</h5>
                                                 </div>
                                                 <div style="width: 80px;">
-                                                    <h5 class="mb-0">${{b.prix}}</h5>
+                                                    <h5 class="mb-0">${{b.prix*b.qtte}}</h5>
                                                 </div>
                                                 <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
                                             </div>
@@ -144,24 +144,13 @@
 
                                         <hr class="my-4">
 
-                                        <div class="d-flex justify-content-between">
-                                            <p class="mb-2">Subtotal</p>
-                                            <p class="mb-2">$4798.00</p>
-                                        </div>
-
-                                        <div class="d-flex justify-content-between">
-                                            <p class="mb-2">Shipping</p>
-                                            <p class="mb-2">$20.00</p>
-                                        </div>
-
                                         <div class="d-flex justify-content-between mb-4">
-                                            <p class="mb-2">Total(Incl. taxes)</p>
-                                            <p class="mb-2">$4818.00</p>
+                                            <h2 class="mb-2">Total Price</h2>
+                                            <h4 class="mb-2">${{totalPrice}}</h4>
                                         </div>
 
                                         <button type="button" class="btn btn-info btn-block btn-lg">
                                             <div class="d-flex justify-content-between">
-                                                <span>$4818.00</span>
                                                 <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
                                             </div>
                                         </button>
@@ -191,16 +180,28 @@ export default {
             basketProduct: {
                 id_pers: localStorage.getItem('client_id'),
             },
-
+            numberProductInBasket: '',
+            totalPrice:''
         }
     },
+    computed: {},
     mounted() {
         this.DisplayAllProductsInBasket()
+    },
+    async created() {
+        let res = await axios('http://stop-and-shop.com/Basket/index/46')
+        this.numberProductInBasket = res.data
     },
     methods: {
         async DisplayAllProductsInBasket() {
             let res = await axios('http://stop-and-shop.com/Basket/readBasketProductById/' + this.basketProduct.id_pers)
             this.basketProducts = res.data
+            // console.log(this.basketProducts)
+            let sum = 0
+            this.basketProducts.forEach(item => {
+                sum += (item.prix * item.qtte)
+            })
+            this.totalPrice=sum
         }
     }
 
