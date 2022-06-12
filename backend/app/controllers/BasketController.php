@@ -66,8 +66,11 @@ class BasketController
     public function updateQteOfProduct($id)
     {
         $update = new Basket();
-        $qtte = trim($_POST['qtte']);
-        if ($update->updateQteOfProduct($qtte, $id)) {
+        $data = [
+            'qtte'=>trim($_POST['qtte']),
+            'price_total'=>trim($_POST['price_total'])
+        ];
+        if ($update->updateQteOfProduct($data, $id)) {
             echo json_encode(array(
                 'message' => 'Quantite Updated successfully'
             ));
