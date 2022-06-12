@@ -17,11 +17,11 @@ class Basket extends DB
     public function ProductAlreadyExist($id_produit){
         $sql="SELECT * from basket where id_produit=?";
         $sql = $this->connect()->prepare($sql);
-        // if()
-        //     return 0;
-        // return 1;
-        return $sql->execute(array($id_produit));
-        return 0;
+        // return $sql->execute(array($id_produit));
+        if($sql->execute(array($id_produit))){
+            if($sql->rowCount()>0)
+              return 1;
+        }return 0;
     }
     // Function to add product to basket
     public function addProductToBasket($data)

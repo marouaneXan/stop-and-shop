@@ -30,24 +30,23 @@ class BasketController
     {
         $add = new Basket();
         $data = [
-            // 'qtte' => $_POST['qtte'],
-            // 'id_pers' => $_POST['id_pers'],
-            'id_produit' =>33,
-            // 'price_total' => $_POST['price_total']
+            'qtte' => $_POST['qtte'],
+            'id_pers' => $_POST['id_pers'],
+            'id_produit' => $_POST['id_produit'],
+            'price_total' => $_POST['price_total']
         ];
-        echo $add->ProductAlreadyExist($data['id_produit']);
-        // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        //     if ($add->ProductAlreadyExist($data['id_produit'])) {
-        //         $add->addProductToBasket($data);
-        //         echo json_encode(array(
-        //             'message' => 'Product Added successfully In Your Basket'
-        //         ));
-        //     } else {
-        //         echo json_encode(array(
-        //             'error' => 'Error on Adding new Product To Basket'
-        //         ));
-        //     }
-        // }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($add->ProductAlreadyExist($data['id_produit'])==0) {
+                $add->addProductToBasket($data);
+                echo json_encode(array(
+                    'message' => 'Product Added successfully In Your Basket'
+                ));
+            } else {
+                echo json_encode(array(
+                    'error' => 'Product already exist in the basket'
+                ));
+            }
+        }
     }
 
     //delete product
