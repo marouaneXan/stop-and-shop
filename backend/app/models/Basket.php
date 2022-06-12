@@ -37,10 +37,10 @@ class Basket extends DB
     // Function to update status of order
     public function updateQteOfProduct($qte, $id)
     {
-            $sql = "UPDATE basket SET qtte=? where id_basket like ?";
-            $sql = $this->connect()->prepare($sql);
-            if ($sql->execute([$qte,$id]))
-                return 1;
-            return 0;
+        $sql = "UPDATE basket SET qtte=? where id_basket like ?";
+        $sql = $this->connect()->prepare($sql);
+        if ($sql->execute([$qte, $id]))
+            return 1;
+        return 0;
     }
 }

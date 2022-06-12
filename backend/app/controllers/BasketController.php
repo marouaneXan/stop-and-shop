@@ -8,15 +8,37 @@ class BasketController
 {
 
     //get single cart
-    public function read_single_product($id)
+    public function readBasketProductById($id)
     {
         $single_product = new Basket();
-        if ($single_product->get_cart_by_id($id)) {
-            echo json_encode($single_product->get_cart_by_id($id));
+        if ($single_product->get_basket_by_id($id)) {
+            echo json_encode($single_product->get_basket_by_id($id));
         } else {
             echo json_encode(array(
                 'error' => 'empty'
             ));
+        }
+    }
+
+    // create new product
+    public function create($id_pers, $id_produit)
+    {
+        $add = new Basket();
+        $data = [
+            'qte' => $_POST['qtte'],
+            'id_pers' => $id_pers,
+            'id_produit' => $id_produit
+        ];
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($add->addProductToBasket($data)) {
+                echo json_encode(array(
+                    'message' => 'Product Added successfully In Your Basket'
+                ));
+            } else {
+                echo json_encode(array(
+                    'error' => 'Error on Adding new Product To Basket'
+                ));
+            }
         }
     }
 }
