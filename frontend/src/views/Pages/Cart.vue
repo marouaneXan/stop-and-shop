@@ -52,9 +52,9 @@
         </div>
     </div>
 </section> -->
-<section class="h-100 h-custom" style="background-color: #eee;">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
+<section class=" h-custom" style="background-color: #eee;">
+    <div class="container py-5 ">
+        <div class="row d-flex justify-content-center align-items-center ">
             <div class="col">
                 <div class="card">
                     <div class="card-body p-4">
@@ -70,16 +70,13 @@
                                         <p class="mb-1">Shopping cart</p>
                                         <p class="mb-0">You have {{numberProductInBasket}} items in your cart</p>
                                     </div>
-                                    <div>
-                                        <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!" class="text-body">price <i class="fas fa-angle-down mt-1"></i></a></p>
-                                    </div>
                                 </div>
 
                                 <div v-for="b in basketProducts" :key="b.id_basket" class="card mb-3">
                                     <div class="card-body">
-                                        <div class="d-flex justify-content-between">
+                                        <div class=" d-flex justify-content-between">
                                             <div class="d-flex flex-row align-items-center">
-                                                <div class="col-md-2 col-lg-2 col-xl-2">
+                                                <div >
                                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp" class="img-fluid rounded-3" alt="Shopping item" id="image">
                                                 </div>
                                                 <div class="ms-3">
@@ -146,7 +143,7 @@
 
                                         <div class="d-flex justify-content-between mb-4">
                                             <h2 class="mb-2">Total Price</h2>
-                                            <h4 class="mb-2">${{totalPrice}}</h4>
+                                            <h3 class="mb-2">${{totalPrice}}</h3>
                                         </div>
 
                                         <button type="button" class="btn btn-info btn-block btn-lg">
@@ -179,6 +176,7 @@ export default {
             basketProducts: [],
             basketProduct: {
                 id_pers: localStorage.getItem('client_id'),
+                id_basket:''
             },
             numberProductInBasket: '',
             totalPrice:''
@@ -202,7 +200,24 @@ export default {
                 sum += (item.prix * item.qtte)
             })
             this.totalPrice=sum
-        }
+        },
+
+        //passing id for model
+        passingDataDelete(p) {
+            this.basketProduct.id_basket = p.id_basket;
+            console.log(this.basketProduct.id_basket)
+        },
+        //delete product
+        async DeleteProductFromBasket() {
+            let res = await axios.post("http://stop-and-shop.com/Basket/DeleteProductFromBasket/" + this.basketProduct.id_basket);
+            if (res.data.message == 'Product Deleted Successfully') {
+                this.DisplayAllProductsInBasket()
+                // this.Deleteproduct.success = "Product Deleted Successfully";
+            } else {
+                this.DisplayAllProductsInBasket()
+                // this.Deleteproduct.error = "Error on updating Product";
+            }
+        },
     }
 
 }
@@ -211,6 +226,6 @@ export default {
 <style>
 #image {
     height: 150px;
-    width: 100%;
+    min-width: 90px;
 }
 </style>

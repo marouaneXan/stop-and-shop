@@ -59,7 +59,7 @@ class BasketController
             ));
         } else {
             echo json_encode(array(
-                'message' => 'Error on Deleting this product'
+                'error' => 'Error on Deleting this product'
             ));
         }
     }
