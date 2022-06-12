@@ -41,4 +41,19 @@ class BasketController
             }
         }
     }
+
+    //delete product
+  public function DeleteProductFromBasket($id_basket)
+  {
+    $Delete = new Basket();
+    if ($Delete->DeleteProductFromBasket($id_basket)) {
+      echo json_encode(array(
+        'message' => 'Product Deleted Successfully'
+      ));
+    } else {
+      echo json_encode(array(
+        'message' => 'Error on Deleting this product'
+      ));
+    }
+  }
 }
