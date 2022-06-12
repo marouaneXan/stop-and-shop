@@ -53,7 +53,7 @@
     </div>
 </section> -->
 <section v-if="basketProducts.length" class=" h-custom" style="background-color: #eee;">
-    <div  class="container py-5 ">
+    <div class="container py-5 ">
         <div class="row d-flex justify-content-center align-items-center ">
             <div class="col">
                 <div class="card">
@@ -77,11 +77,11 @@
                                         <div class=" d-flex justify-content-between">
                                             <div class="d-flex flex-row align-items-center">
                                                 <div>
-                                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp" class="img-fluid rounded-3" alt="Shopping item" id="image">
+                                                    <img :src="getImgUrl(b.image)" class="img-fluid rounded-3" alt="Shopping item" id="image">
                                                 </div>
                                                 <div class="ms-3">
                                                     <h5>{{b.nom}}</h5>
-                                                    <p>Category: <span class="small mb-0">{{b.nom_cat}}</span></p>
+                                                    <span class="small mb-0">{{b.nom_cat}}</span>
                                                 </div>
                                             </div>
                                             <div class="d-flex flex-row align-items-center">
@@ -90,6 +90,30 @@
                                                 </div>
                                                 <div style="width: 80px;">
                                                     <h5 class="mb-0">${{b.prix*b.qtte}}</h5>
+                                                </div>
+                                                <a style="color: #cecece;cursor: pointer;" @click="passingDataUpdate(b)" class="btn" data-bs-toggle="modal" data-bs-target="#updateProduct"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <!-- Model To update new product -->
+                                                <div class="modal fade" id="updateProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Update quantite</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form @click.prevent>
+                                                                    <div class="mb-1">
+                                                                        <label for="name" class="form-label">Quantite</label>
+                                                                        <input type="number" v-model="basketProduct.qtte" class="form-control" id="Quantity">
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" @click="UpdateQuantite()" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <a @click="passingDataDelete(b)" style="color: #cecece;cursor: pointer;" data-bs-toggle="modal" data-bs-target="#delete"><i class="fas fa-trash-alt"></i></a>
                                                 <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -208,7 +232,8 @@ export default {
             basketProducts: [],
             basketProduct: {
                 id_pers: localStorage.getItem('client_id'),
-                id_basket: ''
+                id_basket: '',
+                qtte:''
             },
             numberProductInBasket: '',
             totalPrice: ''
@@ -223,6 +248,10 @@ export default {
         this.numberProductInBasket = res.data
     },
     methods: {
+        getImgUrl(pet) {
+            var images = require.context('../../assets/uploads/', false)
+            return images('./' + pet)
+        },
         async DisplayAllProductsInBasket() {
             let res = await axios('http://stop-and-shop.com/Basket/readBasketProductById/' + this.basketProduct.id_pers)
             this.basketProducts = res.data
@@ -250,6 +279,42 @@ export default {
             } else {
                 this.DisplayAllProductsInBasket()
                 // this.Deleteproduct.error = "Error on updating Product";
+            }
+        },
+
+        //passing data for model
+        passingDataUpdate(p) {
+            this.product.id_produit = p.id_produit;
+            this.product.nom = p.nom;
+            this.product.description = p.description;
+            this.product.prix = p.prix;
+            // this.product.image = p.image;
+            this.product.id_category = p.id_category;
+            this.product.quantite = p.quantite;
+        },
+        //delete product
+        async UpdateProduct() {
+            var form = new FormData();
+            form.append('nom', this.product.nom);
+            form.append('description', this.product.description);
+            form.append('prix', this.product.prix);
+            // form.append('image', this.product.image);
+            form.append('id_category', this.product.id_category);
+            form.append('quantite', this.product.quantite);
+            let res = await axios({
+                method: "POST",
+                url: 'http://stop-and-shop.com/Product/updateProduct/' + this.product.id_produit,
+                data: form,
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+            })
+            if (res.data.message == "Product Updated successfully") {
+                this.fetchProducts()
+                this.Updateproduct.success = res.data.message;
+            } else {
+                this.fetchProducts()
+                this.Updateproduct.error = "Error on Updating new Product";
             }
         },
     }
