@@ -89,7 +89,7 @@ export default {
                     this.success = result.data.message;
                     let object = {};
                     form.forEach((value, key) => object[key] = value);
-                    localStorage.setItem("client", JSON.stringify(result.data));
+                    localStorage.setItem("client_id", JSON.stringify(result.data.user_info.id_pers));
                     this.redirect({
                         val: 'home'
                     })
