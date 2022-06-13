@@ -27,6 +27,9 @@
     <!-- </div>
         </div>
     </div> -->
+    <!--Message for added new  product in basket-->
+    <div v-if="alert.success" class="alert alert-success text-center">{{alert.success}}</div>
+    <div v-if="alert.error" class="alert alert-warning text-center">{{alert.error}}</div>
     <section class="section-products">
         <div class="container">
             <div class="row">
@@ -67,8 +70,12 @@ export default {
     data() {
         return {
             basket: {
-                id_pers: localStorage.getItem('id_client'),
+                id_pers: localStorage.getItem('client_id'),
                 id_produit: ''
+            },
+            alert:{
+                succes:'',
+                error:''
             }
         }
     },
@@ -89,22 +96,22 @@ export default {
             this.basket.id_produit = p;
             console.log(this.basket.id_produit)
             var form = new FormData();
-            form.append('id_pers', this.product.id_pers);
+            form.append('id_pers', this.basket.id_pers);
             form.append('id_produit', this.basket.id_produit);
             let res = await axios({
                 method: "POST",
-                url: 'http://stop-and-shop.com/Product/create',
+                url: 'http://stop-and-shop.com/Basket/create',
                 data: form,
                 headers: {
                     "Content-Type": "multipart/form-data"
                 },
             })
             if (res.data.message == "Product Added successfully") {
-                this.fetchProducts()
-                this.Addproduct.success = res.data.message;
+                // this.fetchProducts()
+                this.alert.error=res.data.message
             } else {
-                this.fetchProducts()
-                this.Addproduct.error = "Error on added new Product";
+                // this.fetchProducts()
+                this.alert.error=res.data.error
             }
         },
     }
