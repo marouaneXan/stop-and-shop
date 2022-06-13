@@ -4,9 +4,9 @@
     <div v-if="success" class="alert alert-success text-center">{{success}}</div>
     <div v-if="error" class="alert alert-warning text-center">{{error}}</div>
 </div>
-<h1 class="text-center text-dark mt-5">Register Page</h1>
-<div class="container d-flex justify-content-center mt-5">
-    <form class="border shadow p-4 rounded" style="width:60%;" @click.prevent>
+<h1 class="text-center text-dark mt-5">Register</h1>
+<div class="container d-flex justify-content-center mt-2">
+    <form class="border shadow p-4 rounded" style="width:490px;" @click.prevent>
         <div class="row mb-3">
             <div class="col">
                 <input type="text" class="form-control" v-model="client.nom" placeholder="First name" aria-label="First name">
