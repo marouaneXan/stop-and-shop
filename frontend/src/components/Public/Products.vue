@@ -106,9 +106,9 @@ export default {
                     "Content-Type": "multipart/form-data"
                 },
             })
-            if (res.data.message == "Product Added successfully") {
+            if (res.data.message == "Product Added successfully In Your Basket") {
                 // this.fetchProducts()
-                this.alert.error=res.data.message
+                this.alert.success=res.data.message
             } else {
                 // this.fetchProducts()
                 this.alert.error=res.data.error

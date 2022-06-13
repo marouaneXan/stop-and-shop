@@ -68,7 +68,7 @@
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <div>
                                         <p class="mb-1">Shopping cart</p>
-                                        <p class="mb-0">You have {{numberProductInBasket}} items in your cart</p>
+                                        <p class="mb-0">You have {{this.basketProducts.length}} items in your cart</p>
                                     </div>
                                 </div>
 
@@ -273,6 +273,7 @@ export default {
         async DeleteProductFromBasket() {
             let res = await axios.post("http://stop-and-shop.com/Basket/DeleteProductFromBasket/" + this.basketProduct.id_basket);
             if (res.data.message == 'Product Deleted Successfully') {
+                this.numberProductInBasket
                 this.DisplayAllProductsInBasket()
             } else {
                 this.DisplayAllProductsInBasket()
