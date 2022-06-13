@@ -27,17 +27,21 @@
     <!-- </div>
         </div>
     </div> -->
-    <section  class="section-products">
+    <section class="section-products">
         <div class="container">
             <div class="row">
                 <div v-for="p in products" :key="p.id_produit" class="col-md-6 col-lg-4 col-xl-3">
                     <div id="product-1" class="single-product">
+                        <h1>{{p.id_produit}}</h1>
                         <div class="part-1">
                             <img :src="getImgUrl(p.image)" alt="">
+
                             <ul>
-                                <li><a @click="AddProductToBasket()"><i class="fas fa-shopping-cart"></i></a></li>
+                                <li><a @click="AddProductToBasket(p.id_produit)"><i class="fas fa-shopping-cart"></i></a></li>
                                 <!-- <li><a href="#"><i class="fas fa-heart"></i></a></li> -->
-                                <li><router-link :to="{ name: 'ProductDetails',params:{id_produit:p.id_produit}}"><i class="fas fa-expand"></i></router-link></li>
+                                <li>
+                                    <router-link :to="{ name: 'ProductDetails',params:{id_produit:p.id_produit}}"><i class="fas fa-expand"></i></router-link>
+                                </li>
                             </ul>
                         </div>
                         <div class="part-2">
@@ -50,32 +54,59 @@
         </div>
     </section>
 </div>
-
 </template>
 
 <script>
+import axios from 'axios'
 import {
     mapGetters,
     mapActions
 } from 'vuex'
 export default {
     name: 'ProductsComponent',
-    computed:{
+    data() {
+        return {
+            basket: {
+                id_pers: localStorage.getItem('id_client'),
+                id_produit: ''
+            }
+        }
+    },
+    computed: {
         ...mapGetters(['products', 'categories'])
     },
-    mounted(){
+    mounted() {
         this.fetchProducts()
         this.fetchCategories()
     },
-    methods:{
-        ...mapActions(['fetchProducts','fetchCategories']),
+    methods: {
+        ...mapActions(['fetchProducts', 'fetchCategories']),
         getImgUrl(pet) {
             var images = require.context('../../assets/uploads/', false)
             return images('./' + pet)
         },
-        async AddProductToBasket(){
-            
-        }
+        async AddProductToBasket(p) {
+            this.basket.id_produit = p;
+            console.log(this.basket.id_produit)
+            var form = new FormData();
+            form.append('id_pers', this.product.id_pers);
+            form.append('id_produit', this.basket.id_produit);
+            let res = await axios({
+                method: "POST",
+                url: 'http://stop-and-shop.com/Product/create',
+                data: form,
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+            })
+            if (res.data.message == "Product Added successfully") {
+                this.fetchProducts()
+                this.Addproduct.success = res.data.message;
+            } else {
+                this.fetchProducts()
+                this.Addproduct.error = "Error on added new Product";
+            }
+        },
     }
 }
 </script>
@@ -85,6 +116,7 @@ export default {
     width: 100%;
     height: 100%;
 }
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 
 body {
@@ -115,7 +147,7 @@ a:hover {
 .section-products .header h2 {
     font-size: 2.2rem;
     font-weight: 400;
-    color: #444444; 
+    color: #444444;
 }
 
 .section-products .single-product {
@@ -131,27 +163,26 @@ a:hover {
 }
 
 .section-products .single-product .part-1::before {
-		position: absolute;
-		content: "";
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		z-index: -1;
-		transition: all 0.3s;
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transition: all 0.3s;
 }
 
 .section-products .single-product:hover .part-1::before {
-		transform: scale(1.2,1.2) rotate(5deg);
+    transform: scale(1.2, 1.2) rotate(5deg);
 }
 
 /* .section-products #product-1 .part-1::before {
     background: url("https://i.ibb.co/L8Nrb7p/1.jpg") no-repeat center;
     background-size: cover;
-		transition: all 0.3s;
+
+transition: all 0.3s;
 } */
-
-
 
 .section-products .single-product .part-1 .discount,
 .section-products .single-product .part-1 .new {
