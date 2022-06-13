@@ -22,7 +22,7 @@
                             <a class="nav-link">Products</a>
                         </router-link>
                     </li>
-                     <li class="nav-item">
+                    <li class="nav-item">
                         <router-link :to="{ name: 'About'}" style="text-decoration:none;">
                             <a class="nav-link">About</a>
                         </router-link>
@@ -32,7 +32,7 @@
                             <a class="nav-link">Contact</a>
                         </router-link>
                     </li>
-                </ul> 
+                </ul>
                 <div class="btn">
                     <router-link v-if="!client_id" :to="{ name: 'Login'}" style="text-decoration:none;">
                         <a class="btn btn-outline-dark ms-2">
@@ -44,13 +44,16 @@
                             <i class="fa fa-user-plus me-1"></i>Register
                         </a>
                     </router-link>
-                        <a v-if="client_id" class="btn btn-outline-dark ms-2" style="text-decoration:none;">
-                            <i class="fa-solid fa-right-from-bracket"></i>Logout
-                        </a>
+                    <a v-if="client_id" @click="logout()" class="btn btn-outline-dark ms-2" style="text-decoration:none;">
+                        <i class="fa-solid fa-right-from-bracket"></i>Logout
+                    </a>
                     <router-link :to="{ name: 'cart'}" style="text-decoration:none;">
-                        <a v-if="client_id" class="btn btn-outline-dark ms-2">
-                            <i class="fa-solid fa-cart-shopping"></i>Cart(130)
-                        </a>
+                        <button class="btn ms-2">
+                            <i class="fa-solid fa-cart-shopping fs-5"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                                <span class="visually-hidden">New alerts</span>
+                            </span>
+                        </button>
                     </router-link>
                 </div>
             </div>
@@ -60,13 +63,25 @@
 </template>
 
 <script>
+import {
+    mapActions
+} from 'vuex';
 export default {
     name: "NavbarComponent",
-    data(){
-        return{
-            client_id:localStorage.getItem("client_id")
+    data() {
+        return {
+            client_id: localStorage.getItem("client_id")
         }
     },
+    methods: {
+        ...mapActions(['redirect']),
+        logout() {
+            localStorage.clear();
+            this.redirect({
+                val: "Login"
+            });
+        }
+    }
 }
 </script>
 

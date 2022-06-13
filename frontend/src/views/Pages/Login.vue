@@ -1,9 +1,9 @@
 <template>
 <NavbarComponent />
 <div class="container mt-1 p-3" style="display:flex;flex-direction:column;justify-content:center;align-items:center;">
-    <!-- <div v-if="success" class="alert alert-sucess">{{success}}</div> -->
-    <h1 class="text-center text-dark">Login Page</h1>
-    <form class="border shadow p-4 mt-4 rounded" @click.prevent style="border: 1px solid red;width:50%;">
+    <div v-if="success" class="alert alert-sucess">{{success}}</div>
+    <h1 class="text-center text-dark">Login</h1>
+    <form class="border shadow p-4 mt-4 rounded" @click.prevent style="border: 1px solid red;max-width:450px;">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
             <input v-model="client.email" type="email" class="form-control" aria-label="Email address">
@@ -85,7 +85,7 @@ export default {
                         "Content-Type": "multipart/form-data"
                     },
                 })
-                if (result.data.message == "Login success" && result.data.user_info.role==0) {
+                if (result.data.message == "Login success" && result.data.user_info.role == 0) {
                     this.success = result.data.message;
                     let object = {};
                     form.forEach((value, key) => object[key] = value);
@@ -93,14 +93,14 @@ export default {
                     this.redirect({
                         val: 'home'
                     })
-                } else if(result.data.message == "Login success" && result.data.user_info.role==1){
+                } else if (result.data.message == "Login success" && result.data.user_info.role == 1) {
                     let object = {};
                     form.forEach((value, key) => object[key] = value);
                     localStorage.setItem("Admin", JSON.stringify(result.data));
                     this.redirect({
                         val: 'dashboard'
                     })
-                }else {
+                } else {
                     this.error_login = "Client not found"
                 }
             } else {

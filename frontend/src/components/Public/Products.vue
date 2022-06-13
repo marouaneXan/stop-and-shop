@@ -74,7 +74,7 @@ export default {
                 id_produit: ''
             },
             alert:{
-                succes:'',
+                success:'',
                 error:''
             }
         }
@@ -94,7 +94,6 @@ export default {
         },
         async AddProductToBasket(p) {
             this.basket.id_produit = p;
-            console.log(this.basket.id_produit)
             var form = new FormData();
             form.append('id_pers', this.basket.id_pers);
             form.append('id_produit', this.basket.id_produit);
@@ -107,10 +106,8 @@ export default {
                 },
             })
             if (res.data.message == "Product Added successfully In Your Basket") {
-                // this.fetchProducts()
                 this.alert.success=res.data.message
             } else {
-                // this.fetchProducts()
                 this.alert.error=res.data.error
             }
         },
