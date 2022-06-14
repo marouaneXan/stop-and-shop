@@ -15,11 +15,9 @@
             </ul>
         </div>
         <div class="col-md-6 pb-4">
-            <div class="d-flex">
-                <div class="mb-3" >
-                    <input type="text" class="form-control" placeholder="Search" style="width:300px;">
+                <div class="mb-3"  style="min-width:300px;">
+                    <input type="text" class="form-control" placeholder="Search">
                 </div>
-            </div>
         </div>
     </div>
 

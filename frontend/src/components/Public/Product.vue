@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-lg-5 mt-5">
                     <div class="card mb-3">
-                        <img class="card-img img-fluid" :src="getImgUrl(product.image)" alt="Card image cap" id="product-detail">
+                        <img class="card-img img-fluid" :src="require(`../../assets/uploads/${product.image}`)" alt="Card image cap" id="product-detail">
                     </div>
                 </div>
                 <!-- col end -->
@@ -55,7 +55,7 @@
         </div>
     </section>
     <!-- Close Content -->
-    <!-- {{product}} -->
+    {{product}}
 </template>
 
 <script>
@@ -77,10 +77,10 @@ export default {
         }
     },
     methods:{
-        getImgUrl(pet) {
-            var images = require.context('../../assets/uploads/', false)
-            return images('./' + pet)
-        }
+        // getImgUrl(pet) {
+        //     var images = require.context('../../assets/uploads/', false)
+        //     return images('./' + pet)
+        // }
     }
 }
 </script>
