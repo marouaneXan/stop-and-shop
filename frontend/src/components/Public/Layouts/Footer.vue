@@ -1,11 +1,17 @@
 <template>
 <!-- Start Footer -->
-<footer class="bg-dark" id="tempaltemo_footer">
+<footer class="bg-dark">
     <div class="container">
         <div class="row">
 
             <div class="col-md-4 pt-5">
-                <h2 class="h2 text-success border-bottom pb-3 border-light logo">Zay Shop</h2>
+                <h2>
+                    <router-link :to="{ name: 'home'}" style="text-decoration:none;">
+                        <a class="navbar-brand" id="logo-title">
+                           <p class="text-white d-inline">stop</p> <span class="text-secondary">AND</span> <p class="text-white d-inline">shop</p> 
+                        </a>
+                    </router-link>
+                </h2>
                 <ul class="list-unstyled text-light footer-link-list">
                     <li>
                         <i class="fas fa-map-marker-alt fa-fw"></i>
@@ -13,11 +19,11 @@
                     </li>
                     <li>
                         <i class="fa fa-phone fa-fw"></i>
-                        <a class="text-decoration-none">0603860541</a>
+                        <span class="text-decoration-none">0603860541</span>
                     </li>
                     <li>
                         <i class="fa fa-envelope fa-fw"></i>
-                        <a class="text-decoration-none">marouanezahaoui835@gmail.com</a>
+                        <span class="text-decoration-none">marouanezahaoui835@gmail.com</span>
                     </li>
                 </ul>
             </div>
@@ -25,17 +31,17 @@
             <div class="col-md-4 pt-5">
                 <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
                 <ul class="list-unstyled text-light footer-link-list">
-                    <li v-for="c in categories" :key="c.id_cat"><a class="text-decoration-none" href="#">{{c.nom_cat}}</a></li>
+                    <li v-for="c in categories" :key="c.id_cat"><a class="text-decoration-none text-white" href="#">{{c.nom_cat}}</a></li>
                 </ul>
             </div>
 
             <div class="col-md-4 pt-5">
                 <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
                 <ul class="list-unstyled text-light footer-link-list">
-                    <li><a class="text-decoration-none" href="/">Home</a></li>
-                    <li><a class="text-decoration-none" href="/about-us">About Us</a></li>
-                    <li><a class="text-decoration-none" href="/products">Shop Locations</a></li>
-                    <li><a class="text-decoration-none" href="/contact-us">Contact</a></li>
+                    <li><a class="text-decoration-none text-white" href="/">Home</a></li>
+                    <li><a class="text-decoration-none text-white" href="/about-us">About Us</a></li>
+                    <li><a class="text-decoration-none text-white" href="/products">Shop Locations</a></li>
+                    <li><a class="text-decoration-none text-white" href="/contact-us">Contact</a></li>
                 </ul>
             </div>
 
@@ -68,7 +74,7 @@
         <div class="container">
             <div class="row pt-2">
                 <div class="col-12">
-                    <p class="text-left text-light">
+                    <p class="text-light text-center">
                         Copyright &copy; 2021 Stop-and-Shop
                     </p>
                 </div>

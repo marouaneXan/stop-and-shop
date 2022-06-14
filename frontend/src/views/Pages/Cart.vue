@@ -215,7 +215,8 @@
         </div>
     </div>
 </div> -->
-<section v-if="basketProducts.length" class="h-100" style="background-color: #eee;">
+<NavbarComponent/>
+<section v-if="basketProducts.length" class="h-100">
     <div class="container h-100 py-5">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-10">
@@ -240,11 +241,10 @@
                                 <p><span class="text-muted">Quantite: {{b.qtte}}</span></p>
                             </div>
                             <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                <h5 class="mb-0">${{b.prix}}</h5>
+                                <h5 class="mb-0">${{b.prix * b.qtte}}</h5>
                             </div>
-                            <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                            <div class="col-md-1 col-lg-1 col-xl-1">
                                 <a style="color: #cecece;cursor: pointer;" @click="passingDataUpdate(b)" class="btn" data-bs-toggle="modal" data-bs-target="#updateProduct"><i class="fa-solid fa-pen-to-square"></i></a>
-
                                 <div class="modal fade" id="updateProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -292,7 +292,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <button type="button" class="btn btn-warning btn-block btn-lg w-100">Proceed to Pay</button>
+                        <button type="button" class="btn btn-dark btn-block btn-lg w-100">Proceed to Pay</button>
                     </div>
                 </div>
 
@@ -315,12 +315,19 @@
         </div>
     </div>
 </div>
+<FooterView/>
 </template>
 
 <script>
+import NavbarComponent from '@/components/Public/Layouts/Navbar.vue'
+import FooterView from '@/components/Public/Layouts/Footer.vue'
 import axios from 'axios'
 export default {
     name: 'CartView',
+    components:{
+        NavbarComponent,
+        FooterView
+    },
     data() {
         return {
             basketProducts: [],
