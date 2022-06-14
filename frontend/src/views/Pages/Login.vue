@@ -3,7 +3,7 @@
 <div class="container mt-1 p-3" style="display:flex;flex-direction:column;justify-content:center;align-items:center;">
     <div v-if="success" class="alert alert-sucess">{{success}}</div>
     <h1 class="text-center text-dark">Login</h1>
-    <form class="border shadow p-4 mt-4 rounded" @click.prevent style="border: 1px solid red;max-width:450px;">
+    <form class="border shadow p-4 mt-4 rounded" @click.prevent style="width:395px;">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
             <input v-model="client.email" type="email" class="form-control" aria-label="Email address">

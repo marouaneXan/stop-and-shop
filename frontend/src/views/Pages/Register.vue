@@ -17,22 +17,20 @@
                 <span class="error-feedback text-danger" v-if="v$.client.prenom.$error">{{v$.client.prenom.$errors[0].$message}}</span>
             </div>
         </div>
-        <div class="row mb-3">
-            <div class="col">
-                <input type="date" class="form-control" v-model="client.date_naissance" placeholder="Date of birth" aria-label="Date of birth">
-            </div>
-            <div class="col">
-                <input type="email" class="form-control" v-model="client.email" placeholder="Email address" aria-label="Email address">
-                <span class="error-feedback text-danger" v-if="v$.client.email.$error">{{v$.client.email.$errors[0].$message}}</span>
-            </div>
+        <div class="col mb-3">
+            <input type="date" class="form-control" v-model="client.date_naissance" placeholder="Date of birth" aria-label="Date of birth">
         </div>
-        <div class="row mb-3">
-            <div class="col">
-                <input type="text" class="form-control" v-model="client.ville" placeholder="Ville" aria-label="Ville">
-                <span class="error-feedback text-danger" v-if="v$.client.ville.$error">{{v$.client.ville.$errors[0].$message}}</span>
-                <input type="password" class="form-control" v-model="client.password" placeholder="Password" aria-label="Password">
-                <span class="error-feedback text-danger" v-if="v$.client.password.$error">{{v$.client.password.$errors[0].$message}}</span>
-            </div>
+        <div class="col mb-3">
+            <input type="email" class="form-control" v-model="client.email" placeholder="Email address" aria-label="Email address">
+            <span class="error-feedback text-danger" v-if="v$.client.email.$error">{{v$.client.email.$errors[0].$message}}</span>
+        </div>
+        <div class="col mb-3">
+            <input type="text" class="form-control" v-model="client.ville" placeholder="Ville" aria-label="Ville">
+            <span class="error-feedback text-danger" v-if="v$.client.ville.$error">{{v$.client.ville.$errors[0].$message}}</span>
+        </div>
+        <div class="col mb-3">
+            <input type="password" class="form-control" v-model="client.password" placeholder="Password" aria-label="Password">
+            <span class="error-feedback text-danger" v-if="v$.client.password.$error">{{v$.client.password.$errors[0].$message}}</span>
         </div>
         <button type="submit" @click="register()" class="btn btn-dark mb-1 w-100">Register</button>
         <button type="button" @click="redirect({val:'Login'})" class="btn btn-outline-dark w-100">Login</button>

@@ -47,12 +47,9 @@
                     <a v-if="client_id" @click="logout()" class="btn btn-outline-dark ms-2" style="text-decoration:none;">
                         <i class="fa-solid fa-right-from-bracket"></i>Logout
                     </a>
-                    <router-link :to="{ name: 'cart'}" style="text-decoration:none;">
+                    <router-link v-if="client_id"  :to="{ name: 'cart'}" style="text-decoration:none;">
                         <button class="btn ms-2">
-                            <i class="fa-solid fa-cart-shopping fs-5"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
-                                <span class="visually-hidden">New alerts</span>
-                            </span>
+                            <i class="fa-solid fa-cart-shopping" style="font-size:20px;"></i>
                         </button>
                     </router-link>
                 </div>

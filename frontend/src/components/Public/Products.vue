@@ -7,10 +7,26 @@
         </div>
     </div>
     <div class="row">
-        <div class="d-flex justify-content-center mb-5 pb-5" @click.prevent>
-            <button v-for="c in categories" :key="c.id_cat" class="btn btn-outline-dark me-2">{{c.nom_cat}}</button>
+        <div class="col-md-6">
+            <ul class="list-inline shop-top-menu pb-3 pt-1">
+                <li class="list-inline-item">
+                    <button v-for="c in categories" :key="c.id_cat"  class="btn btn-outline-dark me-2">{{c.nom_cat}}</button>
+                    <button v-for="c in categories" :key="c.id_cat"  class="btn btn-outline-dark me-2">{{c.nom_cat}}</button>
+                    <button v-for="c in categories" :key="c.id_cat"  class="btn btn-outline-dark me-2">{{c.nom_cat}}</button>
+                    <button v-for="c in categories" :key="c.id_cat"  class="btn btn-outline-dark me-2">{{c.nom_cat}}</button>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6 pb-4">
+            <div class="d-flex">
+                <div class="mb-3" >
+                    <input type="text" class="form-control" placeholder="Search" style="width:300px;">
+                </div>
+            </div>
         </div>
     </div>
+
+    
 
     <!-- <div class="row">
         <div  class="col-md-3 mb-4">
@@ -35,10 +51,8 @@
             <div class="row">
                 <div v-for="p in products" :key="p.id_produit" class="col-md-6 col-lg-4 col-xl-3">
                     <div id="product-1" class="single-product">
-                        <h1>{{p.id_produit}}</h1>
                         <div class="part-1">
                             <img :src="getImgUrl(p.image)" alt="">
-
                             <ul>
                                 <li><a @click="AddProductToBasket(p.id_produit)"><i class="fas fa-shopping-cart"></i></a></li>
                                 <!-- <li><a href="#"><i class="fas fa-heart"></i></a></li> -->
