@@ -47,6 +47,7 @@
                 <div v-for="p in resultQuery" :key="p.id_produit" class="col-md-6 col-lg-4 col-xl-3">
                     <div id="product-1" class="single-product">
                         <div class="part-1" >
+                            {{p.id_produit}}
                             <img :src="getImgUrl(p.image)" alt="" style="width:100%;height:100%;">
                             <ul>
                                 <li><a @click="AddProductToBasket(p.id_produit)"><i class="fas fa-shopping-cart"></i></a></li>

@@ -256,7 +256,7 @@
                                                 <form @click.prevent>
                                                     <div class="mb-1">
                                                         <label for="name" class="form-label">Quantite</label>
-                                                        <input type="number" v-model="basketProduct.qtte" class="form-control" id="Quantity">
+                                                        <input type="number" min="1" :max=b.quantite v-model="basketProduct.qtte" class="form-control" id="Quantity">
                                                     </div>
                                                 </form>
                                             </div>

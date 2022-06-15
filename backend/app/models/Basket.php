@@ -6,7 +6,7 @@ class Basket extends DB
     //
     public function get_basket_by_id($id)
     {
-        $sql = "SELECT b.id_basket,p.nom as nom_pers,p.ville,p.email,pro.nom,pro.prix,pro.image,c.nom_cat,b.qtte from personne p,produit pro,categories c,basket b where p.id_pers=b.id_pers and pro.id_produit=b.id_produit and pro.id_category=c.id_cat and b.id_pers=?";
+        $sql = "SELECT b.id_basket,p.nom as nom_pers,p.ville,p.email,pro.nom,pro.prix,pro.quantite,pro.image,c.nom_cat,b.qtte from personne p,produit pro,categories c,basket b where p.id_pers=b.id_pers and pro.id_produit=b.id_produit and pro.id_category=c.id_cat and b.id_pers=?";
         $sql = $this->connect()->prepare($sql);
         if ($sql->execute(array($id))) {
             return $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -14,11 +14,11 @@ class Basket extends DB
         return 'empty';
     }
     //
-    public function ProductAlreadyExist($id_produit)
+    public function ProductAlreadyExist($id_produit,$id_pers)
     {
-        $sql = "SELECT * from basket where id_produit=?";
+        $sql = "SELECT * from basket where id_produit=?and id_pers=?";
         $sql = $this->connect()->prepare($sql);
-        if ($sql->execute(array($id_produit))) {
+        if ($sql->execute(array($id_produit,$id_pers))) {
             if ($sql->rowCount() > 0)
                 return 1;
         }
@@ -30,12 +30,12 @@ class Basket extends DB
         $sql = "INSERT INTO `basket`(`id_pers`, `id_produit`, `qtte`) VALUES (?,?,?)";
         $sql = $this->connect()->prepare($sql);
         if ($sql->execute([$data['id_pers'], $data['id_produit'], $data['qtte']])) {
-            $query = "SELECT quantite from produit where id_produit =?";
-            $query = $this->connect()->prepare($query);
-            if ($query->execute([$data['id_produit']])) {
-                $res = $query->fetch(PDO::FETCH_ASSOC);
-                $res['quantite']--;
-            }
+            // $query = "SELECT quantite from produit where id_produit =?";
+            // $query = $this->connect()->prepare($query);
+            // if ($query->execute([$data['id_produit']])) {
+            //     $res = $query->fetch(PDO::FETCH_ASSOC);
+            //     $res['quantite']--;
+            // }
             return 1;
         }
         return 0;

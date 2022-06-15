@@ -35,7 +35,7 @@ class BasketController
             'id_produit' => $_POST['id_produit'],
         ];
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if ($add->ProductAlreadyExist($data['id_produit'])==0) {
+            if ($add->ProductAlreadyExist($data['id_produit'],$data['id_pers'])==0) {
                 $add->addProductToBasket($data);
                 echo json_encode(array(
                     'message' => 'Product Added successfully In Your Basket'
