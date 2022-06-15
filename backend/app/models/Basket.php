@@ -14,22 +14,30 @@ class Basket extends DB
         return 'empty';
     }
     //
-    public function ProductAlreadyExist($id_produit){
-        $sql="SELECT * from basket where id_produit=?";
+    public function ProductAlreadyExist($id_produit)
+    {
+        $sql = "SELECT * from basket where id_produit=?";
         $sql = $this->connect()->prepare($sql);
-        // return $sql->execute(array($id_produit));
-        if($sql->execute(array($id_produit))){
-            if($sql->rowCount()>0)
-              return 1;
-        }return 0;
+        if ($sql->execute(array($id_produit))) {
+            if ($sql->rowCount() > 0)
+                return 1;
+        }
+        return 0;
     }
     // Function to add product to basket
     public function addProductToBasket($data)
     {
         $sql = "INSERT INTO `basket`(`id_pers`, `id_produit`, `qtte`) VALUES (?,?,?)";
         $sql = $this->connect()->prepare($sql);
-        if ($sql->execute([$data['id_pers'], $data['id_produit'], $data['qtte']]))
-            return 1;
+        if ($sql->execute([$data['id_pers'], $data['id_produit'], $data['qtte']])) {
+            $query = "SELECT quantite from produit where id_produit =?";
+            $query = $this->connect()->prepare($query);
+            if ($query->execute([$data['id_produit']])) {
+                $res = $query->fetch();
+                $res--;
+            }
+            return $res;
+        }
         return 0;
     }
 
@@ -62,11 +70,13 @@ class Basket extends DB
             return $sql->rowCount();
         return 0;
     }
-    public function getAllProductInBasket(){
-        $sql="select * from basket";
+    public function getAllProductInBasket()
+    {
+        $sql = "select * from basket";
         $sql = $this->connect()->prepare($sql);
-        if($sql->execute()){
+        if ($sql->execute()) {
             return $sql->fetchAll(PDO::FETCH_ASSOC);
-        }return 0;
+        }
+        return 0;
     }
 }

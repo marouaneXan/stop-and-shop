@@ -386,6 +386,7 @@ export default {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-evenly;
+    height: 76px;
 }
 
 #form {
