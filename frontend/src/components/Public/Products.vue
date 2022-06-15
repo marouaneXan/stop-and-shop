@@ -16,7 +16,7 @@
         </div>
         <div class="col-md-6 pb-4">
                 <div class="mb-3"  style="min-width:300px;">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input v-model="searchQuery" type="text" class="form-control" placeholder="Search">
                 </div>
         </div>
     </div>
@@ -47,7 +47,7 @@
                 <div v-for="p in products" :key="p.id_produit" class="col-md-6 col-lg-4 col-xl-3">
                     <div id="product-1" class="single-product">
                         <div class="part-1" >
-                            <img :src="getImgUrl(p.image)" alt="" id="images">
+                            <img :src="getImgUrl(p.image)" alt="" style="width:100%;height:100%;">
                             <ul>
                                 <li><a @click="AddProductToBasket(p.id_produit)"><i class="fas fa-shopping-cart"></i></a></li>
                                 <!-- <li><a href="#"><i class="fas fa-heart"></i></a></li> -->
@@ -78,6 +78,8 @@ export default {
     name: 'ProductsComponent',
     data() {
         return {
+            searchQuery:'',
+            products:[],
             basket: {
                 id_pers: localStorage.getItem('client_id'),
                 id_produit: ''
@@ -89,13 +91,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['products', 'categories'])
-    },
-    mounted() {
-        this.fetchProducts()
-        this.fetchCategories()
-    },
-     computed: {
+        ...mapGetters([ 'categories']),
         resultQuery() {
             if (this.searchQuery) {
                 return this.products.filter((item) => {
@@ -106,11 +102,19 @@ export default {
             }
         }
     },
+    mounted() {
+        this.fetchProducts()
+        this.fetchCategories()
+    },
     methods: {
-        ...mapActions(['fetchProducts', 'fetchCategories']),
+        ...mapActions([ 'fetchCategories']),
         getImgUrl(pet) {
             var images = require.context('../../assets/uploads/', false)
             return images('./' + pet)
+        },
+        async fetchProducts() {
+            let res = await axios("http://stop-and-shop.com/Product");
+            this.products = res.data
         },
         async AddProductToBasket(p) {
             this.basket.id_produit = p;
