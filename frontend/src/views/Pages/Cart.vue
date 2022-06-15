@@ -243,7 +243,7 @@
                             <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                                 <h5 class="mb-0">${{b.prix * b.qtte}}</h5>
                             </div>
-                            <div class="col-md-1 col-lg-1 col-xl-1">
+                            <div class="col-md-1 col-lg-1 col-xl-1" id="actions">
                                 <a style="color: #cecece;cursor: pointer;" @click="passingDataUpdate(b)" class="btn" data-bs-toggle="modal" data-bs-target="#updateProduct"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <div class="modal fade" id="updateProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -413,5 +413,10 @@ export default {
 #imageCart {
     height: 150px;
     width: 100%;
+}
+#actions{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>
