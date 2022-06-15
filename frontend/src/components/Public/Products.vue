@@ -47,7 +47,7 @@
                 <div v-for="p in products" :key="p.id_produit" class="col-md-6 col-lg-4 col-xl-3">
                     <div id="product-1" class="single-product">
                         <div class="part-1" >
-                            <img :src="getImgUrl(p.image)" alt="">
+                            <img :src="getImgUrl(p.image)" alt="" id="images">
                             <ul>
                                 <li><a @click="AddProductToBasket(p.id_produit)"><i class="fas fa-shopping-cart"></i></a></li>
                                 <!-- <li><a href="#"><i class="fas fa-heart"></i></a></li> -->
@@ -94,6 +94,17 @@ export default {
     mounted() {
         this.fetchProducts()
         this.fetchCategories()
+    },
+     computed: {
+        resultQuery() {
+            if (this.searchQuery) {
+                return this.products.filter((item) => {
+                    return this.searchQuery.toLowerCase().split('').every(v => item.nom.toLowerCase().includes(v))
+                })
+            } else {
+                return this.products;
+            }
+        }
     },
     methods: {
         ...mapActions(['fetchProducts', 'fetchCategories']),
@@ -189,7 +200,11 @@ a:hover {
 .section-products .single-product:hover .part-1::before {
     transform: scale(1.2, 1.2) rotate(5deg);
 }
-
+/* #images::before{
+    background: url("https://i.ibb.co/L8Nrb7p/1.jpg") no-repeat center;
+    background: no-repeat center;
+    background-size: cover;
+} */
 /* .section-products #product-1 .part-1::before {
     background: url("https://i.ibb.co/L8Nrb7p/1.jpg") no-repeat center;
     background-size: cover;
