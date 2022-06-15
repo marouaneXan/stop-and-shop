@@ -13,7 +13,7 @@
     <!--Message for update products-->
     <div v-if="Updateproduct.success" class="alert alert-success text-center">{{Updateproduct.success}} <i class="fa-solid fa-circle-check"></i></div>
     <div v-if="Updateproduct.error" class="alert alert-warning text-center">{{Updateproduct.error}}</div>
-    
+
     <!--Message for add category-->
     <div v-if="Addcategory.success" class="alert alert-success text-center">{{Addcategory.success}} <i class="fa-solid fa-circle-check"></i></div>
     <div v-if="Addcategory.error" class="alert alert-warning text-center">{{Addcategory.error}}</div>
@@ -38,7 +38,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form @submit="addProduct()">
+                        <form>
                             <div class="mb-1">
                                 <label for="name" class="form-label">Name</label>
                                 <input type="text" v-model="product.nom" class="form-control" id="name" required>
@@ -47,7 +47,7 @@
                                 <label for="Price" class="form-label">Price</label>
                                 <input type="text" v-model="product.prix" class="form-control" id="Price" required>
                                 <label for="formFile" class="form-label">Image</label>
-                                <input type="file" ref="ProductImage" multiple class="form-control" @change="previewFiles" id="formFile" enctype='multipart/form-data'>
+                                <input type="file" multiple class="form-control" @change="previewFiles" id="formFile" enctype='multipart/form-data'>
                                 <label class="form-label">Select Category</label>
                                 <select class="form-select" v-model="product.id_category" aria-label="Default select example">
                                     <option disabled selected>Select Category</option>
@@ -56,12 +56,13 @@
                                 <label for="Quantity" class="form-label">Quantity</label>
                                 <input type="number" v-model="product.quantite" class="form-control" id="Quantity" required>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="btn" @click="addProduct()" class="btn btn-primary" data-bs-dismiss="modal">Add</button>
+                            </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Add</button>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -91,7 +92,7 @@
             </div>
         </div>
     </div>
-    <div  class="row d-flex justify-content-center align-items-center mt-3">
+    <div class="row d-flex justify-content-center align-items-center mt-3">
         <div class="col-md-6" id="card">
             <div class="card text-dark bg-light mb-3">
                 <div class="card-header fw-bold">List of Products</div>
@@ -149,16 +150,16 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form  @submit="UpdateProduct()">
+                                                        <form>
                                                             <div class="mb-1">
                                                                 <label for="name" class="form-label">Name</label>
                                                                 <input type="text" v-model="product.nom" class="form-control" id="name">
                                                                 <label for="Description" class="form-label">Description</label>
                                                                 <input type="text" v-model="product.description" class="form-control" id="Description">
                                                                 <label for="Price" class="form-label">Price</label>
-                                                                <input type="text" v-model="product.prix" class="form-control" id="Price">
+                                                                <input type="text" required v-model="product.prix" class="form-control" id="Price">
                                                                 <label for="formFile" class="form-label">Image</label>
-                                                                <input type="file" ref="file"  multiple class="form-control" @change="previewFiles" id="formFile" enctype='multipart/form-data'>
+                                                                <input type="file" ref="file" multiple class="form-control" @change="previewFiles" id="formFile" enctype='multipart/form-data'>
                                                                 <label class="form-label">Select Category</label>
                                                                 <select class="form-select" v-model="product.id_category" aria-label="Default select example">
                                                                     <option disabled selected>Select Category</option>
@@ -167,12 +168,13 @@
                                                                 <label for="Quantity" class="form-label">Quantity</label>
                                                                 <input type="number" v-model="product.quantite" class="form-control" id="Quantity">
                                                             </div>
+                                                            <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" @click="UpdateProduct()" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
+                                                    </div>
                                                         </form>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -204,18 +206,18 @@ export default {
         return {
             products: [],
             categories: [],
-            searchQuery:'',
+            searchQuery: '',
             product: {
                 id_produit: '',
                 nom: '',
                 description: '',
                 prix: '',
-                // image:'',
+                image:'',
                 id_category: '',
                 quantite: ''
             },
-            category:{
-                nom_cat:''
+            category: {
+                nom_cat: ''
             },
             Addproduct: {
                 success: '',
@@ -274,9 +276,10 @@ export default {
             form.append('nom', this.product.nom);
             form.append('description', this.product.description);
             form.append('prix', this.product.prix);
-            // form.append('image', this.product.image);
+            form.append('image', this.product.image);
             form.append('id_category', this.product.id_category);
             form.append('quantite', this.product.quantite);
+            console.log(this.product.image);
             let res = await axios({
                 method: "POST",
                 url: 'http://stop-and-shop.com/Product/create',
@@ -316,7 +319,7 @@ export default {
             this.product.nom = p.nom;
             this.product.description = p.description;
             this.product.prix = p.prix;
-            // this.product.image = p.image;
+            this.product.image = p.image;
             this.product.id_category = p.id_category;
             this.product.quantite = p.quantite;
         },
@@ -326,7 +329,7 @@ export default {
             form.append('nom', this.product.nom);
             form.append('description', this.product.description);
             form.append('prix', this.product.prix);
-            // form.append('image', this.product.image);
+            form.append('image', this.product.image);
             form.append('id_category', this.product.id_category);
             form.append('quantite', this.product.quantite);
             let res = await axios({
@@ -346,17 +349,17 @@ export default {
             }
         },
         //Add category
-        async addCategory(){
-            let form=new FormData()
-            form.append('nom_cat',this.category.nom_cat)
+        async addCategory() {
+            let form = new FormData()
+            form.append('nom_cat', this.category.nom_cat)
             let res = await axios({
-                method:'POST',
-                url:'http://stop-and-shop.com/Category/create',
-                data:form,
-                headers:{
+                method: 'POST',
+                url: 'http://stop-and-shop.com/Category/create',
+                data: form,
+                headers: {
                     "Content-Type": "multipart/form-data"
                 }
-            }) 
+            })
             if (res.data.message == "Category added successfully") {
                 this.fetchCategories()
                 this.Addcategory.success = res.data.message;
@@ -366,9 +369,8 @@ export default {
             }
         },
         //get name of image
-         previewFiles(event) {
-            this.image=event.target.files;
-              console.log(this.image);
+        previewFiles(event) {
+            this.product.image = event.target.files[0];
         }
     },
 }
@@ -378,6 +380,7 @@ export default {
 #card {
     width: 90%;
 }
+
 .action_btn {
     display: flex;
     flex-wrap: wrap;
