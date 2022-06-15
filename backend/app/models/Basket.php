@@ -33,10 +33,10 @@ class Basket extends DB
             $query = "SELECT quantite from produit where id_produit =?";
             $query = $this->connect()->prepare($query);
             if ($query->execute([$data['id_produit']])) {
-                $res = $query->fetch();
-                $res--;
+                $res = $query->fetch(PDO::FETCH_ASSOC);
+                $res['quantite']--;
             }
-            return $res;
+            return 1;
         }
         return 0;
     }
