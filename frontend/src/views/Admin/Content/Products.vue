@@ -46,8 +46,9 @@
                                 <input type="text" v-model="product.description" class="form-control" id="Description" required>
                                 <label for="Price" class="form-label">Price</label>
                                 <input type="text" v-model="product.prix" class="form-control" id="Price" required>
-                                <!-- <label for="formFile" class="form-label">Image</label> -->
-                                <!-- <input type="file" ref="ProductImage" multiple class="form-control" @change="previewFiles" id="formFile" enctype='multipart/form-data'> -->
+                                <label for="formFile" class="form-label">Image</label>
+                                <input type="file" ref="ProductImage" multiple class="form-control" @change="previewFiles" id="formFile" enctype='multipart/form-data'>
+                                <label class="form-label">Select Category</label>
                                 <select class="form-select" v-model="product.id_category" aria-label="Default select example">
                                     <option disabled selected>Select Category</option>
                                     <option v-for="c in categories" :key="c.id_cat" :value="c.id_cat" required>{{c.nom_cat}}</option>
@@ -59,7 +60,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" @click="addProduct()" class="btn btn-primary" data-bs-dismiss="modal">Add</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Add</button>
                     </div>
                 </div>
             </div>
@@ -148,7 +149,7 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form @click.prevent>
+                                                        <form  @submit="UpdateProduct()">
                                                             <div class="mb-1">
                                                                 <label for="name" class="form-label">Name</label>
                                                                 <input type="text" v-model="product.nom" class="form-control" id="name">
@@ -156,9 +157,9 @@
                                                                 <input type="text" v-model="product.description" class="form-control" id="Description">
                                                                 <label for="Price" class="form-label">Price</label>
                                                                 <input type="text" v-model="product.prix" class="form-control" id="Price">
-                                                                <!-- <label for="formFile" class="form-label">Image</label> -->
-                                                                <!-- <input type="file" ref="ProductImage" multiple class="form-control" @change="previewFiles" id="formFile" enctype='multipart/form-data'> -->
-                                                                <!-- <label class="form-label">Select Category</label> -->
+                                                                <label for="formFile" class="form-label">Image</label>
+                                                                <input type="file" ref="file"  multiple class="form-control" @change="previewFiles" id="formFile" enctype='multipart/form-data'>
+                                                                <label class="form-label">Select Category</label>
                                                                 <select class="form-select" v-model="product.id_category" aria-label="Default select example">
                                                                     <option disabled selected>Select Category</option>
                                                                     <option v-for="c in categories" :key="c.id_cat" :value="c.id_cat">{{c.nom_cat}}</option>
@@ -170,7 +171,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" @click="UpdateProduct()" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
+                                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -363,6 +364,11 @@ export default {
                 this.fetchCategories()
                 this.Addcategory.error = "Error on adding new category";
             }
+        },
+        //get name of image
+         previewFiles(event) {
+            this.image=event.target.files;
+              console.log(this.image);
         }
     },
 }
@@ -372,11 +378,11 @@ export default {
 #card {
     width: 90%;
 }
-
 .action_btn {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    height: 100px;
 }
 
 #form {

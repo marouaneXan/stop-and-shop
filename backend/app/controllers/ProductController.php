@@ -34,11 +34,15 @@ class ProductController
   public function create()
   {
     $all_products = new Product();
+    $filename = $_FILES["image"]["name"];
+    $tempname = $_FILES["image"]["tmp_name"];
+    $folder =  "C:/xampp/htdocs/stop-and-shop/frontend/src/assets/uploads/" . $filename;
+    move_uploaded_file($tempname, $folder);
     $data = [
       'nom' => trim($_POST['nom']),
       'description' => trim($_POST['description']),
       'prix' => trim($_POST['prix']),
-      'image' => 'image1.png',
+      'image' => $filename,
       'id_category' => trim($_POST['id_category']),
       'quantite' => trim($_POST['quantite'])
     ];
@@ -74,11 +78,15 @@ class ProductController
   public function updateProduct($id)
   {
     $update = new Product();
+    $filename = $_FILES["image"]["name"];
+    $tempname = $_FILES["image"]["tmp_name"];
+    $folder =  "C:/xampp/htdocs/stop-and-shop/frontend/src/assets/uploads/" . $filename;
+    move_uploaded_file($tempname, $folder);
     $data = [
       'nom' => trim($_POST['nom']),
       'description' => trim($_POST['description']),
       'prix' => trim($_POST['prix']),
-      // 'image' => uploadImage(),
+      'image' =>  $filename,
       'image' => trim($_POST['image']),
       'id_category' => trim($_POST['id_category']),
       'quantite' => trim($_POST['quantite'])
