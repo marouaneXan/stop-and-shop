@@ -4,7 +4,8 @@
         <h1 id="title">404</h1>
         <h4 id="sub-title">Page not found</h4>
         <p id="text">Oops! The page you are looking for does not exist. It might have been moved or deleted.</p>
-        <a id="link-home" v-if="id_pers" href="/home" class="btn btn-dark">Back To Home</a>
+        <a id="link-home" v-if="id_pers" href="/" class="btn btn-dark">Back To Home</a>
+        <a id="link-home" v-if="!id_pers" href="/" class="btn btn-dark">Back To Home</a>
         <a id="link-dashboard" v-if="id_admin" href="/admin/dashboard" class="btn btn-dark">Back To Dashboard</a>
     </div>
 </div>
@@ -40,15 +41,6 @@ export default {
     text-decoration: none;
     padding: 10px;
 
-}
-
-#link-home:hover {
-    text-decoration: none;
-    background-color: #0c2461;
-}
-#link-dashboard:hover {
-    text-decoration: none;
-    background-color: #0c2461;
 }
 
 

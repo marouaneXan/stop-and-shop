@@ -101,8 +101,7 @@ export default {
         this.fetchContact()
         //Redirect user to home page
         let client = localStorage.getItem('client_id')
-        let admin = localStorage.getItem('Admin')
-        if ((client || !client) && !admin){
+        if (client){
             this.redirect({
                 val: 'home'
             });

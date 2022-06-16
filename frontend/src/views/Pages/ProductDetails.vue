@@ -16,7 +16,7 @@ export default {
         NavbarComponent,
         ProductComponent,
         FooterView
-    }
+    },
 }
 </script>
 

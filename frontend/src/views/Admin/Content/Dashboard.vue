@@ -98,8 +98,8 @@ export default {
 
         //Redirect user to home page
         let client = localStorage.getItem('client_id')
-        let admin = localStorage.getItem('Admin')
-        if (client || !client || !admin){
+        // let admin = localStorage.getItem('Admin')
+        if (client){ 
             this.redirect({
                 val: 'home'
             });

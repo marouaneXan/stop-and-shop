@@ -30,6 +30,7 @@
 import NavbarComponent from '@/components/Public/Layouts/Navbar.vue'
 import FooterView from '@/components/Public/Layouts/Footer.vue'
 import ProductsComponent from '@/components/Public/Products.vue'
+import { mapActions } from 'vuex'
 export default {
     name: 'HomeView',
     components: {
@@ -37,9 +38,18 @@ export default {
         ProductsComponent,
         FooterView
     },
-    mounted() {
-        
+    mounted(){
+        // let admin = localStorage.getItem('Admin')
+        // let client = localStorage.getItem('client_id')
+        // if (admin){
+        //     this.redirect({
+        //         val: 'admin/dashboard'
+        //     });
+        // }
     },
+    methods:{
+        ...mapActions(['redirect'])
+    }
 }
 </script>
 

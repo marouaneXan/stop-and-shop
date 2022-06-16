@@ -65,14 +65,9 @@ export default {
     },
     mounted() {
         let client = localStorage.getItem("client_id");
-        let admin = localStorage.getItem("Admin");
         if (client) {
             this.redirect({
                 val: 'home'
-            });
-        }else if(admin){
-            this.redirect({
-                val: 'admin/dashboard'
             });
         }
     },
