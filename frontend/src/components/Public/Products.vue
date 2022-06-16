@@ -1,6 +1,6 @@
 <template>
 <div>
-    <NavbarComponent v-if="page=='/products'" />
+    <NavbarComponent v-if="page=='/Products'" />
     <div class="container my-5 py-5">
         <div class="row">
             <div class="col-12 mb-5">
