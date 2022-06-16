@@ -45,6 +45,7 @@ class RegisterController
                 echo json_encode(
                     array(
                         'user_info' => $register->login($data),
+                        'message'=>'Login success'
                     )
                 );
             } else {

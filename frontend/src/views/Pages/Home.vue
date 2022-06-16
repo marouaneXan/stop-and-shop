@@ -1,5 +1,6 @@
 <template>
-<NavbarComponent />
+<div>
+    <NavbarComponent />
 <div class="hero">
     <section class="bg-dark text-light p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
         <div class="container">
@@ -22,6 +23,7 @@
 </div>
 <ProductsComponent/>
 <FooterView/>
+</div>
 </template>
 
 <script>

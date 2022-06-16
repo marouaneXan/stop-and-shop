@@ -1,5 +1,6 @@
 <template>
-<NavbarComponent />
+<div>
+    <NavbarComponent />
 <div class="container mt-3">
     <div v-if="success" class="alert alert-success text-center">{{success}}</div>
     <div v-if="error" class="alert alert-warning text-center">{{error}}</div>
@@ -35,6 +36,7 @@
         <button type="submit" @click="register()" class="btn btn-dark mb-1 w-100">Register</button>
         <button type="button" @click="redirect({val:'Login'})" class="btn btn-outline-dark w-100">Login</button>
     </form>
+</div>
 </div>
 </template>
 

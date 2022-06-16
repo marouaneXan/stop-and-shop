@@ -1,5 +1,6 @@
 <template>
-<NavbarComponent />
+<div>
+    <NavbarComponent />
 <SidebarComponent />
 <section class=" mt-2 pt-3">
     <!--Message for delete products-->
@@ -90,7 +91,7 @@
         </div>
     </div>
 </section>
-{{AdminInfos}}
+</div>
 </template>
 
 <script>

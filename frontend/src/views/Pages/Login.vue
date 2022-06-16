@@ -1,5 +1,6 @@
 <template>
-<NavbarComponent />
+<div>
+    <NavbarComponent />
 <div class="container mt-1 p-3" style="display:flex;flex-direction:column;justify-content:center;align-items:center;">
     <div v-if="success" class="alert alert-sucess">{{success}}</div>
     <h1 class="text-center text-dark">Login</h1>
@@ -18,6 +19,7 @@
         <button type="button" @click="redirect({ val : 'Register'})" class="btn btn-outline-dark mb-1 w-100">Register</button>
         <button type="submit" @click="login()" class="btn btn-outline-dark w-100 active">Login</button>
     </form>
+</div>
 </div>
 </template>
 
@@ -96,7 +98,7 @@ export default {
                 } else if (result.data.message == "Login success" && result.data.user_info.role == 1) {
                     let object = {};
                     form.forEach((value, key) => object[key] = value);
-                    localStorage.setItem("Admin", JSON.stringify(result.data));
+                    localStorage.setItem("Admin", JSON.stringify(result.data.user_info.id_pers));
                     this.redirect({
                         val: 'dashboard'
                     })
