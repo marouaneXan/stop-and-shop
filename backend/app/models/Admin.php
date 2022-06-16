@@ -20,7 +20,7 @@ class Admin extends DB
           prenom=?,
           date_naissance=?,
           ville=?,
-          email=?,
+          email=?
           where role = 1
           ";
           $sql = $this->connect()->prepare($sql);
