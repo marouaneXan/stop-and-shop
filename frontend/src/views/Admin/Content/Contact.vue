@@ -77,6 +77,7 @@
 import axios from 'axios'
 import NavbarComponent from '@/components/Admin/Layouts/Navbar.vue'
 import SidebarComponent from '@/components/Admin/Layouts/Sidebar.vue'
+import { mapActions } from 'vuex';
 export default {
     name: "CustomersView",
     data() {
