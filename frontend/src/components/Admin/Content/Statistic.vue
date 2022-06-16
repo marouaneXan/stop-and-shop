@@ -26,6 +26,7 @@ import Chart from 'chart.js/auto';
 import axios from 'axios'
 import NavbarComponent from '@/components/Admin/Layouts/Navbar.vue'
 import SidebarComponent from '@/components/Admin/Layouts/Sidebar.vue'
+import { mapActions } from 'vuex';
 export default {
     name: "StatisticComponent",
     data() {
@@ -39,8 +40,18 @@ export default {
     },
     mounted() {
         this.getStatistic()
+
+        //Redirect user to home page
+        let client = localStorage.getItem('client_id')
+        let admin = localStorage.getItem('Admin')
+        if (client || !client || !admin){
+            this.redirect({
+                val: 'home'
+            });
+        }
     },
     methods: {
+        ...mapActions(['redirect']),
         // get statistic 
         async getStatistic() {
             await axios.get('http://stop-and-shop.com/Admin').then((response) => {

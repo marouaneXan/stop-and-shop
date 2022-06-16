@@ -98,6 +98,14 @@ export default {
     },
     mounted() {
         this.fetchContact()
+        //Redirect user to home page
+        let client = localStorage.getItem('client_id')
+        let admin = localStorage.getItem('Admin')
+        if (client || !client || !admin){
+            this.redirect({
+                val: 'home'
+            });
+        }
     },
     computed: {
         resultQuery() {
@@ -111,6 +119,7 @@ export default {
         }
     },
     methods:{
+        ...mapActions(['redirect']),
       async fetchContact() {
             let res = await axios("http://stop-and-shop.com/Contact");
             this.contacts = res.data

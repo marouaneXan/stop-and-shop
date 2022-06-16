@@ -126,6 +126,7 @@
 import axios from 'axios'
 import NavbarComponent from '@/components/Admin/Layouts/Navbar.vue'
 import SidebarComponent from '@/components/Admin/Layouts/Sidebar.vue'
+import { mapActions } from 'vuex';
 export default {
     name: "OerdersView",
     data() {
@@ -149,6 +150,14 @@ export default {
     },
     mounted() {
         this.fetchOrders()
+        //Redirect user to home page
+        let client = localStorage.getItem('client_id')
+        let admin = localStorage.getItem('Admin')
+        if (client || !client || !admin){
+            this.redirect({
+                val: 'home'
+            });
+        }
     },
     computed: {
         resultQuery() {
@@ -162,6 +171,7 @@ export default {
         }
     },
     methods: {
+        ...mapActions(['redirect']),
         getImgUrl(pet) {
             var images = require.context('../../../assets/uploads/', false)
             return images('./' + pet)

@@ -101,6 +101,14 @@ export default {
     },
     mounted() {
         this.fetchCustomers()
+        //Redirect user to home page
+        let client = localStorage.getItem('client_id')
+        let admin = localStorage.getItem('Admin')
+        if (client || !client || !admin){
+            this.redirect({
+                val: 'home'
+            });
+        }
     },
     computed: {
         resultQuery() {
@@ -114,6 +122,7 @@ export default {
         }
     },
     methods: {
+        ...mapActions(['redirect']),
         async fetchCustomers() {
             let res = await axios("http://stop-and-shop.com/User");
             this.customers = res.data

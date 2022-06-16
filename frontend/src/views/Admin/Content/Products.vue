@@ -197,6 +197,7 @@
 import axios from 'axios'
 import NavbarComponent from '@/components/Admin/Layouts/Navbar.vue'
 import SidebarComponent from '@/components/Admin/Layouts/Sidebar.vue'
+import { mapActions } from 'vuex';
 // import {
 //     mapGetters,
 //     mapActions
@@ -245,6 +246,14 @@ export default {
     mounted() {
         this.fetchProducts()
         this.fetchCategories()
+        //Redirect user to home page
+        let client = localStorage.getItem('client_id')
+        let admin = localStorage.getItem('Admin')
+        if (client || !client || !admin){
+            this.redirect({
+                val: 'home'
+            });
+        }
     },
     computed: {
         // ...mapGetters(['products', 'categories'])
@@ -259,6 +268,7 @@ export default {
         }
     },
     methods: {
+        ...mapActions(['redirect']),
         // ...mapActions(['fetchProducts', 'fetchCategories']),
         getImgUrl(pet) {
             var images = require.context('../../../assets/uploads/', false)
