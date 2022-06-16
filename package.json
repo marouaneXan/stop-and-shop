@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@vue-stripe/vue-stripe": "^4.4.2",
+    "vue-stripe": "^0.1.52"
+  }
+}

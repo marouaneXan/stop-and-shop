@@ -215,7 +215,7 @@
         </div>
     </div>
 </div> -->
-<NavbarComponent/>
+<NavbarComponent />
 <section v-if="basketProducts.length" class="h-100">
     <div class="container h-100 py-5">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -290,9 +290,10 @@
                     </div>
                 </div>
 
+                <stripe-checkout ref="checkoutRef" mode="payment" :pk="publishableKey" :line-items="lineItems" :success-url="successURL" :cancel-url="cancelURL" @loading="v => loading = v" />
                 <div class="card">
                     <div class="card-body">
-                        <button type="button" class="btn btn-dark btn-block btn-lg w-100">Proceed to Pay</button>
+                        <button type="button" @click="submit" class="btn btn-dark btn-block btn-lg w-100">Proceed to Pay</button>
                     </div>
                 </div>
 
@@ -315,20 +316,25 @@
         </div>
     </div>
 </div>
-<FooterView/>
+<FooterView />
 </template>
 
 <script>
+import {
+    StripeCheckout
+} from '@vue-stripe/vue-stripe';
 import NavbarComponent from '@/components/Public/Layouts/Navbar.vue'
 import FooterView from '@/components/Public/Layouts/Footer.vue'
 import axios from 'axios'
 export default {
     name: 'CartView',
-    components:{
+    components: {
         NavbarComponent,
-        FooterView
+        FooterView,
+        StripeCheckout
     },
     data() {
+        this.publishableKey = 'pk_test_51LB6MQIcWRr970L65mrEuVsSNKmLhkfFV8SYAiDKa55UuxsR6kSiRH6jfeSQV67NyQ3qhTSPmw70jf1Ca4bRFXhG00cHcY1HWc'
         return {
             basketProducts: [],
             basketProduct: {
@@ -337,7 +343,9 @@ export default {
                 qtte: ''
             },
             numberProductInBasket: '',
-            totalPrice: ''
+            totalPrice: '',
+            loading: false,
+
         }
     },
     computed: {},
@@ -349,6 +357,10 @@ export default {
         this.numberProductInBasket = res.data
     },
     methods: {
+        submit() {
+            // You will be redirected to Stripe's secure checkout page
+            this.$refs.checkoutRef.redirectToCheckout();
+        },
         getImgUrl(pet) {
             var images = require.context('../../assets/uploads/', false)
             return images('./' + pet)
@@ -414,7 +426,8 @@ export default {
     height: 150px;
     width: 100%;
 }
-#actions{
+
+#actions {
     display: flex;
     align-items: center;
     justify-content: center;
