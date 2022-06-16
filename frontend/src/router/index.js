@@ -6,6 +6,7 @@ import Register from '../views/Pages/Register.vue'
 import Contact from '../views/Pages/Contact.vue'
 import About from '../views/Pages/About.vue'
 import ProductDetails from '../views/Pages/ProductDetails.vue'
+import Products from '../components/Public/Products.vue'
 import ErrorPage from '../views/Pages/ErrorPage.vue'
 import Cart from '../views/Pages/Cart.vue'
 
@@ -24,6 +25,11 @@ const routes=[
         path: '/',
         name: 'home',
         component: Home
+    },
+    {
+        path: '/products',
+        name: 'products',
+        component: Products
     },
     {
         path: '/login',
