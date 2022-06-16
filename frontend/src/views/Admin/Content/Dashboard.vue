@@ -69,6 +69,7 @@
             </div>
         </div>
     </main>
+    <Statistic/>
 </div>
 </template>
 
