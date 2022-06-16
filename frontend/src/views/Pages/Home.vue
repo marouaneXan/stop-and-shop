@@ -10,7 +10,7 @@
                     <p class="card-text lead my-4">
                         CHECK OUT ALL THE TRENDS
                     </p>
-                     <router-link :to="{ name: 'Register'}" style="text-decoration:none;">
+                     <router-link :to="{ name: 'Products'}" style="text-decoration:none;">
                         <a class="btn btn-secondary ms-2">
                             Shop Now
                         </a>
