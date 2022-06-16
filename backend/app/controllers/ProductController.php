@@ -101,4 +101,14 @@ class ProductController
       ));
     }
   }
+
+
+
+  // Update product
+  public function search_by_category($id_cat)
+  {
+    $search = new Product();
+    echo json_encode($search->search_by_category($id_cat));
+  }
+
 }
