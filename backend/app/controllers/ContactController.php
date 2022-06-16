@@ -19,7 +19,27 @@ class ContactController
   }
 
 
-  
+  // create new product
+  public function addContact()
+  {
+    $contact = new Contact();
+    $data = [
+      'email' => trim($_POST['email']),
+      'subject' => trim($_POST['subject']),
+      'message' => trim($_POST['message'])
+    ];
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      if ($contact->addContact($data)) {
+        echo json_encode(array(
+          'message' => 'Contact Added successfully'
+        ));
+      } else {
+        echo json_encode(array(
+          'error' => 'Error on Adding new Contact'
+        ));
+      }
+    }
+  }
   
   //delete contact
   public function DeleteContact($id)
