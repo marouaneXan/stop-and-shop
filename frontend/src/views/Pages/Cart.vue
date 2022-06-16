@@ -303,7 +303,7 @@
     </div>
 </section>
 <div v-else class="py-6 py-lg-12" style="margin-top:120px;">
-    <div class="container">
+    <div class="container mb-5">
         <div class="row">
             <div class="offset-lg-3 col-lg-6 col-md-12 col-12 text-center">
                 <lord-icon src="https://cdn.lordicon.com/slkvcfos.json" trigger="loop" style="width:250px;height:250px">

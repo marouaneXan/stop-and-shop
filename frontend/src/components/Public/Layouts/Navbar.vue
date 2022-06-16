@@ -18,7 +18,7 @@
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link :to="{ name: 'products'}" style="text-decoration:none;">
+                        <router-link :to="{ name: 'Products'}" style="text-decoration:none;">
                             <a class="nav-link">Products</a>
                         </router-link>
                     </li>
