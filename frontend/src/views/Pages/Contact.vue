@@ -11,10 +11,10 @@
                         <input v-model="contact.email" type="email" class="form-control" placeholder="Email address" aria-label="Email address">
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Subject"  required aria-describedby="emailHelp">
+                        <input type="text" v-model="contact.subject" class="form-control" placeholder="Subject"  required aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
-                        <textarea type="text" class="form-control" placeholder="Message" required aria-describedby="emailHelp"></textarea>
+                        <textarea type="text" v-model="contact.message" class="form-control" placeholder="Message" required aria-describedby="emailHelp"></textarea>
                     </div>
                     <button type="submit" class="btn btn-outline-dark w-100 active">Send</button>
                 </form>
@@ -34,13 +34,24 @@ export default {
         return{
             contact:{
                 email:'',
-                
+                subject:'',
+                message:''
             }
         }
     },
     components:{
         NavbarComponent
+    },
+    methods:{
+        async sendMessage(){
+            let form = new FormData()
+            form.append('email',this.contact.email)
+            form.append('subject',this.contact.subject)
+            form.append('message',this.contact.message)
+            let res= await axios
+        }
     }
+
 }
 </script>
 
