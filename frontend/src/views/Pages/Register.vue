@@ -102,7 +102,7 @@ export default {
         }
     },
     mounted() {
-        let client = localStorage.getItem("client");
+        let client = localStorage.getItem("client_id");
         if (client) {
             this.redirect({
                 val: 'home'
