@@ -1,5 +1,6 @@
 <template>
-<NavbarComponent />
+<div>
+    <NavbarComponent />
 <SidebarComponent />
 <main class="mt-5 pt-3">
     <!--Message for add products-->
@@ -7,8 +8,8 @@
     <div v-if="Addproduct.error" class="alert alert-warning text-center">{{Addproduct.error}}</div>
 
     <!--Message for delete products-->
-    <div v-if="Deleteproduct.success" class="alert alert-danger text-center">{{Deleteproduct.success}}</div>
-    <div v-if="Deleteproduct.error" class="alert alert-warning text-center">{{Deleteproduct.error}}</div>
+    <div v-if="Deleteproduct.success" class="alert alert-success text-center">{{Deleteproduct.success}}</div>
+    <div v-if="Deleteproduct.error" class="alert alert-danger text-center">{{Deleteproduct.error}}</div>
 
     <!--Message for update products-->
     <div v-if="Updateproduct.success" class="alert alert-success text-center">{{Updateproduct.success}} <i class="fa-solid fa-circle-check"></i></div>
@@ -190,6 +191,7 @@
         </div>
     </div>
 </main>
+</div>
 </template>
 
 <script>
@@ -299,7 +301,6 @@ export default {
         //passing id for model
         passingDataDelete(p) {
             this.product.id_produit = p.id_produit;
-            console.log(this.product.id_produit)
         },
         //delete product
         async DeleteProduct() {
@@ -309,7 +310,7 @@ export default {
                 this.Deleteproduct.success = "Product Deleted Successfully";
             } else {
                 this.fetchProducts()
-                this.Deleteproduct.error = "Error on updating Product";
+                this.Deleteproduct.error = "Error on Deleting Product";
             }
         },
 
