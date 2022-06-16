@@ -1,9 +1,10 @@
 <template>
 <!-- Open Content -->
-<!--Message for added new  product in basket-->
+
+    <section v-if="product.length" class="bg-light">
+    <!--Message for added new  product in basket-->
     <div v-if="alert.success" class="alert alert-success text-center">{{alert.success}}</div>
     <div v-if="alert.error" class="alert alert-warning text-center">{{alert.error}}</div>
-    <section v-if="product.length" class="bg-light">
         <div class="container pb-5">
             <div class="row">
                 <div class="col-lg-5 mt-5">
@@ -43,12 +44,12 @@
                                 </div>
                                 <div class="row pb-3">
                                     <div class="col d-grid">
-                                        <button v-if="client_id" type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
+                                        <button v-if="basket.id_pers" type="button" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
                                         <a v-else href="/Register" class="btn btn-success btn-lg">Buy</a>
                                     </div>
                                     <div class="col d-grid">
-                                        <button v-if="client_id" type="submit" @click="AddProductToBasket(product[0].id_produit)" class="btn btn-success btn-lg" name="submit">Add To Cart</button>
-                                        <a  class="btn btn-success btn-lg">Add To Cart</a>
+                                        <button v-if="basket.id_pers" type="button" @click="AddProductToBasket(product[0].id_produit)" class="btn btn-success btn-lg" name="submit">Add To Cart</button>
+                                        <a v-else href="/Register"  class="btn btn-success btn-lg">Add To Cart</a>
                                     </div>
                                 </div>
                             </form>
