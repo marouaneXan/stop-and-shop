@@ -36,8 +36,8 @@
                                     <div class="col-auto">
                                         <ul class="list-inline pb-3">
                                             <li class="list-inline-item text-right">
-                                                Quantity
-                                                <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control form-control-sm" />
+                                                Stock
+                                                <p>{{product[0].quantite}}</p>
                                             </li>
                                         </ul>
                                     </div>
