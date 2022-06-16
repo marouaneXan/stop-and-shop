@@ -39,13 +39,10 @@ export default {
         FooterView
     },
     mounted(){
-        // let admin = localStorage.getItem('Admin')
-        // let client = localStorage.getItem('client_id')
-        // if (admin){
-        //     this.redirect({
-        //         val: 'admin/dashboard'
-        //     });
-        // }
+        let admin = localStorage.getItem('Admin')
+        if (admin){
+            localStorage.clear();
+        }
     },
     methods:{
         ...mapActions(['redirect'])

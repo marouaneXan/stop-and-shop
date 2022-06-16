@@ -24,10 +24,20 @@
 
 <script>
 import NavbarComponent from '@/components/Public/Layouts/Navbar.vue'
+import { mapActions } from 'vuex';
 export default {
     name: 'AboutView',
     components:{
         NavbarComponent
+    },
+    mounted(){
+        let admin = localStorage.getItem('Admin')
+        if (admin){
+            localStorage.clear();
+        }
+    },
+    methods:{
+        ...mapActions(['redirect'])
     }
 }
 </script>

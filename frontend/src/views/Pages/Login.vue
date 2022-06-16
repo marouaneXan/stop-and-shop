@@ -70,6 +70,10 @@ export default {
                 val: 'home'
             });
         }
+        let admin = localStorage.getItem('Admin')
+        if (admin){
+            localStorage.clear();
+        }
     },
     methods: {
         ...mapActions(['redirect']),

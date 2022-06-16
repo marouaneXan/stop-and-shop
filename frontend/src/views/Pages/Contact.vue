@@ -31,6 +31,7 @@
 <script>
 import axios from 'axios'
 import NavbarComponent from '@/components/Public/Layouts/Navbar.vue'
+import { mapActions } from 'vuex'
 export default {
     name: 'ContactView',
     data() {
@@ -48,7 +49,14 @@ export default {
     components: {
         NavbarComponent
     },
+    mounted(){
+        let admin = localStorage.getItem('Admin')
+        if (admin){
+            localStorage.clear();
+        }
+    },
     methods: {
+        ...mapActions(['redirect']),
         async sendMessage() {
             let form = new FormData()
             form.append('email', this.contact.email)
