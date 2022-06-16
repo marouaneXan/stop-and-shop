@@ -1,4 +1,6 @@
 <template>
+<div>
+     <NavbarComponent />
 <div class="container my-5 py-5">
     <div class="row">
         <div class="col-12 mb-5">
@@ -66,6 +68,7 @@
         </div>
     </section>
 </div>
+</div>
 </template>
 
 <script>
@@ -74,6 +77,7 @@ import {
     mapGetters,
     mapActions
 } from 'vuex'
+import NavbarComponent from '@/components/Public/Layouts/Navbar.vue'
 export default {
     name: 'ProductsComponent',
     data() {
@@ -89,6 +93,9 @@ export default {
                 error: ''
             }
         }
+    },
+    components: {
+        NavbarComponent
     },
     computed: {
         ...mapGetters(['categories']),

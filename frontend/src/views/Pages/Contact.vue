@@ -30,8 +30,11 @@
 
 <script>
 import axios from 'axios'
+import router from "@/router";
 import NavbarComponent from '@/components/Public/Layouts/Navbar.vue'
-import { mapActions } from 'vuex'
+import {
+    mapActions
+} from 'vuex'
 export default {
     name: 'ContactView',
     data() {
@@ -49,11 +52,12 @@ export default {
     components: {
         NavbarComponent
     },
-    mounted(){
+    mounted() {
         let admin = localStorage.getItem('Admin')
-        if (admin){
+        if (admin) {
             localStorage.clear();
         }
+        console.log(router.currentRoute.value.fullPath)
     },
     methods: {
         ...mapActions(['redirect']),
