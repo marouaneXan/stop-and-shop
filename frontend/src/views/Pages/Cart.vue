@@ -215,7 +215,8 @@
         </div>
     </div>
 </div> -->
-<NavbarComponent />
+<div>
+    <NavbarComponent />
 <section v-if="basketProducts.length" class="h-100">
     <div class="container h-100 py-5">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -317,6 +318,7 @@
     </div>
 </div>
 <FooterView />
+</div>
 </template>
 
 <script>

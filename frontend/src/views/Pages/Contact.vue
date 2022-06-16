@@ -1,5 +1,6 @@
 <template>
-<NavbarComponent />
+<div>
+    <NavbarComponent />
 <section class="text-light p-4 text-center text-sm-start">
     <div class="container mt-4">
         <div class="d-sm-flex align-items-center justify-content-between">
@@ -27,6 +28,7 @@
         </div>
     </div>
 </section>
+</div>
 </template>
 
 <script>
