@@ -50,7 +50,7 @@ export default {
             form.append('message', this.contact.message)
             let res = await axios({
                 method: "POST",
-                url: 'http://stop-and-shop.com/contact/',
+                url: 'http://stop-and-shop.com/contact/addContact',
                 data: form,
                 headers: {
                     "Content-Type": "multipart/form-data"
