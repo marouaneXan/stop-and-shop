@@ -30,7 +30,6 @@
 
 <script>
 import axios from 'axios'
-import router from "@/router";
 import NavbarComponent from '@/components/Public/Layouts/Navbar.vue'
 import {
     mapActions
@@ -57,7 +56,6 @@ export default {
         if (admin) {
             localStorage.clear();
         }
-        console.log(router.currentRoute.value.fullPath)
     },
     methods: {
         ...mapActions(['redirect']),

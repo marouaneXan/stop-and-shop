@@ -1,32 +1,32 @@
 <template>
 <div>
-     <NavbarComponent />
-<div class="container my-5 py-5">
-    <div class="row">
-        <div class="col-12 mb-5">
-            <h1 class="display-6 fw-bolder text-center">Our Latest Products</h1>
-            <hr>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <ul class="list-inline shop-top-menu pb-3 pt-1">
-                <li class="list-inline-item">
-                    <button v-for="c in categories" :key="c.id_cat" class="btn btn-outline-dark me-2">{{c.nom_cat}}</button>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-6 pb-4">
-            <div class="mb-3" style="min-width:300px;">
-                <input v-model="searchQuery" type="text" class="form-control" placeholder="Search">
+    <NavbarComponent v-if="page=='/products'" />
+    <div class="container my-5 py-5">
+        <div class="row">
+            <div class="col-12 mb-5">
+                <h1 class="display-6 fw-bolder text-center">Our Latest Products</h1>
+                <hr>
             </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="list-inline shop-top-menu pb-3 pt-1">
+                    <li class="list-inline-item">
+                        <button v-for="c in categories" :key="c.id_cat" class="btn btn-outline-dark me-2">{{c.nom_cat}}</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6 pb-4">
+                <div class="mb-3" style="min-width:300px;">
+                    <input v-model="searchQuery" type="text" class="form-control" placeholder="Search">
+                </div>
+            </div>
+        </div>
 
-    <!-- <div class="row">
+        <!-- <div class="row">
         <div  class="col-md-3 mb-4">
             <div class="card h-100 text-center p-4"> -->
-    <!-- <img :src="getImgUrl(p.image)" class="card-img-top" alt="...">
+        <!-- <img :src="getImgUrl(p.image)" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title mb-0">zdvzv</h5>
                     <p class="card-text lead fw-bold">zeveagreae...</p>
@@ -35,39 +35,39 @@
                     </router-link>
                 </div> -->
 
-    <!-- </div>
+        <!-- </div>
         </div>
     </div> -->
-    <!--Message for added new  product in basket-->
-    <div v-if="alert.success" class="alert alert-success text-center">{{alert.success}}</div>
-    <div v-if="alert.error" class="alert alert-warning text-center">{{alert.error}}</div>
-    <section class="section-products">
-        <div class="container">
-            <div class="row">
-                <div v-for="p in resultQuery" :key="p.id_produit" class="col-md-6 col-lg-4 col-xl-3">
-                    <div id="product-1" class="single-product">
-                        <div class="part-1">
-                            {{p.id_produit}}
-                            <img :src="getImgUrl(p.image)" alt="" style="width:100%;height:100%;">
-                            <ul>
-                                <li v-if="basket.id_pers"><a @click="AddProductToBasket(p.id_produit)"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li v-else><a href="/Register"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li><a><i class="fas fa-heart"></i></a></li>
-                                <li>
-                                    <router-link :to="{ name: 'ProductDetails',params:{id_produit:p.id_produit}}"><i class="fas fa-expand"></i></router-link>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">{{p.nom}}</h3>
-                            <h4 class="product-price">{{p.prix}}</h4>
+        <!--Message for added new  product in basket-->
+        <div v-if="alert.success" class="alert alert-success text-center">{{alert.success}}</div>
+        <div v-if="alert.error" class="alert alert-warning text-center">{{alert.error}}</div>
+        <section class="section-products">
+            <div class="container">
+                <div class="row">
+                    <div v-for="p in resultQuery" :key="p.id_produit" class="col-md-6 col-lg-4 col-xl-3">
+                        <div id="product-1" class="single-product">
+                            <div class="part-1">
+                                {{p.id_produit}}
+                                <img :src="getImgUrl(p.image)" alt="" style="width:100%;height:100%;">
+                                <ul>
+                                    <li v-if="basket.id_pers"><a @click="AddProductToBasket(p.id_produit)"><i class="fas fa-shopping-cart"></i></a></li>
+                                    <li v-else><a href="/Register"><i class="fas fa-shopping-cart"></i></a></li>
+                                    <li><a><i class="fas fa-heart"></i></a></li>
+                                    <li>
+                                        <router-link :to="{ name: 'ProductDetails',params:{id_produit:p.id_produit}}"><i class="fas fa-expand"></i></router-link>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="part-2">
+                                <h3 class="product-title">{{p.nom}}</h3>
+                                <h4 class="product-price">{{p.prix}}</h4>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-</div>
+        </section>
+    </div>
 </div>
 </template>
 
@@ -77,6 +77,7 @@ import {
     mapGetters,
     mapActions
 } from 'vuex'
+import router from "@/router";
 import NavbarComponent from '@/components/Public/Layouts/Navbar.vue'
 export default {
     name: 'ProductsComponent',
@@ -91,7 +92,8 @@ export default {
             alert: {
                 success: '',
                 error: ''
-            }
+            },
+            page:router.currentRoute.value.fullPath
         }
     },
     components: {
