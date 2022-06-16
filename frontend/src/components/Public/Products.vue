@@ -49,7 +49,7 @@
                             <img :src="getImgUrl(p.image)" alt="" style="width:100%;height:100%;">
                             <ul>
                                 <li v-if="client_id"><a @click="AddProductToBasket(p.id_produit)"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li v-if="!client_id"><a href="/Register"><i class="fas fa-shopping-cart"></i></a></li>
+                                <li v-else><a href="/Register"><i class="fas fa-shopping-cart"></i></a></li>
                                 <li><a><i class="fas fa-heart"></i></a></li>
                                 <li>
                                     <router-link :to="{ name: 'ProductDetails',params:{id_produit:p.id_produit}}"><i class="fas fa-expand"></i></router-link>

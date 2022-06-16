@@ -40,10 +40,12 @@
                                 </div>
                                 <div class="row pb-3">
                                     <div class="col d-grid">
-                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
+                                        <button v-if="client_id" type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
+                                        <a v-else href="/Register" class="btn btn-success btn-lg">Buy</a>
                                     </div>
                                     <div class="col d-grid">
-                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Add To Cart</button>
+                                        <button v-if="client_id" type="submit" @click="AddProductToBasket(p.id_produit)" class="btn btn-success btn-lg" name="submit">Add To Cart</button>
+                                        <a  class="btn btn-success btn-lg">Add To Cart</a>
                                     </div>
                                 </div>
                             </form>
@@ -80,6 +82,25 @@ export default {
         //     var images = require.context('../../assets/uploads/', false)
         //     return images('./' + pet)
         // }
+         async AddProductToBasket(p) {
+            this.basket.id_produit = p;
+            var form = new FormData();
+            form.append('id_pers', this.basket.id_pers);
+            form.append('id_produit', this.basket.id_produit);
+            let res = await axios({
+                method: "POST",
+                url: 'http://stop-and-shop.com/Basket/create',
+                data: form,
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+            })
+            if (res.data.message == "Product Added successfully In Your Basket") {
+                this.alert.success = res.data.message
+            } else {
+                this.alert.error = res.data.error
+            }
+        },
     }
 }
 </script>
