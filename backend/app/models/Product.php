@@ -93,4 +93,12 @@ class Product extends DB
                 return 1;
             return 0;
     }
+
+    public function search_by_category($id_cat){
+        $sql="SELECT * from product where id_cat=?";
+        $sql=$this->connect()->prepare($sql);
+        if($sql->execute(array($id_cat)))
+           return $sql->fetchAll(PDO::FETCH_ASSOC);
+        return 0;
+    }
 }
