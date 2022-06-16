@@ -160,7 +160,7 @@
                                                                 <label for="Price" class="form-label">Price</label>
                                                                 <input type="text" required v-model="product.prix" class="form-control" id="Price">
                                                                 <label for="formFile" class="form-label">Image</label>
-                                                                <input type="file" ref="file" multiple class="form-control" @change="previewFiles" id="formFile" enctype='multipart/form-data'>
+                                                                <input type="file" v-bind="image" multiple class="form-control" @change="previewFiles" enctype='multipart/form-data'>
                                                                 <label class="form-label">Select Category</label>
                                                                 <select class="form-select" v-model="product.id_category" aria-label="Default select example">
                                                                     <option disabled selected>Select Category</option>
