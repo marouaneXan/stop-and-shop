@@ -326,6 +326,7 @@
 import NavbarComponent from '@/components/Public/Layouts/Navbar.vue'
 import FooterView from '@/components/Public/Layouts/Footer.vue'
 import axios from 'axios'
+import { mapActions } from 'vuex'
 export default {
     name: 'CartView',
     components: {
@@ -350,14 +351,23 @@ export default {
     },
     computed: {},
     mounted() {
-        this.DisplayAllProductsInBasket(),
-        this.getSession()
+        this.DisplayAllProductsInBasket()
+        // this.getSession()
+
+        //Redirect user to login page
+        let client = localStorage.getItem('client_id')
+        if (!client){
+            this.redirect({
+                val: 'Login'
+            });
+        }
     },
     async created() {
         let res = await axios('http://stop-and-shop.com/Basket/index/46')
         this.numberProductInBasket = res.data
     },
     methods: {
+        ...mapActions(['redirect']),
         // submit() {
         //     // You will be redirected to Stripe's secure checkout page
         //     this.$refs.checkoutRef.redirectToCheckout();

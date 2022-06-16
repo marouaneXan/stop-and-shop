@@ -10,18 +10,16 @@
         <div class="col-md-6">
             <ul class="list-inline shop-top-menu pb-3 pt-1">
                 <li class="list-inline-item">
-                    <button v-for="c in categories" :key="c.id_cat"  class="btn btn-outline-dark me-2">{{c.nom_cat}}</button>
+                    <button v-for="c in categories" :key="c.id_cat" class="btn btn-outline-dark me-2">{{c.nom_cat}}</button>
                 </li>
             </ul>
         </div>
         <div class="col-md-6 pb-4">
-                <div class="mb-3"  style="min-width:300px;">
-                    <input v-model="searchQuery" type="text" class="form-control" placeholder="Search">
-                </div>
+            <div class="mb-3" style="min-width:300px;">
+                <input v-model="searchQuery" type="text" class="form-control" placeholder="Search">
+            </div>
         </div>
     </div>
-
-    
 
     <!-- <div class="row">
         <div  class="col-md-3 mb-4">
@@ -46,7 +44,7 @@
             <div class="row">
                 <div v-for="p in resultQuery" :key="p.id_produit" class="col-md-6 col-lg-4 col-xl-3">
                     <div id="product-1" class="single-product">
-                        <div class="part-1" >
+                        <div class="part-1">
                             {{p.id_produit}}
                             <img :src="getImgUrl(p.image)" alt="" style="width:100%;height:100%;">
                             <ul>
@@ -80,20 +78,20 @@ export default {
     name: 'ProductsComponent',
     data() {
         return {
-            searchQuery:'',
-            products:[],
+            searchQuery: '',
+            products: [],
             basket: {
                 id_pers: localStorage.getItem('client_id'),
                 id_produit: ''
             },
-            alert:{
-                success:'',
-                error:''
+            alert: {
+                success: '',
+                error: ''
             }
         }
     },
     computed: {
-        ...mapGetters([ 'categories']),
+        ...mapGetters(['categories']),
         resultQuery() {
             if (this.searchQuery) {
                 return this.products.filter((item) => {
@@ -109,9 +107,7 @@ export default {
         this.fetchCategories()
     },
     methods: {
-        ...mapActions([ 'fetchCategories']),
-        //Redirect user to login page
-        RedirectToLogin(){},
+        ...mapActions(['fetchCategories']),
         getImgUrl(pet) {
             var images = require.context('../../assets/uploads/', false)
             return images('./' + pet)
@@ -134,9 +130,9 @@ export default {
                 },
             })
             if (res.data.message == "Product Added successfully In Your Basket") {
-                this.alert.success=res.data.message
+                this.alert.success = res.data.message
             } else {
-                this.alert.error=res.data.error
+                this.alert.error = res.data.error
             }
         },
     }
@@ -208,6 +204,7 @@ a:hover {
 .section-products .single-product:hover .part-1::before {
     transform: scale(1.2, 1.2) rotate(5deg);
 }
+
 /* #images::before{
     background: url("https://i.ibb.co/L8Nrb7p/1.jpg") no-repeat center;
     background: no-repeat center;
