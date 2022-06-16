@@ -78,6 +78,7 @@ import NavbarComponent from '@/components/Admin/Layouts/Navbar.vue'
 import SidebarComponent from '@/components/Admin/Layouts/Sidebar.vue'
 import StatisticComponent from '@/components/Admin/Content/Statistic.vue'
 import axios from "axios";
+import { mapActions } from 'vuex';
 export default {
     name: 'DashboardView',
     components: {
@@ -94,6 +95,18 @@ export default {
         // get statistic 
         let statistic = await axios.get('http://stop-and-shop.com/Admin');
         this.statistic = statistic.data;
+
+        //Redirect user to home page
+        let client = localStorage.getItem('client_id')
+        let admin = localStorage.getItem('Admin')
+        if (client || !client || !admin){
+            this.redirect({
+                val: 'home'
+            });
+        }
+    },
+    methods:{
+        ...mapActions(['redirect'])
     }
 }
 </script>

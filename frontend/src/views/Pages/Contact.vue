@@ -8,7 +8,7 @@
             <div class="d-sm-flex align-items-center justify-content-between">
                 <div>
                     <h5 class=" text-dark card-title text-center display-3">Contact us</h5>
-                    <form class="p-4" id="contact">
+                    <form class="p-4" id="contact" @click.prevent>
                         <div class="mb-3">
                             <input v-model="contact.email" type="email" class="form-control" required placeholder="Email address" aria-label="Email address">
                         </div>
