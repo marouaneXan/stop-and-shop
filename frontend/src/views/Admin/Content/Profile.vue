@@ -78,8 +78,6 @@
                             <input type="text" v-model="info.ville" class="form-control" required>
                             <label for="name" class="form-label">Email</label>
                             <input type="text" v-model="info.email" class="form-control" required>
-                            <label for="name" class="form-label">Password</label>
-                            <input type="text" v-model="info.password" class="form-control" required>
                         </div>
                     </form>
                 </div>
@@ -110,7 +108,6 @@ export default {
                 date_naissance: '',
                 ville: '',
                 email: '',
-                password: '',
             },
             UpdatedataAdmin: {
                 success: '',
@@ -139,7 +136,6 @@ export default {
             this.info.date_naissance = a.date_naissance;
             this.info.ville = a.ville;
             this.info.email = a.email;
-            this.info.password = a.password;
         },
         //delete product
         async UpdateDataAdmin() {
@@ -149,7 +145,6 @@ export default {
             form.append('date_naissance', this.info.date_naissance);
             form.append('ville', this.info.ville);
             form.append('email', this.info.email);
-            form.append('password', this.info.password);
             let res = await axios({
                 method: "POST",
                 url: 'http://stop-and-shop.com/Admin/updateAdminProfile',

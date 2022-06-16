@@ -21,11 +21,10 @@ class Admin extends DB
           date_naissance=?,
           ville=?,
           email=?,
-          password=?
           where role = 1
           ";
           $sql = $this->connect()->prepare($sql);
-          if ($sql->execute([$data['nom'], $data['prenom'], $data['date_naissance'], $data['ville'], $data['email'],$data['password']]))
+          if ($sql->execute([$data['nom'], $data['prenom'], $data['date_naissance'], $data['ville'], $data['email']]))
               return 1;
           return 0;
   }
