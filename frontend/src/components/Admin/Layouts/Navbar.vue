@@ -19,11 +19,11 @@
                         <i class="fa-solid fa-user"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="/admin/profile">Profile</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Log out</a></li>
+                        <li><a class="dropdown-item" @click="logout()">Log out</a></li>
                     </ul>
                 </li>
             </ul>
