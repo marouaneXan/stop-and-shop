@@ -33,8 +33,18 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
-    name: 'NavbarComponent'
+    name: 'NavbarComponent',
+    methods: {
+        ...mapActions(['redirect']),
+        logout() {
+            localStorage.clear();
+            this.redirect({
+                val: "Login"
+            });
+        }
+    }
 }
 </script>
 
