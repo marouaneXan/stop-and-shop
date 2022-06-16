@@ -320,9 +320,9 @@
 </template>
 
 <script>
-import {
-    StripeCheckout
-} from '@vue-stripe/vue-stripe';
+// import {
+//     StripeCheckout
+// } from '@vue-stripe/vue-stripe';
 import NavbarComponent from '@/components/Public/Layouts/Navbar.vue'
 import FooterView from '@/components/Public/Layouts/Footer.vue'
 import axios from 'axios'
@@ -331,10 +331,10 @@ export default {
     components: {
         NavbarComponent,
         FooterView,
-        StripeCheckout
+        // StripeCheckout
     },
     data() {
-        this.publishableKey = 'pk_test_51LB6MQIcWRr970L65mrEuVsSNKmLhkfFV8SYAiDKa55UuxsR6kSiRH6jfeSQV67NyQ3qhTSPmw70jf1Ca4bRFXhG00cHcY1HWc'
+        // this.publishableKey = 'pk_test_51LB6MQIcWRr970L65mrEuVsSNKmLhkfFV8SYAiDKa55UuxsR6kSiRH6jfeSQV67NyQ3qhTSPmw70jf1Ca4bRFXhG00cHcY1HWc'
         return {
             basketProducts: [],
             basketProduct: {
@@ -344,23 +344,27 @@ export default {
             },
             numberProductInBasket: '',
             totalPrice: '',
-            loading: false,
+            // loading: false,
 
         }
     },
     computed: {},
     mounted() {
-        this.DisplayAllProductsInBasket()
+        this.DisplayAllProductsInBasket(),
+        this.getSession()
     },
     async created() {
         let res = await axios('http://stop-and-shop.com/Basket/index/46')
         this.numberProductInBasket = res.data
     },
     methods: {
-        submit() {
-            // You will be redirected to Stripe's secure checkout page
-            this.$refs.checkoutRef.redirectToCheckout();
-        },
+        // submit() {
+        //     // You will be redirected to Stripe's secure checkout page
+        //     this.$refs.checkoutRef.redirectToCheckout();
+        // },
+        // getSession(){
+        //     axios.get('')
+        // },
         getImgUrl(pet) {
             var images = require.context('../../assets/uploads/', false)
             return images('./' + pet)
