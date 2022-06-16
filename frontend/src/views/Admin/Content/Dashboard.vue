@@ -69,19 +69,21 @@
             </div>
         </div>
     </main>
-    <Statistic/>
+    <StatisticComponent/>
 </div>
 </template>
 
 <script>
 import NavbarComponent from '@/components/Admin/Layouts/Navbar.vue'
 import SidebarComponent from '@/components/Admin/Layouts/Sidebar.vue'
+import StatisticComponent from '@/components/Admin/Content/Statistic.vue'
 import axios from "axios";
 export default {
     name: 'DashboardView',
     components: {
         NavbarComponent,
-        SidebarComponent
+        SidebarComponent,
+        StatisticComponent
     },
     data() {
         return {
