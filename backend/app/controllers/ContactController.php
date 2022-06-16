@@ -19,6 +19,8 @@ class ContactController
   }
 
 
+  
+  
   //delete contact
   public function DeleteContact($id)
   {
