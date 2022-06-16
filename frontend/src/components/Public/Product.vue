@@ -1,5 +1,8 @@
 <template>
 <!-- Open Content -->
+<!--Message for added new  product in basket-->
+    <div v-if="alert.success" class="alert alert-success text-center">{{alert.success}}</div>
+    <div v-if="alert.error" class="alert alert-warning text-center">{{alert.error}}</div>
     <section v-if="product.length" class="bg-light">
         <div class="container pb-5">
             <div class="row">
@@ -44,7 +47,7 @@
                                         <a v-else href="/Register" class="btn btn-success btn-lg">Buy</a>
                                     </div>
                                     <div class="col d-grid">
-                                        <button v-if="client_id" type="submit" @click="AddProductToBasket(p.id_produit)" class="btn btn-success btn-lg" name="submit">Add To Cart</button>
+                                        <button v-if="client_id" type="submit" @click="AddProductToBasket(product[0].id_produit)" class="btn btn-success btn-lg" name="submit">Add To Cart</button>
                                         <a  class="btn btn-success btn-lg">Add To Cart</a>
                                     </div>
                                 </div>
@@ -67,6 +70,14 @@ export default {
         return {
             id_produit: '',
             product: [],
+             basket: {
+                id_pers: localStorage.getItem('client_id'),
+                id_produit: ''
+            },
+            alert: {
+                success: '',
+                error: ''
+            }
         }
     },
     async mounted() {
