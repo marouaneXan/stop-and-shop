@@ -5,7 +5,7 @@
     <main>
         <div class="container-fluid mt-2 pt-3">
             <div class="row">
-                <div class="col-md-12 fs-3">
+                <div class="col-md-12 fs-3 mt-5">
                     Dahsboard
                 </div>
                 <div class="row mt-3">
