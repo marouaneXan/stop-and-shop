@@ -33,19 +33,21 @@
 
 <script>
 import Chart from 'chart.js/auto';
-// import axios from 'axios'
+import axios from 'axios'
 import NavbarComponent from '@/components/Admin/Layouts/Navbar.vue'
 import SidebarComponent from '@/components/Admin/Layouts/Sidebar.vue'
 export default {
     name: "StatisticComponent",
     data() {
-        return {}
+        return {
+            statistic: [],
+        }
     },
     components: {
         NavbarComponent,
         SidebarComponent
     },
-    mounted() {
+    async mounted() {
         const ctx1 = document.getElementById('myChart1').getContext('2d');
 
         const myChart1 = new Chart(ctx1, {
@@ -123,6 +125,10 @@ export default {
             }
         });
         myChart2;
+
+        // get statistic 
+        let statistic = await axios.get('http://stop-and-shop.com/Admin');
+        this.statistic = statistic.data;
     }
 
 }
