@@ -95,7 +95,7 @@ class Product extends DB
     }
 
     public function search_by_category($id_cat){
-        $sql="SELECT * from product where id_cat=?";
+        $sql="SELECT * from produit where id_category=?";
         $sql=$this->connect()->prepare($sql);
         if($sql->execute(array($id_cat)))
            return $sql->fetchAll(PDO::FETCH_ASSOC);
