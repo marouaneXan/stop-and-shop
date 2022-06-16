@@ -39,10 +39,6 @@
                                         <h6>Country</h6>
                                         <p class="text-muted">{{AdminInfos.ville}}</p>
                                     </div>
-                                    <div class="col-6 mb-3">
-                                        <h6>Password</h6>
-                                        <p class="text-muted">{{AdminInfos.password}}</p>
-                                    </div>
                                 </div>
                                 <div class="d-flex justify-content-start">
                                     <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
