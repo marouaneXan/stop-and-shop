@@ -21,7 +21,7 @@ class User extends DB
     $result = $sql->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $row) {
       if (password_verify($data['password'], $row['password']) && $data['email'] === $row['email'])
-        return $row;
+        return $row['id_pers'];
     }
     return 0;
   }
