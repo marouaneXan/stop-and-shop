@@ -8,19 +8,14 @@
                 <h5 class=" text-dark card-title text-center display-3">Contact us</h5>
                 <form class="p-4" id="contact" @click.prevent>
                     <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Email address" aria-label="Email address">
-                        <!-- <span class="error-feedback text-danger" v-if="v$.email.$error">{{v$.email.$errors[0].$message}}</span> -->
+                        <input v-model="contact.email" type="email" class="form-control" placeholder="Email address" aria-label="Email address">
                     </div>
                     <div class="mb-3">
                         <input type="text" class="form-control" placeholder="Subject"  required aria-describedby="emailHelp">
-                        <!-- <span class="error-feedback text-danger" v-if="v$.uniqId.$error">{{v$.uniqId.$errors[0].$message}}</span> -->
                     </div>
                     <div class="mb-3">
                         <textarea type="text" class="form-control" placeholder="Message" required aria-describedby="emailHelp"></textarea>
-                        <!-- <span class="error-feedback text-danger" v-if="v$.uniqId.$error">{{v$.uniqId.$errors[0].$message}}</span> -->
                     </div>
-                    <!-- <span class="error-feedback text-danger">{{error_login}}</span> -->
-                    <!-- <button type="button" @click="redirect({ val : 'SignUp'})" class="btn btn-outline-dark mb-1 w-100">Register</button> -->
                     <button type="submit" class="btn btn-outline-dark w-100 active">Send</button>
                 </form>
             </div>
@@ -35,6 +30,14 @@
 import NavbarComponent from '@/components/Public/Layouts/Navbar.vue'
 export default {
     name: 'ContactView',
+    data(){
+        return{
+            contact:{
+                email:'',
+                
+            }
+        }
+    },
     components:{
         NavbarComponent
     }

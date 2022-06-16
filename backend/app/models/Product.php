@@ -80,7 +80,6 @@ class Product extends DB
     // Function to update Product
     public function updateProduct($data, $id)
     {
-        if ($this->getProductById($id)) {
             $sql = "UPDATE produit SET 
             nom=?,
             description=?,
@@ -88,12 +87,10 @@ class Product extends DB
             image=?,
             id_category=?,
             quantite=?
-            where id_produit = ?
-            ";
+            where id_produit = ?";
             $sql = $this->connect()->prepare($sql);
             if ($sql->execute([$data['nom'], $data['description'], $data['prix'], $data['id_category'],$data['image'], $data['quantite'], $id]))
                 return 1;
             return 0;
-        }
     }
 }

@@ -53,7 +53,7 @@ export default {
                         labels: ['Products', 'Orders', 'Customers', 'Contacts'],
                         datasets: [{
                             label: '# Numbers',
-                            data: [this.statistic['number_of_products'], this.statistic['number_of_orders'], this.statistic['number_of_clients'], this.statistic['number_of_clients']],
+                            data: [this.statistic['number_of_products'], this.statistic['number_of_orders'], this.statistic['number_of_clients'], this.statistic['number_of_contacts']],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',

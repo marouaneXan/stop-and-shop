@@ -22,7 +22,7 @@
     <div class="col-md-12 fs-5 mt-3 mb-2" style="padding:0px 50px;">
         Name of Product
     </div>
-    <div class="d-flex" id="form" style="">
+    <div class="d-flex" id="form">
         <div class="mb-3" style="padding:0px 50px;">
             <input v-model="searchQuery" type="text" class="form-control" placeholder="Search" style="width:300px;">
         </div>
@@ -140,7 +140,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <button @click="passingDataUpdate(p)" class="btn" data-bs-toggle="modal" data-bs-target="#updateProduct"><i class="fa-solid fa-pen-to-square"></i></button>
                                         <!-- Model To update new product -->
                                         <div class="modal fade" id="updateProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -160,7 +159,7 @@
                                                                 <label for="Price" class="form-label">Price</label>
                                                                 <input type="text" required v-model="product.prix" class="form-control" id="Price">
                                                                 <label for="formFile" class="form-label">Image</label>
-                                                                <input type="file" v-bind="image" multiple class="form-control" @change="previewFiles" enctype='multipart/form-data'>
+                                                                <input type="file" multiple class="form-control" @change="previewFiles" enctype='multipart/form-data'>
                                                                 <label class="form-label">Select Category</label>
                                                                 <select class="form-select" v-model="product.id_category" aria-label="Default select example">
                                                                     <option disabled selected>Select Category</option>
@@ -320,7 +319,7 @@ export default {
             this.product.nom = p.nom;
             this.product.description = p.description;
             this.product.prix = p.prix;
-            this.product.image = p.image;
+            // this.product.image = p.image;
             this.product.id_category = p.id_category;
             this.product.quantite = p.quantite;
         },

@@ -1,5 +1,6 @@
 <template>
-<NavbarComponent />
+<div>
+    <NavbarComponent />
 <SidebarComponent />
 <main class="mt-5 pt-3">
     <!--Message for delete contact-->
@@ -69,6 +70,7 @@
         </div>
     </div>
 </main>
+</div>
 </template>
 
 <script>
