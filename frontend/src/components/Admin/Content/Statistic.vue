@@ -1,7 +1,8 @@
 <template>
-<NavbarComponent />
+<div>
+    <NavbarComponent />
 <SidebarComponent />
-<!-- <canvas id="myChart" width="40" height="400"></canvas> -->
+
 <main class="p-3" id="chart">
     <h1>Statistics of website</h1>
     <div class="row">
@@ -27,6 +28,7 @@
         </div>
     </div>
 </main>
+</div>
 </template>
 
 <script>
@@ -49,10 +51,10 @@ export default {
         const myChart1 = new Chart(ctx1, {
             type: 'bar',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: ['Products', 'Orders', 'Customers'],
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    label: '# Numbers',
+                    data: [12, 19, 3],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
