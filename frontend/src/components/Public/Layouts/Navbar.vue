@@ -18,9 +18,7 @@
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link :to="{ name: 'Products'}" style="text-decoration:none;">
-                            <a class="nav-link">Products</a>
-                        </router-link>
+                        <a href="/Products" class="nav-link">Products</a>
                     </li>
                     <li class="nav-item">
                         <router-link :to="{ name: 'About'}" style="text-decoration:none;">
@@ -47,7 +45,7 @@
                     <a v-if="client_id" @click="logout()" class="btn btn-outline-dark ms-2" style="text-decoration:none;">
                         <i class="fa-solid fa-right-from-bracket"></i>Logout
                     </a>
-                    <router-link v-if="client_id"  :to="{ name: 'cart'}" style="text-decoration:none;">
+                    <router-link v-if="client_id" :to="{ name: 'cart'}" style="text-decoration:none;">
                         <button class="btn ms-2">
                             <i class="fa-solid fa-cart-shopping" style="font-size:20px;"></i>
                         </button>
