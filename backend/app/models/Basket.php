@@ -30,12 +30,15 @@ class Basket extends DB
         $sql = "INSERT INTO `basket`(`id_pers`, `id_produit`, `qtte`) VALUES (?,?,?)";
         $sql = $this->connect()->prepare($sql);
         if ($sql->execute([$data['id_pers'], $data['id_produit'], $data['qtte']])) {
-            // $query = "SELECT quantite from produit where id_produit =?";
-            // $query = $this->connect()->prepare($query);
-            // if ($query->execute([$data['id_produit']])) {
-            //     $res = $query->fetch(PDO::FETCH_ASSOC);
-            //     $res['quantite']--;
-            // }
+            $query = "SELECT quantite from produit where id_produit =?";
+            $query = $this->connect()->prepare($query);
+            if ($query->execute([$data['id_produit']])) {
+                $res = $query->fetch(PDO::FETCH_ASSOC);
+                $res['quantite']--;
+                $query2="UPDATE produit SET quantite=".$res['quantite']." where id_produit =?";
+                $query2 = $this->connect()->prepare($query2);
+                $query2->execute([$data['id_produit']]);
+            }
             return 1;
         }
         return 0;
