@@ -33,4 +33,16 @@ class OrderController
       ));
     }
   }
+
+  //function to insert order after payment
+  public function InsertOrderAfterPayment($id)
+  {
+    $insertOrder = new Basket();
+    $data=[
+      'id_pers' => trim($_POST['id_pers']),
+      'id_produit' => trim($_POST['id_produit']),
+      'qtte' => trim($_POST['qtte']),
+      'status' => trim($_POST['status'])
+    ];
+  }
 }
