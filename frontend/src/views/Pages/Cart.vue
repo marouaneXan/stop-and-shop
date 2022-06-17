@@ -217,6 +217,8 @@
 </div> -->
 <div>
     <NavbarComponent />
+    <div v-if="alert.success" class="alert alert-sucess">{{alert.success}}</div>
+    <div v-if="alert.error" class="alert alert-danger">{{alert.error}}</div>
 <section v-if="basketProducts.length" class="h-100">
     <div class="container h-100 py-5">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -256,14 +258,14 @@
                                             <div class="modal-body">
                                                 <form @click.prevent>
                                                     <div class="mb-1">
-                                                        <label for="name" class="form-label">Enter your card number</label>
-                                                        <input type="number" min="1" :max=b.quantite v-model="basketProduct.qtte" class="form-control" id="Quantity">
+                                                        <label for="payment" class="form-label">Enter your card number</label>
+                                                        <input type="number" class="form-control" id="payment">
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" @click="Payment()" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
+                                                <button type="button" @click="Payment()" class="btn btn-primary" data-bs-dismiss="modal">Pay</button>
                                             </div>
                                         </div>
                                     </div>
@@ -291,12 +293,12 @@
                     </div>
                 </div>
 
-                <stripe-checkout ref="checkoutRef" mode="payment" :pk="publishableKey" :line-items="lineItems" :success-url="successURL" :cancel-url="cancelURL" @loading="v => loading = v" />
+                <!-- <stripe-checkout ref="checkoutRef" mode="payment" :pk="publishableKey" :line-items="lineItems" :success-url="successURL" :cancel-url="cancelURL" @loading="v => loading = v" />
                 <div class="card">
                     <div class="card-body">
                         <button type="button" @click="submit" class="btn btn-dark btn-block btn-lg w-100">Proceed to Pay</button>
                     </div>
-                </div>
+                </div> -->
 
             </div>
         </div>
@@ -348,6 +350,10 @@ export default {
             },
             numberProductInBasket: '',
             totalPrice: '',
+            alert:{
+                success:'',
+                error:''
+            }
             // loading: false,
 
         }
@@ -413,7 +419,6 @@ export default {
         //passing data for model
         passingDataPayment(b) {
             this.basketProduct.id_basket = b.id_basket;
-            this.basketProduct.id_pers = b.id_pers;
             this.basketProduct.id_produit = b.id_produit;
             this.basketProduct.qtte = b.qtte;
         },
@@ -422,6 +427,7 @@ export default {
             var form = new FormData();
             form.append('id_pers', this.basketProduct.id_pers);
             form.append('id_produit', this.basketProduct.id_produit);
+            console.log(this.basketProduct.id_pers);
             form.append('qtte', this.basketProduct.qtte);
             let res = await axios({
                 method: "POST",
@@ -431,10 +437,12 @@ export default {
                     "Content-Type": "multipart/form-data"
                 },
             })
-            if (res.data.message == "Product Updated successfully") {
+            if (res.data.message == "Payement successfully") {
                 this.DisplayAllProductsInBasket()
+                this.success=res.data.message
             } else {
                 this.DisplayAllProductsInBasket()
+                this.error=res.data.error
             }
         },
     }
