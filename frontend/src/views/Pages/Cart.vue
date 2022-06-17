@@ -245,7 +245,7 @@
                                 <h5 class="mb-0">${{b.prix * b.qtte}}</h5>
                             </div>
                             <div class="col-md-1 col-lg-1 col-xl-1" id="actions">
-                                <a style="color: #cecece;cursor: pointer;" @click="passingDataUpdate(b)" class="btn" data-bs-toggle="modal" data-bs-target="#updateProduct"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <!-- <a style="color: #cecece;cursor: pointer;" @click="passingDataUpdate(b)" class="btn" data-bs-toggle="modal" data-bs-target="#updateProduct"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <div class="modal fade" id="updateProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -267,7 +267,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <a @click="passingDataDelete(b)" style="color: #cecece;cursor: pointer;" data-bs-toggle="modal" data-bs-target="#delete"><i class="fas fa-trash-alt"></i></a>
                                 <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
@@ -410,28 +410,28 @@ export default {
         },
 
         //passing data for model
-        passingDataUpdate(b) {
-            this.basketProduct.id_basket = b.id_basket;
-            this.basketProduct.qtte = b.qtte;
-        },
+        // passingDataUpdate(b) {
+        //     this.basketProduct.id_basket = b.id_basket;
+        //     this.basketProduct.qtte = b.qtte;
+        // },
         //delete product
-        async UpdateQuantite() {
-            var form = new FormData();
-            form.append('qtte', this.basketProduct.qtte);
-            let res = await axios({
-                method: "POST",
-                url: 'http://stop-and-shop.com/Basket/updateQteOfProduct/' + this.basketProduct.id_basket,
-                data: form,
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                },
-            })
-            if (res.data.message == "Product Updated successfully") {
-                this.DisplayAllProductsInBasket()
-            } else {
-                this.DisplayAllProductsInBasket()
-            }
-        },
+        // async UpdateQuantite() {
+        //     var form = new FormData();
+        //     form.append('qtte', this.basketProduct.qtte);
+        //     let res = await axios({
+        //         method: "POST",
+        //         url: 'http://stop-and-shop.com/Basket/updateQteOfProduct/' + this.basketProduct.id_basket,
+        //         data: form,
+        //         headers: {
+        //             "Content-Type": "multipart/form-data"
+        //         },
+        //     })
+        //     if (res.data.message == "Product Updated successfully") {
+        //         this.DisplayAllProductsInBasket()
+        //     } else {
+        //         this.DisplayAllProductsInBasket()
+        //     }
+        // },
     }
 
 }
