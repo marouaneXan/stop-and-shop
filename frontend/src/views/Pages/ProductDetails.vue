@@ -2,6 +2,7 @@
 <div>
     <NavbarComponent />
     <ProductComponent />
+    <ProductsComponent />
     <FooterView />
 </div>
 </template>
@@ -9,6 +10,7 @@
 <script>
 import NavbarComponent from '../../components/Public/Layouts/Navbar.vue'
 import ProductComponent from '../../components/Public/Product.vue'
+import ProductsComponent from '@/components/Public/Products.vue'
 import FooterView from '@/components/Public/Layouts/Footer.vue'
 import { mapActions } from 'vuex'
 export default {
@@ -16,6 +18,7 @@ export default {
     components: {
         NavbarComponent,
         ProductComponent,
+        ProductsComponent,
         FooterView
     },
     mounted(){
