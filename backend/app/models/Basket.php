@@ -6,7 +6,7 @@ class Basket extends DB
     //
     public function get_basket_by_id($id)
     {
-        $sql = "SELECT b.id_basket,p.nom as nom_pers,p.id_produit,p.ville,p.email,pro.nom,pro.prix,pro.quantite,pro.image,c.nom_cat,b.qtte from personne p,produit pro,categories c,basket b where p.id_pers=b.id_pers and pro.id_produit=b.id_produit and pro.id_category=c.id_cat and b.id_pers=?";
+        $sql = "SELECT b.id_basket,p.nom as nom_pers,p.ville,p.email,pro.id_produit,pro.nom,pro.prix,pro.quantite,pro.image,c.nom_cat,b.qtte from personne p,produit pro,categories c,basket b where p.id_pers=b.id_pers and pro.id_produit=b.id_produit and pro.id_category=c.id_cat and b.id_pers=?";
         $sql = $this->connect()->prepare($sql);
         if ($sql->execute(array($id))) {
             return $sql->fetchAll(PDO::FETCH_ASSOC);

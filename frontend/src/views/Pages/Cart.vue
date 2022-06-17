@@ -412,29 +412,30 @@ export default {
 
         //passing data for model
         passingDataPayment(b) {
-            // this.basketProduct.id_basket = b.id_basket;
-            // this.basketProduct.id_pers = b.id_pers;
+            this.basketProduct.id_basket = b.id_basket;
+            this.basketProduct.id_pers = b.id_pers;
             this.basketProduct.id_produit = b.id_produit;
-            console.log(this.basketProduct.id_produit);
-            // this.basketProduct.qtte = b.qtte;
+            this.basketProduct.qtte = b.qtte;
         },
         //Payment
-        Payment() {
-            // var form = new FormData();
-            // form.append('qtte', this.basketProduct.qtte);
-            // let res = await axios({
-            //     method: "POST",
-            //     url: 'http://stop-and-shop.com/Basket/updateQteOfProduct/' + this.basketProduct.id_basket,
-            //     data: form,
-            //     headers: {
-            //         "Content-Type": "multipart/form-data"
-            //     },
-            // })
-            // if (res.data.message == "Product Updated successfully") {
-            //     this.DisplayAllProductsInBasket()
-            // } else {
-            //     this.DisplayAllProductsInBasket()
-            // }
+       async  Payment() {
+            var form = new FormData();
+            form.append('id_pers', this.basketProduct.id_pers);
+            form.append('id_produit', this.basketProduct.id_produit);
+            form.append('qtte', this.basketProduct.qtte);
+            let res = await axios({
+                method: "POST",
+                url: 'http://stop-and-shop.com/order/InsertOrderAfterPayment/' + this.basketProduct.id_basket,
+                data: form,
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+            })
+            if (res.data.message == "Product Updated successfully") {
+                this.DisplayAllProductsInBasket()
+            } else {
+                this.DisplayAllProductsInBasket()
+            }
         },
     }
 
