@@ -12,7 +12,7 @@
             <div class="col-md-6">
                 <ul class="list-inline shop-top-menu pb-3 pt-1">
                     <li class="list-inline-item">
-                        <button v-for="c in categories" :key="c.id_cat" class="btn btn-outline-dark me-2">{{c.nom_cat}}</button>
+                        <button @click="getProductByIdCat(c.id_cat)" v-for="c in categories" :key="c.id_cat" class="btn btn-outline-dark me-2">{{c.nom_cat}}</button>
                     </li>
                 </ul>
             </div>
@@ -45,7 +45,7 @@
             <div class="container">
                 <div class="row">
                     <div v-for="p in resultQuery" :key="p.id_produit" class="col-md-6 col-lg-4 col-xl-3">
-                        <div id="product-1" class="single-product">
+                        <div  id="product-1" class="single-product">
                             <div class="part-1">
                                 {{p.id_produit}}
                                 <img :src="getImgUrl(p.image)" alt="" style="width:100%;height:100%;">
@@ -84,6 +84,7 @@ export default {
     data() {
         return {
             searchQuery: '',
+            selected_category : 1,
             products: [],
             basket: {
                 id_pers: localStorage.getItem('client_id'),
@@ -144,6 +145,11 @@ export default {
                 this.alert.error = res.data.error
             }
         },
+        async getProductByIdCat(p){
+            let res= await axios('http://stop-and-shop.com/Product/search_by_category/'+p)
+            // console.log(res.data);
+            this.products = res.data
+        }
     }
 }
 </script>
