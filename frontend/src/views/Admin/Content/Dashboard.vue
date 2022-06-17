@@ -104,6 +104,11 @@ export default {
                 val: 'home'
             });
         }
+        if (!client){
+            this.redirect({
+                val: 'home'
+            });
+        }
     },
     methods:{
         ...mapActions(['redirect'])
