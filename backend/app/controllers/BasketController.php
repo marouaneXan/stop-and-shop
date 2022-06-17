@@ -65,20 +65,20 @@ class BasketController
 
 
     // Update quantite of product in basket
-    public function updateQteOfProduct($id)
-    {
-        $update = new Basket();
-        $data = [
-            'qtte'=>trim($_POST['qtte']),
-        ];
-        if ($update->updateQteOfProduct($data, $id)) {
-            echo json_encode(array(
-                'message' => 'Quantite Updated successfully'
-            ));
-        } else {
-            echo json_encode(array(
-                'error' => 'Error on updating quantite'
-            ));
-        }
-    }
+    // public function updateQteOfProduct($id)
+    // {
+    //     $update = new Basket();
+    //     $data = [
+    //         'qtte'=>trim($_POST['qtte']),
+    //     ];
+    //     if ($update->updateQteOfProduct($data, $id)) {
+    //         echo json_encode(array(
+    //             'message' => 'Quantite Updated successfully'
+    //         ));
+    //     } else {
+    //         echo json_encode(array(
+    //             'error' => 'Error on updating quantite'
+    //         ));
+    //     }
+    // }
 }

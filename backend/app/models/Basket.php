@@ -14,11 +14,11 @@ class Basket extends DB
         return 'empty';
     }
     //
-    public function ProductAlreadyExist($id_produit,$id_pers)
+    public function ProductAlreadyExist($id_produit, $id_pers)
     {
         $sql = "SELECT * from basket where id_produit=?and id_pers=?";
         $sql = $this->connect()->prepare($sql);
-        if ($sql->execute(array($id_produit,$id_pers))) {
+        if ($sql->execute(array($id_produit, $id_pers))) {
             if ($sql->rowCount() > 0)
                 return 1;
         }
@@ -35,7 +35,7 @@ class Basket extends DB
             if ($query->execute([$data['id_produit']])) {
                 $res = $query->fetch(PDO::FETCH_ASSOC);
                 $res['quantite']--;
-                $query2="UPDATE produit SET quantite=".$res['quantite']." where id_produit =?";
+                $query2 = "UPDATE produit SET quantite=" . $res['quantite'] . " where id_produit =?";
                 $query2 = $this->connect()->prepare($query2);
                 $query2->execute([$data['id_produit']]);
             }
@@ -48,21 +48,29 @@ class Basket extends DB
     public function DeleteProductFromBasket($id)
     {
         $sql = "DELETE FROM basket WHERE id_basket=?";
+        $select = "SELECT id_produit from basket where id_basket = ?";
         $sql = $this->connect()->prepare($sql);
-        if ($sql->execute(array($id)))
-            return 1;
-        return 0;
+        $select = $this->connect()->prepare($select);
+        $select->execute(array($id));
+        $res = $select->fetch(PDO::FETCH_ASSOC);
+        if ($sql->execute([$id]) && $res) {
+            $query = "UPDATE produit SET quantite=quantite+1 where id_produit =?";
+            $query = $this->connect()->prepare($query);
+            $query->execute([$res['id_produit']]);
+            return true;
+        }
+        return false;
     }
 
     // Function to update status of order
-    public function updateQteOfProduct($data, $id)
-    {
-        $sql = "UPDATE basket SET qtte=? where id_basket = ?";
-        $sql = $this->connect()->prepare($sql);
-        if ($sql->execute([$data['qtte'], $id]))
-            return 1;
-        return 0;
-    }
+    // public function updateQteOfProduct($data, $id)
+    // {
+    //     $sql = "UPDATE basket SET qtte=? where id_basket = ?";
+    //     $sql = $this->connect()->prepare($sql);
+    //     if ($sql->execute([$data['qtte'], $id]))
+    //         return 1;
+    //     return 0;
+    // }
 
     //get number of products in basket
     public function getNumberOfProductInBasketById($id_pers)
