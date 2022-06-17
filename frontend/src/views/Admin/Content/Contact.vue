@@ -106,6 +106,11 @@ export default {
                 val: 'home'
             });
         }
+        if (!client){
+            this.redirect({
+                val: 'home'
+            });
+        }
     },
     computed: {
         resultQuery() {
