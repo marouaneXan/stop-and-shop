@@ -34,7 +34,6 @@
                                         <th scope="col">Price product</th>
                                         <th scope="col">Image</th>
                                         <th scope="col">Category</th>
-                                        <th scope="col">Price total</th>
                                         <th scope="col">Command Quantite</th>
                                         <th scope="col">Done at</th>
                                         <th scope="col">Status</th>
@@ -51,7 +50,6 @@
                                         <td>{{o.prix}}</td>
                                         <td><img id="image_produit" :src="getImgUrl(o.image)" alt="..."></td>
                                         <td>{{o.nom_cat}}</td>
-                                        <td>{{o.price_total}}</td>
                                         <td>{{o.qtte}}</td>
                                         <td>{{o.done_at}}</td>
                                         <td>
