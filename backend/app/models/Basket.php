@@ -75,7 +75,7 @@ class Basket extends DB
     // Function to add order
     public function addOrder($data)
     {
-        $sql = "insert into orders(id_pers,id_produit,qtte,status) values (?,?,?,?)";
+        $sql = "insert into orders(id_pers,id_produit,qtte) values (?,?,?)";
         $sql = $this->connect()->prepare($sql);
         if ($sql->execute([$data['id_pers'],$data['id_produit'],$data['qtte'],$data['status']]))
            return 1;

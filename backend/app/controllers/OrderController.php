@@ -42,7 +42,7 @@ class OrderController
       'id_pers' => trim($_POST['id_pers']),
       'id_produit' => trim($_POST['id_produit']),
       'qtte' => trim($_POST['qtte']),
-      'status' => trim($_POST['status'])
+      // 'status' => trim($_POST['status'])
     ];
     if($basket->addOrder($data)){
       $basket->DeleteProductFromBasketAfterPayment($id);
