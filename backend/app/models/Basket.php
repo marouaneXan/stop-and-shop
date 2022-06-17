@@ -77,7 +77,7 @@ class Basket extends DB
     {
         $sql = "insert into orders(id_pers,id_produit,qtte) values (?,?,?)";
         $sql = $this->connect()->prepare($sql);
-        if ($sql->execute([$data['id_pers'],$data['id_produit'],$data['qtte'],$data['status']]))
+        if ($sql->execute([$data['id_pers'],$data['id_produit'],$data['qtte']]))
            return 1;
         return 0;
     }
