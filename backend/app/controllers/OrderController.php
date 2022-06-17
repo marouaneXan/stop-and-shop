@@ -47,7 +47,7 @@ class OrderController
     if($basket->addOrder($data)){
       $basket->DeleteProductFromBasketAfterPayment($id);
       echo json_encode(array(
-        'message'=>'Payement succefully'
+        'message'=>'Payement successfully'
       ));
     }else{
       echo json_encode(array(
