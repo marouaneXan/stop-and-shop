@@ -62,15 +62,25 @@ class Basket extends DB
         return false;
     }
 
-    // Function to update status of order
-    // public function updateQteOfProduct($data, $id)
-    // {
-    //     $sql = "UPDATE basket SET qtte=? where id_basket = ?";
-    //     $sql = $this->connect()->prepare($sql);
-    //     if ($sql->execute([$data['qtte'], $id]))
-    //         return 1;
-    //     return 0;
-    // }
+    //delete contact
+    public function DeleteProductFromBasketAfterPayment($id)
+    {
+        $sql = "DELETE FROM basket WHERE id_basket=?";
+        $sql = $this->connect()->prepare($sql);
+        if($sql->execute([$id]))
+           return 1;
+        return 0;
+    }
+
+    // Function to add order
+    public function addOrder($data)
+    {
+        $sql = "insert into orders(id_pers,id_produit,qtte,status) values (?,?,?,?)";
+        $sql = $this->connect()->prepare($sql);
+        if ($sql->execute([$data['id_pers'],$data['id_produit'],$data['qtte'],$data['status']]))
+           return 1;
+        return 0;
+    }
 
     //get number of products in basket
     public function getNumberOfProductInBasketById($id_pers)
