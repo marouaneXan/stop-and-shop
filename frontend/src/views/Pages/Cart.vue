@@ -343,6 +343,7 @@ export default {
             basketProduct: {
                 id_pers: localStorage.getItem('client_id'),
                 id_basket: '',
+                id_produit: '',
                 qtte: ''
             },
             numberProductInBasket: '',
@@ -411,8 +412,11 @@ export default {
 
         //passing data for model
         passingDataPayment(b) {
-            this.basketProduct.id_basket = b.id_basket;
-            console.log(this.basketProduct.id_basket)
+            // this.basketProduct.id_basket = b.id_basket;
+            // this.basketProduct.id_pers = b.id_pers;
+            this.basketProduct.id_produit = b.id_produit;
+            console.log(this.basketProduct.id_produit);
+            // this.basketProduct.qtte = b.qtte;
         },
         //Payment
         Payment() {
