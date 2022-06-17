@@ -245,29 +245,29 @@
                                 <h5 class="mb-0">${{b.prix * b.qtte}}</h5>
                             </div>
                             <div class="col-md-1 col-lg-1 col-xl-1" id="actions">
-                                <!-- <a style="color: #cecece;cursor: pointer;" @click="passingDataUpdate(b)" class="btn" data-bs-toggle="modal" data-bs-target="#updateProduct"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <div class="modal fade" id="updateProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <a style="color: #cecece;cursor: pointer;" @click="passingDataPayment(b)" class="btn" data-bs-toggle="modal" data-bs-target="#updateProduct"><i class="fa-solid fa-credit-card"></i></a>
+                                 <div class="modal fade" id="updateProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Update Quantite</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Payment</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <form @click.prevent>
                                                     <div class="mb-1">
-                                                        <label for="name" class="form-label">Quantite</label>
+                                                        <label for="name" class="form-label">Enter your card number</label>
                                                         <input type="number" min="1" :max=b.quantite v-model="basketProduct.qtte" class="form-control" id="Quantity">
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" @click="UpdateQuantite()" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
+                                                <button type="button" @click="Payment()" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
                                             </div>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
                                 <a @click="passingDataDelete(b)" style="color: #cecece;cursor: pointer;" data-bs-toggle="modal" data-bs-target="#delete"><i class="fas fa-trash-alt"></i></a>
                                 <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
@@ -302,7 +302,7 @@
         </div>
     </div>
 </section>
-<div v-else class="py-6 py-lg-12" style="margin-top:120px;">
+<div v-else class="py-6 py-lg-12" style="margin-top:60px;">
     <div class="container mb-5">
         <div class="row">
             <div class="offset-lg-3 col-lg-6 col-md-12 col-12 text-center">
@@ -410,28 +410,28 @@ export default {
         },
 
         //passing data for model
-        // passingDataUpdate(b) {
-        //     this.basketProduct.id_basket = b.id_basket;
-        //     this.basketProduct.qtte = b.qtte;
-        // },
-        //delete product
-        // async UpdateQuantite() {
-        //     var form = new FormData();
-        //     form.append('qtte', this.basketProduct.qtte);
-        //     let res = await axios({
-        //         method: "POST",
-        //         url: 'http://stop-and-shop.com/Basket/updateQteOfProduct/' + this.basketProduct.id_basket,
-        //         data: form,
-        //         headers: {
-        //             "Content-Type": "multipart/form-data"
-        //         },
-        //     })
-        //     if (res.data.message == "Product Updated successfully") {
-        //         this.DisplayAllProductsInBasket()
-        //     } else {
-        //         this.DisplayAllProductsInBasket()
-        //     }
-        // },
+        passingDataPayment(b) {
+            this.basketProduct.id_basket = b.id_basket;
+            console.log(this.basketProduct.id_basket)
+        },
+        //Payment
+        Payment() {
+            // var form = new FormData();
+            // form.append('qtte', this.basketProduct.qtte);
+            // let res = await axios({
+            //     method: "POST",
+            //     url: 'http://stop-and-shop.com/Basket/updateQteOfProduct/' + this.basketProduct.id_basket,
+            //     data: form,
+            //     headers: {
+            //         "Content-Type": "multipart/form-data"
+            //     },
+            // })
+            // if (res.data.message == "Product Updated successfully") {
+            //     this.DisplayAllProductsInBasket()
+            // } else {
+            //     this.DisplayAllProductsInBasket()
+            // }
+        },
     }
 
 }
