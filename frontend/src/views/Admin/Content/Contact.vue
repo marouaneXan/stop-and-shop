@@ -106,7 +106,7 @@ export default {
                 val: 'home'
             });
         }
-        if (!client){
+        if (client){
             this.redirect({
                 val: 'home'
             });
