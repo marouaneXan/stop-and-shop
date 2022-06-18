@@ -5,12 +5,12 @@
     <section v-if="orders.length" class="gradient-custom-2">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
-                <div  v-for="o in orders" :key="o.id_order" class="col-md-10 col-lg-8 col-xl-6">
+                <div v-for="o in orders" :key="o.id_order" class="col-md-10 col-lg-8 col-xl-6">
                     <div class="card card-stepper" style="border-radius: 16px;">
                         <div class="card-header p-4">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <p class="text-muted mb-2"> Order ID <span class="fw-bold text-body">{{id_order}}</span></p>
+                                    <p class="text-muted mb-2"> Order ID <span class="fw-bold text-body">{{o.id_order}}</span></p>
                                     <p class="text-muted mb-0"> Place On <span class="fw-bold text-body">{{o.done_at}}</span> </p>
                                 </div>
                             </div>
@@ -27,11 +27,17 @@
                                     <img id="order-image" class="align-self-center img-fluid" :src="require(`../../assets/uploads/${o.image}`)" width="250">
                                 </div>
                             </div>
-                            <ul id="progressbar-1" class="mx-0 mt-0 mb-5 px-0 pt-0 pb-4">
-                                <li class="step0 active" id="step1"><span style="margin-left: 22px; margin-top: 12px;">PLACED</span></li>
-                                <li class="step0 active text-center" id="step2"><span>SHIPPED</span></li>
-                                <li class="step0 text-muted text-end" id="step3"><span style="margin-right: 22px;">DELIVERED</span></li>
-                            </ul>
+                            <div class="progress">
+                                <div class="text-center" :class="(o.status=='In progress...' || o.status=='Delivery' || o.status=='Confirmed') ? 'progress-bar bg-success':''" style="width: 50%">
+                                    In progress...
+                                </div>
+                                <div class="text-center" :class="(o.status=='Delivery'  || o.status=='Confirmed') ? 'progress-bar bg-success':''" style="width: 50%">
+                                    Delivery
+                                </div>
+                                <div class="text-center" :class="(o.status=='Confirmed'  ) ? 'progress-bar bg-success':''" style="width: 50%">
+                                    Confirmed<p v-if="o.status=='Confirmed'">Confirmed 100%</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -152,11 +158,6 @@ export default {
 #progressbar-1 li:nth-child(3):after {
     left: 25%;
     width: 50%;
-}
-
-#progressbar-1 li.active:before,
-#progressbar-1 li.active:after {
-    background: #1266f1;
 }
 
 .card-stepper {
