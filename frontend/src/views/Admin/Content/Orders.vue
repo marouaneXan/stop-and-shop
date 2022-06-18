@@ -41,8 +41,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="o in resultQuery" :key="o.id_order">
-                                        <td>#</td>
+                                    <tr v-for="(o,i) in resultQuery" :key="i.id_order">
+                                        <td>{{i++}}</td>
                                         <td>{{o.nom_pers}}</td>
                                         <td>{{o.ville}}</td>
                                         <td>{{o.email}}</td>
