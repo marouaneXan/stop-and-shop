@@ -15,7 +15,7 @@ class Product extends DB
     //Function to display all product
     public function get_all_products()
     {
-        $sql = "SELECT p.id_produit,p.nom,p.description,p.prix,p.image,c.nom_cat,p.quantite FROM produit p,categories c where p.id_category=c.id_cat";
+        $sql = "SELECT p.id_produit,p.nom,p.description,p.prix,p.image,c.nom_cat,p.quantite FROM produit p,categories c  where p.id_category=c.id_cat ORDER BY p.id_produit Desc";
         $sql = $this->connect()->prepare($sql);
         if ($sql->execute())
             return $sql->fetchAll(PDO::FETCH_ASSOC);
