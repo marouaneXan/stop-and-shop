@@ -46,7 +46,7 @@
                                 <label for="Description" class="form-label">Description</label>
                                 <input type="text" v-model="product.description" class="form-control" id="Description" required>
                                 <label for="Price" class="form-label">Price</label>
-                                <input type="text" v-model="product.prix" class="form-control" id="Price" required>
+                                <input type="number" v-model="product.prix" class="form-control" id="Price" required>
                                 <label for="formFile" class="form-label">Image</label>
                                 <input type="file" multiple class="form-control" @change="previewFiles" id="formFile" enctype='multipart/form-data'>
                                 <label class="form-label">Select Category</label>
