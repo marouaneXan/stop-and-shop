@@ -36,8 +36,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="c in resultQuery" :key="c.id_pers">
-                                        <td>#</td>
+                                    <tr v-for="(c,i) in resultQuery" :key="i.id_pers">
+                                        <td>{{i++}}</td>
                                         <td>{{c.nom}}</td>
                                         <td>{{c.prenom}}</td>
                                         <td>{{c.date_naissance}}</td>

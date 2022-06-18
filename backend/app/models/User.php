@@ -52,7 +52,7 @@ class User extends DB
   //Function to display all product
   public function get_all_customers()
   {
-    $sql = "SELECT * from personne where role like 0";
+    $sql = "SELECT * from personne where role like 0 ORDER BY id_pers DESC";
     $sql = $this->connect()->prepare($sql);
     if ($sql->execute())
       return $sql->fetchAll(PDO::FETCH_ASSOC);
