@@ -9,7 +9,7 @@ import ProductDetails from '../views/Pages/ProductDetails.vue'
 import Products from '../components/Public/Products.vue'
 import ErrorPage from '../views/Pages/ErrorPage.vue'
 import Cart from '../views/Pages/Cart.vue'
-import OrdersClient from '../views/Pages/Orders.vue'
+import Orders from '../views/Pages/Orders.vue'
 
 //Route of admin page
 import dashboard from '../views/Admin/Content/Dashboard.vue'
@@ -53,9 +53,9 @@ const routes=[
         component: About
     },
     {
-        path: '/Orders',
+        path: '/orders',
         name: 'Orders',
-        component: OrdersClient
+        component: Orders
     },
     {
         path: '/:catchAll(.*)',
