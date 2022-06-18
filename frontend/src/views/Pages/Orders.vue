@@ -2,7 +2,7 @@
 <div>
     <NavbarComponent />
 
-    <section class="vh-100 gradient-custom-2">
+    <section class="gradient-custom-2">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-md-10 col-lg-8 col-xl-6">
@@ -27,7 +27,7 @@
                                     <p class="text-muted">Tracking Status on: <span class="text-body">11:30pm, Today</span></p>
                                 </div>
                                 <div>
-                                    <img class="align-self-center img-fluid" src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/6.webp" width="250">
+                                    <img id="order-image" class="align-self-center img-fluid" src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/6.webp" width="250">
                                 </div>
                             </div>
                             <ul id="progressbar-1" class="mx-0 mt-0 mb-5 px-0 pt-0 pb-4">
@@ -35,18 +35,6 @@
                                 <li class="step0 active text-center" id="step2"><span>SHIPPED</span></li>
                                 <li class="step0 text-muted text-end" id="step3"><span style="margin-right: 22px;">DELIVERED</span></li>
                             </ul>
-                        </div>
-                        <div class="card-footer p-4">
-                            <div class="d-flex justify-content-between">
-                                <h5 class="fw-normal mb-0"><a href="#!">Track</a></h5>
-                                <div class="border-start h-100"></div>
-                                <h5 class="fw-normal mb-0"><a href="#!">Cancel</a></h5>
-                                <div class="border-start h-100"></div>
-                                <h5 class="fw-normal mb-0"><a href="#!">Pre-pay</a></h5>
-                                <div class="border-start h-100"></div>
-                                <h5 class="fw-normal mb-0"><a href="#!" class="text-muted"><i class="fas fa-ellipsis-v"></i></a>
-                                </h5>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -70,16 +58,6 @@ export default {
 </script>
 
 <style>
-.gradient-custom-2 {
-/* fallback for old browsers */
-background: #a1c4fd;
-
-/* Chrome 10-25, Safari 5.1-6 */
-background: -webkit-linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1));
-
-/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-background: linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1))
-}
 
 #progressbar-1 {
 color: #455A64;
@@ -135,7 +113,9 @@ right: 0%;
 top: 15px;
 z-index: -1;
 }
-
+#order-image{
+    height: 150px;
+}
 #progressbar-1 li:nth-child(2):after {
 left: 50%
 }
