@@ -18,6 +18,18 @@ class OrderController
     }
   }
 
+  //get orders by id user
+  public function readOrdersByIdClient($id)
+  {
+      $single_product = new Basket();
+      if ($single_product->get_basket_by_id($id)) {
+          echo json_encode($single_product->get_basket_by_id($id));
+      } else {
+          echo json_encode(array(
+              'error' => 'empty'
+          ));
+      }
+  }
   // Update status order
   public function updateStatusOrder($id)
   {

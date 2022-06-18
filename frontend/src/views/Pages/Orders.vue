@@ -45,6 +45,7 @@
 <script>
 import NavbarComponent from '../../components/Public/Layouts/Navbar.vue'
 import FooterView from '@/components/Public/Layouts/Footer.vue'
+import axios from 'axios'
 export default {
     name: 'OrdersView',
     data() {
@@ -76,13 +77,6 @@ export default {
         async fetchOrders() {
             let res = await axios('http://stop-and-shop.com/Basket/readBasketProductById/' + this.basketProduct.id_pers)
             this.orders = res.data
-            if (this.basketProducts.length) {
-                let sum = 0
-                this.basketProducts.forEach(item => {
-                    sum += (item.prix * item.qtte)
-                })
-                this.totalPrice = sum
-            }
         },
     }
 }
