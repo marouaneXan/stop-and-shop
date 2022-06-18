@@ -324,9 +324,6 @@
 </template>
 
 <script>
-// import {
-//     StripeCheckout
-// } from '@vue-stripe/vue-stripe';
 import NavbarComponent from '@/components/Public/Layouts/Navbar.vue'
 import FooterView from '@/components/Public/Layouts/Footer.vue'
 import axios from 'axios'
@@ -338,10 +335,8 @@ export default {
     components: {
         NavbarComponent,
         FooterView,
-        // StripeCheckout
     },
     data() {
-        // this.publishableKey = 'pk_test_51LB6MQIcWRr970L65mrEuVsSNKmLhkfFV8SYAiDKa55UuxsR6kSiRH6jfeSQV67NyQ3qhTSPmw70jf1Ca4bRFXhG00cHcY1HWc'
         return {
             basketProducts: [],
             basketProduct: {
@@ -356,14 +351,12 @@ export default {
                 success: '',
                 error: ''
             }
-            // loading: false,
 
         }
     },
     computed: {},
     mounted() {
         this.DisplayAllProductsInBasket()
-        // this.getSession()
 
         //Redirect user to login page
         let client = localStorage.getItem('client_id')
@@ -374,7 +367,7 @@ export default {
         }
     },
     async created() {
-        let res = await axios('http://stop-and-shop.com/Basket/index/46')
+        let res = await axios('http://stop-and-shop.com/Basket/index/'+ this.basketProduct.id_pers)
         this.numberProductInBasket = res.data
     },
     methods: {

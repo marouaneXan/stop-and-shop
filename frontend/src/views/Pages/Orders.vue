@@ -50,6 +50,12 @@ export default {
     data() {
         return {
             orders: [],
+            order: {
+                id_order: '',
+                id_pers: localStorage.getItem('client_id'),
+                id_produit: '',
+                qtte: '',
+            },
         }
     },
     components: {
@@ -65,6 +71,20 @@ export default {
                 val: 'home'
             });
         }
+    },
+    methods: {
+        async fetchOrders() {
+            let res = await axios('http://stop-and-shop.com/Basket/readBasketProductById/' + this.basketProduct.id_pers)
+            this.basketProducts = res.data
+            // console.log(this.basketProducts)
+            if (this.basketProducts.length) {
+                let sum = 0
+                this.basketProducts.forEach(item => {
+                    sum += (item.prix * item.qtte)
+                })
+                this.totalPrice = sum
+            }
+        },
     }
 }
 </script>
