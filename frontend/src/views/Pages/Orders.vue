@@ -2,29 +2,29 @@
 <div>
     <NavbarComponent />
 
-    <section class="gradient-custom-2">
+    <section v-if="orders.length" class="gradient-custom-2">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-md-10 col-lg-8 col-xl-6">
+                <div  v-for="o in orders" :key="o.id_order" class="col-md-10 col-lg-8 col-xl-6">
                     <div class="card card-stepper" style="border-radius: 16px;">
                         <div class="card-header p-4">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <p class="text-muted mb-2"> Order ID <span class="fw-bold text-body">1222528743</span></p>
-                                    <p class="text-muted mb-0"> Place On <span class="fw-bold text-body">12,March 2019</span> </p>
+                                    <p class="text-muted mb-2"> Order ID <span class="fw-bold text-body">{{id_order}}</span></p>
+                                    <p class="text-muted mb-0"> Place On <span class="fw-bold text-body">{{o.done_at}}</span> </p>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body p-4">
                             <div class="d-flex flex-row mb-4 pb-2">
                                 <div class="flex-fill">
-                                    <h5 class="bold">Headphones Bose 35 II</h5>
-                                    <p class="text-muted"> Qt: 1 item</p>
-                                    <h4 class="mb-3"> $ 299 <span class="small text-muted"> via (COD) </span></h4>
-                                    <p class="text-muted">Tracking Status on: <span class="text-body">11:30pm, Today</span></p>
+                                    <h5 class="bold">{{o.ville}}</h5>
+                                    <p class="text-muted"> Qt: {{o.qtte}} item</p>
+                                    <h4 class="mb-3"> $ {{o.prix}} <span class="small text-muted"> via (COD) </span></h4>
+                                    <p class="text-muted">Tracking Status on: <span class="text-body">{{o.status}}</span></p>
                                 </div>
                                 <div>
-                                    <img id="order-image" class="align-self-center img-fluid" src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/6.webp" width="250">
+                                    <img id="order-image" class="align-self-center img-fluid" :src="require(`../../assets/uploads/${o.image}`)" width="250">
                                 </div>
                             </div>
                             <ul id="progressbar-1" class="mx-0 mt-0 mb-5 px-0 pt-0 pb-4">
@@ -52,10 +52,7 @@ export default {
         return {
             orders: [],
             order: {
-                id_order: '',
                 id_pers: localStorage.getItem('client_id'),
-                id_produit: '',
-                qtte: '',
             },
         }
     },
@@ -75,8 +72,9 @@ export default {
     },
     methods: {
         async fetchOrders() {
-            let res = await axios('http://stop-and-shop.com/Basket/readBasketProductById/' + this.basketProduct.id_pers)
+            let res = await axios('http://stop-and-shop.com/Order/readOrdersByIdClient/' + this.order.id_pers)
             this.orders = res.data
+            console.log(this.orders);
         },
     }
 }
