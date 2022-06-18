@@ -44,12 +44,12 @@
                                 </div>
                                 <div class="row pb-3">
                                     <div class="col d-grid">
-                                        <button v-if="basket.id_pers" type="button" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
-                                        <a v-else href="/Register" class="btn btn-success btn-lg">Buy</a>
+                                        <button v-if="basket.id_pers" type="button" class="btn btn-outline-dark mb-1 btn-lg" name="submit" value="buy">Buy</button>
+                                        <a v-else href="/Register" class="btn btn-outline-dark mb-1 btn-lg">Buy</a>
                                     </div>
                                     <div class="col d-grid">
-                                        <button v-if="basket.id_pers" type="button" @click="AddProductToBasket(product[0].id_produit)" class="btn btn-success btn-lg" name="submit">Add To Cart</button>
-                                        <a v-else href="/Register"  class="btn btn-success btn-lg">Add To Cart</a>
+                                        <button v-if="basket.id_pers" type="button" @click="AddProductToBasket(product[0].id_produit)" class="btn btn-outline-dark mb-1 btn-lg" name="submit">Add To Cart</button>
+                                        <a v-else href="/Register"  class="btn btn-outline-dark mb-1 btn-lg">Add To Cart</a>
                                     </div>
                                 </div>
                             </form>

@@ -30,7 +30,13 @@
                             <a class="nav-link">Contact</a>
                         </router-link>
                     </li>
+                    <li class="nav-item">
+                        <router-link v-if="client_id" :to="{ name: 'Contact'}" style="text-decoration:none;">
+                            <a class="nav-link">Orders</a>
+                        </router-link>
+                    </li>
                 </ul>
+
                 <div class="btn">
                     <router-link v-if="!client_id" :to="{ name: 'Login'}" style="text-decoration:none;">
                         <a class="btn btn-outline-dark ms-2">
@@ -50,6 +56,7 @@
                             <i class="fa-solid fa-cart-shopping" style="font-size:20px;"></i>
                         </button>
                     </router-link>
+                    
                 </div>
             </div>
         </div>

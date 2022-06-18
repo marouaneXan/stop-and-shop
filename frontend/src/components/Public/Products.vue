@@ -41,17 +41,16 @@
         <!--Message for added new  product in basket-->
         <div v-if="alert.success" class="alert alert-success text-center">{{alert.success}}</div>
         <div v-if="alert.error" class="alert alert-warning text-center">{{alert.error}}</div>
-        <section class="section-products">
+        <section  class="section-products">
             <div class="container">
-                <div class="row">
+                <div class="row" >
                     <div v-for="p in resultQuery" :key="p.id_produit" class="col-md-6 col-lg-4 col-xl-3">
-                        <div v-if="p.quantite!=0"  id="product-1" class="single-product">
+                        <div v-if="p.quantite!=0" id="product-1" class="single-product">
                             <div class="part-1">
                                 <img :src="getImgUrl(p.image)" alt="" style="width:100%;height:100%;">
                                 <ul>
                                     <li v-if="basket.id_pers"><a @click="AddProductToBasket(p.id_produit)"><i class="fas fa-shopping-cart"></i></a></li>
                                     <li v-else><a href="/Register"><i class="fas fa-shopping-cart"></i></a></li>
-                                    <li><a><i class="fas fa-heart"></i></a></li>
                                     <li>
                                         <router-link :to="{ name: 'ProductDetails',params:{id_produit:p.id_produit}}"><i class="fas fa-expand"></i></router-link>
                                     </li>
