@@ -4,8 +4,8 @@
 
     <section v-if="orders.length" class="gradient-custom-2">
         <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div v-for="o in orders" :key="o.id_order" class="col-md-10 col-lg-8 col-xl-6">
+            <div class="row h-100">
+                <div v-for="o in orders" :key="o.id_order" class="col-md-10 mb-2 col-lg-8 col-xl-6">
                     <div class="card card-stepper" style="border-radius: 16px;">
                         <div class="card-header p-4">
                             <div class="d-flex justify-content-between align-items-center">
