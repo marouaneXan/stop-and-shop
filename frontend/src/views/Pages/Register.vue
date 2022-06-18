@@ -7,7 +7,7 @@
 </div>
 <h1 class="text-center text-dark mt-5">Register</h1>
 <div class="container d-flex justify-content-center mt-2">
-    <form class="border shadow p-4 rounded" style="width:490px;" @click.prevent>
+    <form class="border shadow p-4 rounded" style="width:490px;">
         <div class="row mb-3">
             <div class="col">
                 <input type="text" class="form-control" v-model="client.nom" placeholder="First name" aria-label="First name">
@@ -117,6 +117,7 @@ export default {
     methods: {
         ...mapActions(['redirect']),
         async register() {
+            event.preventDefault()
             this.v$.$validate();
             if (!this.v$.$error) {
                 var form = new FormData();
