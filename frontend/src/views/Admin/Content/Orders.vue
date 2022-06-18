@@ -57,7 +57,7 @@
                                             <span v-if="o.status=='Delivery'" class="badge bg-info">Delivery</span>
                                             <span v-if="o.status=='Confirmed'" class="badge bg-success">Confirmed</span>
                                         </td>
-                                        <td class="action_btn">
+                                        <td id="action_btn">
                                             <button @click="passingDataUpdate(o)" class="btn" data-bs-toggle="modal" data-bs-target="#updateProduct"><i class="fa-solid fa-pen-to-square"></i></button>
                                             <!-- Model To update new product -->
                                             <div class="modal fade" id="updateProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -214,5 +214,8 @@ export default {
 #image_produit {
     width: 60px;
     /* height: 36px; */
+}
+#action_btn{
+    height: 90px;
 }
 </style>

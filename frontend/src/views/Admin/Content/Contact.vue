@@ -34,8 +34,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="c in resultQuery" :key="c.id">
-                                        <td>#</td>
+                                    <tr v-for="(c,i) in resultQuery" :key="i.id">
+                                        <td>{{i++}}</td>
                                         <td>{{c.email}}</td>
                                         <td>{{c.subject}}</td>
                                         <td>{{c.message}}</td>

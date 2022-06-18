@@ -14,7 +14,7 @@ class Contact extends DB
   // Function to get all gategories
   public function get_all_contacts()
   {
-    $sql = "SELECT * FROM contact";
+    $sql = "SELECT * FROM contact  ORDER BY id DESC";
     $sql = $this->connect()->prepare($sql);
     if ($sql->execute())
       return $sql->fetchAll(PDO::FETCH_ASSOC);

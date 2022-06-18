@@ -26,7 +26,7 @@ class Order extends DB
     // get all order by id client
     public function getOrderByIdClient($id)
     {
-        $sql = "SELECT o.id_order,p.ville,pro.nom,pro.prix,pro.image,o.qtte,o.done_at,o.status from personne p,produit pro,orders o where p.id_pers=o.id_pers and pro.id_produit=o.id_produit  and o.id_pers=? ";
+        $sql = "SELECT o.id_order,p.ville,pro.nom,pro.prix,pro.image,o.qtte,o.done_at,o.status from personne p,produit pro,orders o where p.id_pers=o.id_pers and pro.id_produit=o.id_produit  and o.id_pers=? ORDER BY o.id_order DESC";
         $sql = $this->connect()->prepare($sql);
         if ($sql->execute([$id]))
             return $sql->fetchAll(PDO::FETCH_ASSOC);
