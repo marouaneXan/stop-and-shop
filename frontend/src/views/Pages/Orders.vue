@@ -13,9 +13,6 @@
                                     <p class="text-muted mb-2"> Order ID <span class="fw-bold text-body">1222528743</span></p>
                                     <p class="text-muted mb-0"> Place On <span class="fw-bold text-body">12,March 2019</span> </p>
                                 </div>
-                                <div>
-                                    <h6 class="mb-0"> <a href="#">View Details</a> </h6>
-                                </div>
                             </div>
                         </div>
                         <div class="card-body p-4">
@@ -50,92 +47,108 @@ import NavbarComponent from '../../components/Public/Layouts/Navbar.vue'
 import FooterView from '@/components/Public/Layouts/Footer.vue'
 export default {
     name: 'OrdersView',
+    data() {
+        return {
+            orders: [],
+        }
+    },
     components: {
         NavbarComponent,
         FooterView
     },
+    async mounted() {
+        this.fetchOrders()
+        //Redirect user to home page
+        let client = localStorage.getItem('client_id')
+        if (!client) {
+            this.redirect({
+                val: 'home'
+            });
+        }
+    }
 }
 </script>
 
 <style>
-
 #progressbar-1 {
-color: #455A64;
+    color: #455A64;
 }
 
 #progressbar-1 li {
-list-style-type: none;
-font-size: 13px;
-width: 33.33%;
-float: left;
-position: relative;
+    list-style-type: none;
+    font-size: 13px;
+    width: 33.33%;
+    float: left;
+    position: relative;
 }
 
 #progressbar-1 #step1:before {
-content: "1";
-color: #fff;
-width: 29px;
-margin-left: 22px;
-padding-left: 11px;
+    content: "1";
+    color: #fff;
+    width: 29px;
+    margin-left: 22px;
+    padding-left: 11px;
 }
 
 #progressbar-1 #step2:before {
-content: "2";
-color: #fff;
-width: 29px;
+    content: "2";
+    color: #fff;
+    width: 29px;
 }
 
 #progressbar-1 #step3:before {
-content: "3";
-color: #fff;
-width: 29px;
-margin-right: 22px;
-text-align: center;
+    content: "3";
+    color: #fff;
+    width: 29px;
+    margin-right: 22px;
+    text-align: center;
 }
 
 #progressbar-1 li:before {
-line-height: 29px;
-display: block;
-font-size: 12px;
-background: #455A64;
-border-radius: 50%;
-margin: auto;
+    line-height: 29px;
+    display: block;
+    font-size: 12px;
+    background: #455A64;
+    border-radius: 50%;
+    margin: auto;
 }
 
 #progressbar-1 li:after {
-content: '';
-width: 121%;
-height: 2px;
-background: #455A64;
-position: absolute;
-left: 0%;
-right: 0%;
-top: 15px;
-z-index: -1;
+    content: '';
+    width: 121%;
+    height: 2px;
+    background: #455A64;
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 15px;
+    z-index: -1;
 }
-#order-image{
+
+#order-image {
     height: 150px;
 }
+
 #progressbar-1 li:nth-child(2):after {
-left: 50%
+    left: 50%
 }
 
 #progressbar-1 li:nth-child(1):after {
-left: 25%;
-width: 121%
+    left: 25%;
+    width: 121%
 }
 
 #progressbar-1 li:nth-child(3):after {
-left: 25%;
-width: 50%;
+    left: 25%;
+    width: 50%;
 }
 
 #progressbar-1 li.active:before,
 #progressbar-1 li.active:after {
-background: #1266f1;
+    background: #1266f1;
 }
 
 .card-stepper {
-z-index: 0
+    z-index: 0
 }
 </style>
