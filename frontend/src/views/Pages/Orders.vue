@@ -1,7 +1,6 @@
 <template>
 <div>
     <NavbarComponent />
-
     <section v-if="orders.length" class="gradient-custom-2">
         <div class="container py-5 h-100">
             <div class="row h-100">
