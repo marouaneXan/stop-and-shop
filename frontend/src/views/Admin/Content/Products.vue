@@ -113,8 +113,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="p in resultQuery" :key="p.id_produit">
-                                    <td>#</td>
+                                <tr v-for="(p,i) in resultQuery" :key="i.id_produit">
+                                    <td>{{i++}}</td>
                                     <td>{{p.nom}}</td>
                                     <td>{{p.description}}</td>
                                     <td>{{p.prix}}$</td>
@@ -342,7 +342,6 @@ export default {
             form.append('image', this.product.image);
             form.append('id_category', this.product.id_category);
             form.append('quantite', this.product.quantite);
-            console.log(this.product.image)
             let res = await axios({
                 method: "POST",
                 url: 'http://stop-and-shop.com/Product/updateProduct/' + this.product.id_produit,
