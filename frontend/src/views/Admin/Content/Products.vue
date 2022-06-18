@@ -159,7 +159,7 @@
                                                                 <label for="Price" class="form-label">Price</label>
                                                                 <input type="text" required v-model="product.prix" class="form-control" id="Price">
                                                                 <label for="formFile" class="form-label">Image</label>
-                                                                <input type="file" multiple class="form-control" @change="previewFiles" enctype='multipart/form-data'>
+                                                                <input type="file" multiple class="form-control" @change="ImageName" id="formFile" enctype='multipart/form-data'>
                                                                 <label class="form-label">Select Category</label>
                                                                 <select class="form-select" v-model="product.id_category" aria-label="Default select example">
                                                                     <option disabled selected>Select Category</option>
@@ -291,7 +291,6 @@ export default {
             form.append('image', this.product.image);
             form.append('id_category', this.product.id_category);
             form.append('quantite', this.product.quantite);
-            console.log(this.product.image);
             let res = await axios({
                 method: "POST",
                 url: 'http://stop-and-shop.com/Product/create',
@@ -330,7 +329,7 @@ export default {
             this.product.nom = p.nom;
             this.product.description = p.description;
             this.product.prix = p.prix;
-            // this.product.image = p.image;
+            this.product.image = p.image;
             this.product.id_category = p.id_category;
             this.product.quantite = p.quantite;
         },
@@ -343,6 +342,7 @@ export default {
             form.append('image', this.product.image);
             form.append('id_category', this.product.id_category);
             form.append('quantite', this.product.quantite);
+            console.log(this.product.image)
             let res = await axios({
                 method: "POST",
                 url: 'http://stop-and-shop.com/Product/updateProduct/' + this.product.id_produit,
@@ -382,6 +382,9 @@ export default {
         //get name of image
         previewFiles(event) {
             this.product.image = event.target.files[0];
+        },
+        ImageName(event) {
+            this.product.image = event.target.files[0].name;
         }
     },
 }
