@@ -75,8 +75,7 @@ export default {
     methods: {
         async fetchOrders() {
             let res = await axios('http://stop-and-shop.com/Basket/readBasketProductById/' + this.basketProduct.id_pers)
-            this.basketProducts = res.data
-            // console.log(this.basketProducts)
+            this.orders = res.data
             if (this.basketProducts.length) {
                 let sum = 0
                 this.basketProducts.forEach(item => {

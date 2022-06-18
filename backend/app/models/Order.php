@@ -23,6 +23,16 @@ class Order extends DB
         return 0;
     }
 
+    // get all order by id client
+    public function getOrderByIdClient($id)
+    {
+        $sql = "SELECT o.id_order,p.nom as nom_pers,p.ville,p.email,pro.nom,pro.prix,pro.image,c.nom_cat,o.qtte,o.done_at,o.status from personne p,produit pro,categories c,orders o where p.id_pers=o.id_pers and pro.id_produit=o.id_produit and pro.id_category=c.id_cat and o.id_pers=? ";
+        $sql = $this->connect()->prepare($sql);
+        if ($sql->execute([$id]))
+            return $sql->fetchAll(PDO::FETCH_ASSOC);
+        return 0;
+    }
+
     // Function to update status of order
     public function updateStatus($status, $id)
     {
