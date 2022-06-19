@@ -43,7 +43,7 @@ class Basket extends DB
             }
             return 1;
         }
-        return 'Quantite equal 0';
+        return 0;
     }
 
     //delete contact
