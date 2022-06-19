@@ -40,7 +40,12 @@ class BasketController
                 echo json_encode(array(
                     'message' => 'Product Added successfully In Your Basket'
                 ));
-            } else {
+            }elseif($add->addProductToBasket($data)=="Quantite equal 0"){
+                echo json_encode(array(
+                    'quantite' => $add->addProductToBasket($data)
+                ));
+            }
+             else {
                 echo json_encode(array(
                     'error' => 'Product already exist in the basket'
                 ));
