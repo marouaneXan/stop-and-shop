@@ -34,14 +34,16 @@ class Basket extends DB
             $query = $this->connect()->prepare($query);
             if ($query->execute([$data['id_produit']])) {
                 $res = $query->fetch(PDO::FETCH_ASSOC);
-                $res['quantite']--;
-                $query2 = "UPDATE produit SET quantite=" . $res['quantite'] . " where id_produit =?";
-                $query2 = $this->connect()->prepare($query2);
-                $query2->execute([$data['id_produit']]);
+                if ($res['quantite'] != 0) {
+                    $res['quantite']--;
+                    $query2 = "UPDATE produit SET quantite=" . $res['quantite'] . " where id_produit =?";
+                    $query2 = $this->connect()->prepare($query2);
+                    $query2->execute([$data['id_produit']]);
+                }
             }
             return 1;
         }
-        return 0;
+        return 'Quantite equal 0';
     }
 
     //delete contact
@@ -67,8 +69,8 @@ class Basket extends DB
     {
         $sql = "DELETE FROM basket WHERE id_basket=?";
         $sql = $this->connect()->prepare($sql);
-        if($sql->execute([$id]))
-           return 1;
+        if ($sql->execute([$id]))
+            return 1;
         return 0;
     }
 
@@ -77,8 +79,8 @@ class Basket extends DB
     {
         $sql = "insert into orders(id_pers,id_produit,qtte) values (?,?,?)";
         $sql = $this->connect()->prepare($sql);
-        if ($sql->execute([$data['id_pers'],$data['id_produit'],$data['qtte']]))
-           return 1;
+        if ($sql->execute([$data['id_pers'], $data['id_produit'], $data['qtte']]))
+            return 1;
         return 0;
     }
 
