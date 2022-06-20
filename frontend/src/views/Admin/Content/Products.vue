@@ -109,7 +109,7 @@
                                         <th scope="col">image</th>
                                         <th scope="col">Category</th>
                                         <th scope="col">Quantity</th>
-                                        <th scope="col" class="text-center">Action</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -397,14 +397,6 @@ export default {
 <style>
 #card {
     width: 90%;
-}
-
-.action_btn {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-evenly;
-    height: 76px;
 }
 
 #form {

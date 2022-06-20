@@ -215,7 +215,4 @@ export default {
     width: 60px;
     /* height: 36px; */
 }
-#action_btn{
-    height: 90px;
-}
 </style>
