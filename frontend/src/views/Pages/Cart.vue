@@ -247,8 +247,8 @@
                                     <h5 class="mb-0">${{b.prix * b.qtte}}</h5>
                                 </div>
                                 <div class="col-md-1 col-lg-1 col-xl-1" id="actions">
-                                    <a style="color: #cecece;cursor: pointer;" @click="passingDataPayment(b)" class="btn" data-bs-toggle="modal" data-bs-target="#updateProduct"><i class="fa-solid fa-credit-card"></i></a>
-                                    <div class="modal fade" id="updateProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <a style="color: #cecece;cursor: pointer;" @click="passingDataPayment(b)" class="btn" data-bs-toggle="modal" data-bs-target="#buy"><i class="fa-solid fa-credit-card"></i></a>
+                                    <div class="modal fade" id="buy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -372,13 +372,6 @@ export default {
     },
     methods: {
         ...mapActions(['redirect']),
-        // submit() {
-        //     // You will be redirected to Stripe's secure checkout page
-        //     this.$refs.checkoutRef.redirectToCheckout();
-        // },
-        // getSession(){
-        //     axios.get('')
-        // },
         getImgUrl(pet) {
             var images = require.context('../../assets/uploads/', false)
             return images('./' + pet)

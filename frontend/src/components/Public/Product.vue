@@ -44,9 +44,9 @@
                             </div>
                             <div class="row pb-3">
                                 <div class="col d-grid">
-                                    <button v-if="basket.id_pers" type="button" class="btn btn-outline-dark mb-1 btn-lg" name="submit" value="buy">Buy</button>
+                                    <button v-if="basket.id_pers" type="button" class="btn btn-outline-dark mb-1 btn-lg" data-bs-toggle="modal" data-bs-target="#buy">Buy</button>
                                     <a v-else href="/Register" class="btn btn-outline-dark mb-1 btn-lg">Buy</a>
-                                    <div class="modal fade" id="updateProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="buy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -94,7 +94,9 @@ export default {
             product: [],
             basket: {
                 id_pers: localStorage.getItem('client_id'),
-                id_produit: ''
+                id_basket: '',
+                id_produit: '',
+                qtte: ''
             },
             alert: {
                 success: '',
@@ -133,6 +135,12 @@ export default {
             } else {
                 this.alert.error = res.data.error
             }
+        },
+        //passing data for model
+        passingDataPayment(b) {
+            this.basketProduct.id_basket = b.id_basket;
+            this.basketProduct.id_produit = b.id_produit;
+            this.basketProduct.qtte = b.qtte;
         },
     }
 }
