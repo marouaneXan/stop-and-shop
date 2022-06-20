@@ -156,7 +156,7 @@ export default {
             form.append('qtte', this.produit.qtte);
             let res = await axios({
                 method: "POST",
-                url: 'http://stop-and-shop.com/order/InsertOrderAfterPayment/' + this.basketProduct.id_basket,
+                url: 'http://stop-and-shop.com/order/InsertOrderPayment',
                 data: form,
                 headers: {
                     "Content-Type": "multipart/form-data"
