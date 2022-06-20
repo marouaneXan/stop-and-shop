@@ -5,6 +5,9 @@
     <!--Message for added new  product in basket-->
     <div v-if="alert.success" class="alert alert-success text-center">{{alert.success}}</div>
     <div v-if="alert.error" class="alert alert-warning text-center">{{alert.error}}</div>
+    <!--Message for success or error payment-->
+    <div v-if="payment.success" class="alert alert-success text-center">{{payment.success}}</div>
+    <div v-if="payment.error" class="alert alert-warning text-center">{{payment.error}}</div>
     <div class="container pb-5">
         <div class="row">
             <div class="col-lg-5 mt-5">
@@ -92,15 +95,18 @@ export default {
         return {
             id_produit: '',
             product: [],
-            basket: {
+            produit: {
                 id_pers: localStorage.getItem('client_id'),
-                id_basket: '',
-                id_produit: '',
-                qtte: ''
+                id_produit:this.$route.params.id_produit ,
+                qtte: 1
             },
             alert: {
                 success: '',
                 error: ''
+            },
+            payment:{
+                success:'',
+                error:''
             }
         }
     },
@@ -137,18 +143,17 @@ export default {
             }
         },
         //passing data for model
-        passingDataPayment(b) {
-            this.basketProduct.id_basket = b.id_basket;
-            this.basketProduct.id_produit = b.id_produit;
-            this.basketProduct.qtte = b.qtte;
+        passingDataPayment(p) {
+            this.produit.id_pers=p.id_pers;
+            this.produit.id_produit=p.id_produit;
+            this.produit.qtte=p.qtte;
         },
         //Payment
         async Payment() {
             var form = new FormData();
-            form.append('id_pers', this.basketProduct.id_pers);
-            form.append('id_produit', this.basketProduct.id_produit);
-            console.log(this.basketProduct.id_pers);
-            form.append('qtte', this.basketProduct.qtte);
+            form.append('id_pers', this.produit.id_pers);
+            form.append('id_produit', this.produit.id_produit);
+            form.append('qtte', this.produit.qtte);
             let res = await axios({
                 method: "POST",
                 url: 'http://stop-and-shop.com/order/InsertOrderAfterPayment/' + this.basketProduct.id_basket,
@@ -158,11 +163,9 @@ export default {
                 },
             })
             if (res.data.message == "Payement successfully") {
-                this.DisplayAllProductsInBasket()
-                this.alert.success = res.data.message
+                this.payment.success = res.data.message
             } else {
-                this.DisplayAllProductsInBasket()
-                this.alert.error = res.data.error
+                this.payment.error = res.data.error
             }
         },
     }
