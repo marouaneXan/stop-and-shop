@@ -142,6 +142,29 @@ export default {
             this.basketProduct.id_produit = b.id_produit;
             this.basketProduct.qtte = b.qtte;
         },
+        //Payment
+        async Payment() {
+            var form = new FormData();
+            form.append('id_pers', this.basketProduct.id_pers);
+            form.append('id_produit', this.basketProduct.id_produit);
+            console.log(this.basketProduct.id_pers);
+            form.append('qtte', this.basketProduct.qtte);
+            let res = await axios({
+                method: "POST",
+                url: 'http://stop-and-shop.com/order/InsertOrderAfterPayment/' + this.basketProduct.id_basket,
+                data: form,
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+            })
+            if (res.data.message == "Payement successfully") {
+                this.DisplayAllProductsInBasket()
+                this.alert.success = res.data.message
+            } else {
+                this.DisplayAllProductsInBasket()
+                this.alert.error = res.data.error
+            }
+        },
     }
 }
 </script>
