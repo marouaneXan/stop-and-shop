@@ -97,9 +97,9 @@ export default {
         this.statistic = statistic.data;
 
         //Redirect user to home page
-        let client = localStorage.getItem('client_id')
+        let admin = localStorage.getItem('Admin')
         // let admin = localStorage.getItem('Admin')
-        if (client){
+        if (!admin){
             this.redirect({
                 val: 'home'
             });

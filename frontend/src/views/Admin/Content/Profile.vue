@@ -123,9 +123,9 @@ export default {
     mounted() {
         this.fetchDataAdmin()
         //Redirect user to home page
-        let client = localStorage.getItem('client_id')
+        let admin = localStorage.getItem('Admin')
         // let admin = localStorage.getItem('Admin')
-        if (client){
+        if (!admin){
             this.redirect({
                 val: 'home'
             });

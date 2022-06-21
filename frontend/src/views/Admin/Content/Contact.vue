@@ -102,13 +102,9 @@ export default {
     mounted() {
         this.fetchContact()
         //Redirect user to home page
-        let client = localStorage.getItem('client_id')
-        if (client) {
-            this.redirect({
-                val: 'home'
-            });
-        }
-        if (client) {
+        let admin = localStorage.getItem('Admin')
+        // let admin = localStorage.getItem('Admin')
+        if (!admin){
             this.redirect({
                 val: 'home'
             });
