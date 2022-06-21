@@ -12,8 +12,8 @@
         <div v-if="Deleteproduct.error" class="alert alert-danger text-center">{{Deleteproduct.error}}</div>
 
         <!--Message for update products-->
-        <div v-if="Updateproduct.success" class="alert alert-success text-center">{{Updateproduct.success}} <i class="fa-solid fa-circle-check"></i></div>
-        <div v-if="Updateproduct.error" class="alert alert-warning text-center">{{Updateproduct.error}}</div>
+        <!-- <div v-if="Updateproduct.success" class="alert alert-success text-center">{{Updateproduct.success}} <i class="fa-solid fa-circle-check"></i></div>
+        <div v-if="Updateproduct.error" class="alert alert-warning text-center">{{Updateproduct.error}}</div> -->
 
         <!--Message for add category-->
         <div v-if="Addcategory.success" class="alert alert-success text-center">{{Addcategory.success}} <i class="fa-solid fa-circle-check"></i></div>
@@ -235,10 +235,6 @@ export default {
                 success: '',
                 error: ''
             },
-            Updateproduct: {
-                success: '',
-                error: ''
-            }
         }
     },
     components: {
@@ -356,10 +352,8 @@ export default {
             })
             if (res.data.message == "Product Updated successfully") {
                 this.fetchProducts()
-                this.Updateproduct.success = res.data.message;
             } else {
                 this.fetchProducts()
-                this.Updateproduct.error = "Error on Updating new Product";
             }
         },
         //Add category
