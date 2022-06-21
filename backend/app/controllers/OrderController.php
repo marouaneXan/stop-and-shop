@@ -72,23 +72,23 @@ class OrderController
 
 
   //function to insert order after payment
-  public function InsertOrderPayment()
-  {
-    $basket = new Basket();
-    $data=[
-      'id_pers' => trim($_POST['id_pers']),
-      'id_produit' => trim($_POST['id_produit']),
-      'qtte' => trim($_POST['qtte']),
-      // 'status' => trim($_POST['status'])
-    ];
-    if($basket->addOrder($data)){
-      echo json_encode(array(
-        'message'=>'Payement successfully'
-      ));
-    }else{
-      echo json_encode(array(
-        'error'=>'error on Payment'
-      ));
-    }
-  }
+  // public function InsertOrderPayment()
+  // {
+  //   $basket = new Basket();
+  //   $data=[
+  //     'id_pers' => trim($_POST['id_pers']),
+  //     'id_produit' => trim($_POST['id_produit']),
+  //     'qtte' => trim($_POST['qtte']),
+  //     // 'status' => trim($_POST['status'])
+  //   ];
+  //   if($basket->addOrder($data)){
+  //     echo json_encode(array(
+  //       'message'=>'Payement successfully'
+  //     ));
+  //   }else{
+  //     echo json_encode(array(
+  //       'error'=>'error on Payment'
+  //     ));
+  //   }
+  // }
 }

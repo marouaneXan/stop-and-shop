@@ -442,6 +442,7 @@ export default {
 #imageCart {
     height: 150px;
     width: 100%;
+    object-fit: contain;
 }
 
 #actions {

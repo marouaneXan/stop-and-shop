@@ -143,6 +143,7 @@ export default {
 
 #order-image {
     height: 150px;
+    object-fit: contain;
 }
 
 #progressbar-1 li:nth-child(2):after {
