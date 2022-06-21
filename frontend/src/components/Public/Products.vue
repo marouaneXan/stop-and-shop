@@ -22,22 +22,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- <div class="row">
-        <div  class="col-md-3 mb-4">
-            <div class="card h-100 text-center p-4"> -->
-        <!-- <img :src="getImgUrl(p.image)" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title mb-0">zdvzv</h5>
-                    <p class="card-text lead fw-bold">zeveagreae...</p>
-                    <router-link :to="{ name: 'Product',params:{id_produit:p.id_produit}}" style="text-decoration:none;">
-                        <a class="btn btn-outline-dark">Buy Now</a>
-                    </router-link>
-                </div> -->
-
-        <!-- </div>
-        </div>
-    </div> -->
         <!--Message for added new  product in basket-->
         <div v-if="alert.success" class="alert alert-success text-center">{{alert.success}}</div>
         <div v-if="alert.error" class="alert alert-warning text-center">{{alert.error}}</div>
