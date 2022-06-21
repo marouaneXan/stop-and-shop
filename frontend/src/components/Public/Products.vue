@@ -50,6 +50,7 @@
             </div>
         </section>
     </div>
+    <FooterView />
 </div>
 </template>
 
@@ -61,6 +62,7 @@ import {
 } from 'vuex'
 import router from "@/router";
 import NavbarComponent from '@/components/Public/Layouts/Navbar.vue'
+import FooterView from '@/components/Public/Layouts/Footer.vue'
 export default {
     name: 'ProductsComponent',
     data() {
@@ -80,7 +82,8 @@ export default {
         }
     },
     components: {
-        NavbarComponent
+        NavbarComponent,
+        FooterView
     },
     computed: {
         ...mapGetters(['categories']),
