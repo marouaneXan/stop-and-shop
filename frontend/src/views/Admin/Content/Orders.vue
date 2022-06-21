@@ -100,23 +100,6 @@
             </div>
         </div>
     </main>
-    <!-- shop empty page -->
-    <!-- <div v-else class="py-6 py-lg-12">
-    <div class="container">
-        <div class="row">
-            <div class="offset-lg-3 col-lg-6 col-md-12 col-12 text-center">
-                <lord-icon src="https://cdn.lordicon.com/slkvcfos.json" trigger="loop" style="width:250px;height:250px">
-                </lord-icon>
-                <h2>Your shopping cart is empty</h2>
-                <p class="mb-4">
-                    Return to the store to add items for your delivery slot. Before proceed to checkout you must add some products to your shopping cart. You will find a lot of interesting products on our shop page.
-                </p>
-                <a href="#" class="btn btn-primary">Explore Products</a>
-            </div>
-        </div>
-    </div>
-</div> -->
-    <!-- {{orders}} -->
 </div>
 </template>
 

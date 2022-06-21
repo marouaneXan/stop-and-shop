@@ -103,7 +103,6 @@ export default {
         this.fetchContact()
         //Redirect user to home page
         let admin = localStorage.getItem('Admin')
-        // let admin = localStorage.getItem('Admin')
         if (!admin){
             this.redirect({
                 val: 'home'

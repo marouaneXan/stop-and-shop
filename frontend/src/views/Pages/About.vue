@@ -15,7 +15,6 @@
                 </router-link>
             </div>
             <img src="../../assets/images/about-us.svg" class="img-fluid w-50 d-none d-sm-block imag mt-2" alt="about us">
-            <!-- <img class="img-fluid w-50 d-none d-sm-block" src="img/showcase.svg" alt="" /> -->
         </div>
     </div>
 </section>
